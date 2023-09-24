@@ -175,7 +175,7 @@ lemma image_subset_diffs_left : b ∈ t → (s.image fun a ↦ a \ b) ⊆ s \\ t
 lemma image_subset_diffs_right : a ∈ s → t.image (a \ ·) ⊆ s \\ t :=
   image_subset_image₂_right (f := (· \ ·))
 
-lemma forall_diffs_iff {p : α → Prop} : (∀ c ∈ s \\ t, p c) ↔ ∀ a ∈ s, ∀ b ∈ t, p (a \ b) :=
+lemma forall_mem_diffs {p : α → Prop} : (∀ c ∈ s \\ t, p c) ↔ ∀ a ∈ s, ∀ b ∈ t, p (a \ b) :=
   forall_image₂_iff
 
 @[simp] lemma diffs_subset_iff : s \\ t ⊆ u ↔ ∀ a ∈ s, ∀ b ∈ t, a \ b ∈ u := image₂_subset_iff
@@ -248,7 +248,7 @@ variable {s s₁ s₂ t t₁ t₂ u}
 
 lemma compl_mem_compls : a ∈ s → aᶜ ∈ sᶜˢ := mem_map_of_mem _
 @[simp] lemma compls_subset_compls : s₁ᶜˢ ⊆ s₂ᶜˢ ↔ s₁ ⊆ s₂ := map_subset_map
-lemma forall_compls_iff {p : α → Prop} : (∀ a ∈ sᶜˢ, p a) ↔ ∀ a ∈ s, p aᶜ := forall_mem_map
+lemma forall_mem_compls {p : α → Prop} : (∀ a ∈ sᶜˢ, p a) ↔ ∀ a ∈ s, p aᶜ := forall_mem_map
 lemma exists_compls_iff {p : α → Prop} : (∃ a ∈ sᶜˢ, p a) ↔ ∃ a ∈ s, p aᶜ := by aesop
 
 @[simp] lemma compls_compls (s : Finset α) : sᶜˢᶜˢ = s := by ext; simp

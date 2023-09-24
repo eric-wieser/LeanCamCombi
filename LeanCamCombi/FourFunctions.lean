@@ -255,9 +255,9 @@ lemma four_functions_theorem (h₁ : 0 ≤ f₁) (h₂ : 0 ≤ f₂) (h₃ : 0 �
   (h : ∀ a b, f₁ a * f₂ b ≤ f₃ (a ⊓ b) * f₄ (a ⊔ b)) (s t : Finset α) :
     (∑ a in s, f₁ a) * ∑ a in t, f₂ a ≤ (∑ a in s ⊼ t, f₃ a) * ∑ a in s ⊻ t, f₄ a := by
   obtain ⟨β, _, _, g, hg⟩ := exists_birkhoff_representation α
-  have' := four_functions_theorem_aux (extend g f₁ 0) (extend g f₂ 0) (extend g f₃ 0)
+  have := four_functions_theorem_aux (extend g f₁ 0) (extend g f₂ 0) (extend g f₃ 0)
     (extend g f₄ 0) (extend_nonneg h₁ le_rfl) (extend_nonneg h₂ le_rfl) (extend_nonneg h₃ le_rfl)
-    (extend_nonneg h₄ le_rfl) _ (s.map ⟨g, hg⟩) (t.map ⟨g, hg⟩)
+    (extend_nonneg h₄ le_rfl) ?_ (s.map ⟨g, hg⟩) (t.map ⟨g, hg⟩)
   simpa only [←map_sups, ←map_infs, sum_map, Embedding.coeFn_mk, hg.extend_apply] using this
   rintro s t
   classical
