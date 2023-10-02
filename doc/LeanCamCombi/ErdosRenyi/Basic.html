@@ -1,0 +1,178 @@
+<html lang="en"><head><meta charset="UTF-8"></meta><meta name="viewport" content="width=device-width, initial-scale=1"></meta><link rel="stylesheet" href="../.././style.css"></link><link rel="stylesheet" href="../.././src/pygments.css"></link><link rel="shortcut icon" href="../.././favicon.ico"></link><link rel="prefetch" href="../.././/declarations/declaration-data.bmp" as="image"></link><title>LeanCamCombi.ErdosRenyi.Basic</title><script defer="true" src="../.././mathjax-config.js"></script><script defer="true" src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script><script defer="true" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script><script>const SITE_ROOT="../.././";</script><script>const MODULE_NAME="LeanCamCombi.ErdosRenyi.Basic";</script><script type="module" src="../.././jump-src.js"></script><script type="module" src="../.././search.js"></script><script type="module" src="../.././expand-nav.js"></script><script type="module" src="../.././how-about.js"></script><script type="module" src="../.././instances.js"></script><script type="module" src="../.././importedBy.js"></script></head><body><input id="nav_toggle" type="checkbox"></input><header><h1><label for="nav_toggle"></label>Documentation</h1><p class="header_filename break_within"><span class="name">LeanCamCombi</span>.<span class="name">ErdosRenyi</span>.<span class="name">Basic</span></p><form action="https://google.com/search" method="get" id="search_form"><input type="hidden" name="sitesearch" value="https://leanprover-community.github.io/mathlib4_docs"></input><input type="text" name="q" autocomplete="off"></input>&#32;
+            <button id="search_button" onclick="javascript: form.action='../.././search.html';">Search</button><button>Google site search</button></form></header><nav class="internal_nav"><h3><a class="break_within" href="#top"><span class="name">LeanCamCombi</span>.<span class="name">ErdosRenyi</span>.<span class="name">Basic</span></a></h3><p class="gh_nav_link"><a href="https://github.com/YaelDillies/LeanCamCombi/blob/41ed909d6e8b5e6b618db6412ed63ba09eba61c3//LeanCamCombi/ErdosRenyi/Basic.lean">source</a></p><div class="imports"><details><summary>Imports</summary><ul><li><a href="../.././Init.html">Init</a></li><li><a href="../.././LeanCamCombi/BernoulliSeq.html">LeanCamCombi.BernoulliSeq</a></li><li><a href="../.././LeanCamCombi/Mathlib/Combinatorics/SimpleGraph/Subgraph.html">LeanCamCombi.Mathlib.Combinatorics.SimpleGraph.Subgraph</a></li></ul></details><details><summary>Imported by</summary><ul id="imported-by-LeanCamCombi.ErdosRenyi.Basic" class="imported-by-list"></ul></details></div><div class="nav_link"><a class="break_within" href="#ErdosRenyi"><span class="name">ErdosRenyi</span></a></div><div class="nav_link"><a class="break_within" href="#ErdosRenyi.le_one"><span class="name">ErdosRenyi</span>.<span class="name">le_one</span></a></div><div class="nav_link"><a class="break_within" href="#ErdosRenyi.iIndepFun"><span class="name">ErdosRenyi</span>.<span class="name">iIndepFun</span></a></div><div class="nav_link"><a class="break_within" href="#ErdosRenyi.map"><span class="name">ErdosRenyi</span>.<span class="name">map</span></a></div><div class="nav_link"><a class="break_within" href="#ErdosRenyi.aemeasurable"><span class="name">ErdosRenyi</span>.<span class="name">aemeasurable</span></a></div><div class="nav_link"><a class="break_within" href="#ErdosRenyi.nullMeasurableSet"><span class="name">ErdosRenyi</span>.<span class="name">nullMeasurableSet</span></a></div><div class="nav_link"><a class="break_within" href="#ErdosRenyi.identDistrib"><span class="name">ErdosRenyi</span>.<span class="name">identDistrib</span></a></div><div class="nav_link"><a class="break_within" href="#ErdosRenyi.meas_edge"><span class="name">ErdosRenyi</span>.<span class="name">meas_edge</span></a></div><div class="nav_link"><a class="break_within" href="#ErdosRenyi.meas"><span class="name">ErdosRenyi</span>.<span class="name">meas</span></a></div></nav><main>
+<div class="mod_doc"><h1 class="markdown-heading" id="The-Erdős-Rényi-model">The Erdős–Rényi model <a class="hover-link" href="#The-Erdős-Rényi-model">#</a></h1><p>In this file, we define the Erdős–Rényi model through its marginals.</p></div><div class="decl" id="ErdosRenyi"><div class="def"><div class="gh_link"><a href="https://github.com/YaelDillies/LeanCamCombi/blob/41ed909d6e8b5e6b618db6412ed63ba09eba61c3//LeanCamCombi/ErdosRenyi/Basic.lean#L21-L23">source</a></div><div class="attributes">@[inline, reducible]</div>
+<div class="decl_header"><span class="decl_kind">abbrev</span>
+<span class="decl_name"><a class="break_within" href="../.././LeanCamCombi/ErdosRenyi/Basic.html#ErdosRenyi"><span class="name">ErdosRenyi</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{Ω : <a href="../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/MeasureTheory/MeasurableSpace/Defs.html#MeasurableSpace">MeasurableSpace</a> <span class="fn">Ω</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(G : <span class="fn"><span class="fn">Ω</span> → <span class="fn"><a href="../.././Mathlib/Combinatorics/SimpleGraph/Basic.html#SimpleGraph">SimpleGraph</a> <span class="fn">α</span></span></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn">(<span class="fn">ω</span> : <span class="fn">Ω</span>) → <span class="fn"><a href="../.././Init/Prelude.html#DecidableRel">DecidableRel</a> <span class="fn">(<span class="fn"><span class="fn">G</span> <span class="fn">ω</span></span>).Adj</span></span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(p : <a href="../.././Mathlib/Data/Real/NNReal.html#NNReal">NNReal</a>)</span></span>
+<span class="decl_args">
+<span class="fn">(μ : <span class="fn"><a href="../.././Init/Meta.html#autoParam">autoParam</a> (<span class="fn"><a href="../.././Mathlib/MeasureTheory/Measure/MeasureSpaceDef.html#MeasureTheory.Measure">MeasureTheory.Measure</a> <span class="fn">Ω</span></span>) <a href="../.././LeanCamCombi/ErdosRenyi/Basic.html#_auto._@.LeanCamCombi.ErdosRenyi.Basic._hyg.37">_auto✝</a></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><a href="../.././foundational_types.html">Prop</a></div></div><p>A sequence iid. real valued Bernoulli random variables with parameter <code>p ≤ 1</code>.</p><details class="instances"><summary>Instances For</summary><ul id="instances-for-list-ErdosRenyi" class="instances-for-list"></ul></details></div></div><div class="decl" id="ErdosRenyi.le_one"><div class="theorem"><div class="gh_link"><a href="https://github.com/YaelDillies/LeanCamCombi/blob/41ed909d6e8b5e6b618db6412ed63ba09eba61c3//LeanCamCombi/ErdosRenyi/Basic.lean#L30-L30">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././LeanCamCombi/ErdosRenyi/Basic.html#ErdosRenyi.le_one"><span class="name">ErdosRenyi</span>.<span class="name">le_one</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{Ω : <a href="../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/MeasureTheory/MeasurableSpace/Defs.html#MeasurableSpace">MeasurableSpace</a> <span class="fn">Ω</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{G : <span class="fn"><span class="fn">Ω</span> → <span class="fn"><a href="../.././Mathlib/Combinatorics/SimpleGraph/Basic.html#SimpleGraph">SimpleGraph</a> <span class="fn">α</span></span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn">(<span class="fn">ω</span> : <span class="fn">Ω</span>) → <span class="fn"><a href="../.././Init/Prelude.html#DecidableRel">DecidableRel</a> <span class="fn">(<span class="fn"><span class="fn">G</span> <span class="fn">ω</span></span>).Adj</span></span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{p : <a href="../.././Mathlib/Data/Real/NNReal.html#NNReal">NNReal</a>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(μ : <span class="fn"><a href="../.././Mathlib/MeasureTheory/Measure/MeasureSpaceDef.html#MeasureTheory.Measure">MeasureTheory.Measure</a> <span class="fn">Ω</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hG : <span class="fn"><a href="../.././LeanCamCombi/ErdosRenyi/Basic.html#ErdosRenyi">ErdosRenyi</a> <span class="fn">G</span> <span class="fn">p</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">p</span> <a href="../.././Init/Prelude.html#LE.le">≤</a> <span class="fn">1</span></span></div></div></div></div><div class="decl" id="ErdosRenyi.iIndepFun"><div class="theorem"><div class="gh_link"><a href="https://github.com/YaelDillies/LeanCamCombi/blob/41ed909d6e8b5e6b618db6412ed63ba09eba61c3//LeanCamCombi/ErdosRenyi/Basic.lean#L32-L33">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././LeanCamCombi/ErdosRenyi/Basic.html#ErdosRenyi.iIndepFun"><span class="name">ErdosRenyi</span>.<span class="name">iIndepFun</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{Ω : <a href="../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/MeasureTheory/MeasurableSpace/Defs.html#MeasurableSpace">MeasurableSpace</a> <span class="fn">Ω</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{G : <span class="fn"><span class="fn">Ω</span> → <span class="fn"><a href="../.././Mathlib/Combinatorics/SimpleGraph/Basic.html#SimpleGraph">SimpleGraph</a> <span class="fn">α</span></span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn">(<span class="fn">ω</span> : <span class="fn">Ω</span>) → <span class="fn"><a href="../.././Init/Prelude.html#DecidableRel">DecidableRel</a> <span class="fn">(<span class="fn"><span class="fn">G</span> <span class="fn">ω</span></span>).Adj</span></span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{p : <a href="../.././Mathlib/Data/Real/NNReal.html#NNReal">NNReal</a>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(μ : <span class="fn"><a href="../.././Mathlib/MeasureTheory/Measure/MeasureSpaceDef.html#MeasureTheory.Measure">MeasureTheory.Measure</a> <span class="fn">Ω</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hG : <span class="fn"><a href="../.././LeanCamCombi/ErdosRenyi/Basic.html#ErdosRenyi">ErdosRenyi</a> <span class="fn">G</span> <span class="fn">p</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../.././Mathlib/Probability/Independence/Basic.html#ProbabilityTheory.iIndepFun">ProbabilityTheory.iIndepFun</a> <span class="fn">inferInstance</span> <span class="fn">fun <span class="fn">e</span> <span class="fn">ω</span> =&gt <span class="fn"><span class="fn">e</span> <a href="../.././Init/Prelude.html#Membership.mem">∈</a> <span class="fn"><a href="../.././Mathlib/Combinatorics/SimpleGraph/Basic.html#SimpleGraph.edgeSet">SimpleGraph.edgeSet</a> (<span class="fn"><span class="fn">G</span> <span class="fn">ω</span></span>)</span></span></span></span></div></div></div></div><div class="decl" id="ErdosRenyi.map"><div class="theorem"><div class="gh_link"><a href="https://github.com/YaelDillies/LeanCamCombi/blob/41ed909d6e8b5e6b618db6412ed63ba09eba61c3//LeanCamCombi/ErdosRenyi/Basic.lean#L35-L37">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././LeanCamCombi/ErdosRenyi/Basic.html#ErdosRenyi.map"><span class="name">ErdosRenyi</span>.<span class="name">map</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{Ω : <a href="../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/MeasureTheory/MeasurableSpace/Defs.html#MeasurableSpace">MeasurableSpace</a> <span class="fn">Ω</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{G : <span class="fn"><span class="fn">Ω</span> → <span class="fn"><a href="../.././Mathlib/Combinatorics/SimpleGraph/Basic.html#SimpleGraph">SimpleGraph</a> <span class="fn">α</span></span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn">(<span class="fn">ω</span> : <span class="fn">Ω</span>) → <span class="fn"><a href="../.././Init/Prelude.html#DecidableRel">DecidableRel</a> <span class="fn">(<span class="fn"><span class="fn">G</span> <span class="fn">ω</span></span>).Adj</span></span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{p : <a href="../.././Mathlib/Data/Real/NNReal.html#NNReal">NNReal</a>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(μ : <span class="fn"><a href="../.././Mathlib/MeasureTheory/Measure/MeasureSpaceDef.html#MeasureTheory.Measure">MeasureTheory.Measure</a> <span class="fn">Ω</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hG : <span class="fn"><a href="../.././LeanCamCombi/ErdosRenyi/Basic.html#ErdosRenyi">ErdosRenyi</a> <span class="fn">G</span> <span class="fn">p</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(e : <span class="fn"><a href="../.././Mathlib/Data/Sym/Sym2.html#Sym2">Sym2</a> <span class="fn">α</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../.././Mathlib/MeasureTheory/Measure/MeasureSpace.html#MeasureTheory.Measure.map">MeasureTheory.Measure.map</a> (<span class="fn">fun <span class="fn">ω</span> =&gt <span class="fn"><span class="fn">e</span> <a href="../.././Init/Prelude.html#Membership.mem">∈</a> <span class="fn"><a href="../.././Mathlib/Combinatorics/SimpleGraph/Basic.html#SimpleGraph.edgeSet">SimpleGraph.edgeSet</a> (<span class="fn"><span class="fn">G</span> <span class="fn">ω</span></span>)</span></span></span>) <span class="fn">μ</span></span> <a href="../.././Init/Prelude.html#Eq">=</a> <span class="fn"><a href="../.././Mathlib/Probability/ProbabilityMassFunction/Basic.html#Pmf.toMeasure">Pmf.toMeasure</a> (<span class="fn"><a href="../.././LeanCamCombi/Mathlib/Pmf.html#Pmf.bernoulli'">Pmf.bernoulli'</a> <span class="fn">p</span> <span class="fn">(_ : <span class="fn"><span class="fn">p</span> <a href="../.././Init/Prelude.html#LE.le">≤</a> <span class="fn">1</span></span>)</span></span>)</span></span></div></div></div></div><div class="decl" id="ErdosRenyi.aemeasurable"><div class="theorem"><div class="gh_link"><a href="https://github.com/YaelDillies/LeanCamCombi/blob/41ed909d6e8b5e6b618db6412ed63ba09eba61c3//LeanCamCombi/ErdosRenyi/Basic.lean#L39-L40">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././LeanCamCombi/ErdosRenyi/Basic.html#ErdosRenyi.aemeasurable"><span class="name">ErdosRenyi</span>.<span class="name">aemeasurable</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{Ω : <a href="../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/MeasureTheory/MeasurableSpace/Defs.html#MeasurableSpace">MeasurableSpace</a> <span class="fn">Ω</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{G : <span class="fn"><span class="fn">Ω</span> → <span class="fn"><a href="../.././Mathlib/Combinatorics/SimpleGraph/Basic.html#SimpleGraph">SimpleGraph</a> <span class="fn">α</span></span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn">(<span class="fn">ω</span> : <span class="fn">Ω</span>) → <span class="fn"><a href="../.././Init/Prelude.html#DecidableRel">DecidableRel</a> <span class="fn">(<span class="fn"><span class="fn">G</span> <span class="fn">ω</span></span>).Adj</span></span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{p : <a href="../.././Mathlib/Data/Real/NNReal.html#NNReal">NNReal</a>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(μ : <span class="fn"><a href="../.././Mathlib/MeasureTheory/Measure/MeasureSpaceDef.html#MeasureTheory.Measure">MeasureTheory.Measure</a> <span class="fn">Ω</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hG : <span class="fn"><a href="../.././LeanCamCombi/ErdosRenyi/Basic.html#ErdosRenyi">ErdosRenyi</a> <span class="fn">G</span> <span class="fn">p</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(e : <span class="fn"><a href="../.././Mathlib/Data/Sym/Sym2.html#Sym2">Sym2</a> <span class="fn">α</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../.././Mathlib/MeasureTheory/Measure/MeasureSpaceDef.html#AEMeasurable">AEMeasurable</a> <span class="fn">fun <span class="fn">ω</span> =&gt <span class="fn"><span class="fn">e</span> <a href="../.././Init/Prelude.html#Membership.mem">∈</a> <span class="fn"><a href="../.././Mathlib/Combinatorics/SimpleGraph/Basic.html#SimpleGraph.edgeSet">SimpleGraph.edgeSet</a> (<span class="fn"><span class="fn">G</span> <span class="fn">ω</span></span>)</span></span></span></span></div></div></div></div><div class="decl" id="ErdosRenyi.nullMeasurableSet"><div class="theorem"><div class="gh_link"><a href="https://github.com/YaelDillies/LeanCamCombi/blob/41ed909d6e8b5e6b618db6412ed63ba09eba61c3//LeanCamCombi/ErdosRenyi/Basic.lean#L42-L43">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././LeanCamCombi/ErdosRenyi/Basic.html#ErdosRenyi.nullMeasurableSet"><span class="name">ErdosRenyi</span>.<span class="name">nullMeasurableSet</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{Ω : <a href="../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/MeasureTheory/MeasurableSpace/Defs.html#MeasurableSpace">MeasurableSpace</a> <span class="fn">Ω</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{G : <span class="fn"><span class="fn">Ω</span> → <span class="fn"><a href="../.././Mathlib/Combinatorics/SimpleGraph/Basic.html#SimpleGraph">SimpleGraph</a> <span class="fn">α</span></span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn">(<span class="fn">ω</span> : <span class="fn">Ω</span>) → <span class="fn"><a href="../.././Init/Prelude.html#DecidableRel">DecidableRel</a> <span class="fn">(<span class="fn"><span class="fn">G</span> <span class="fn">ω</span></span>).Adj</span></span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{p : <a href="../.././Mathlib/Data/Real/NNReal.html#NNReal">NNReal</a>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(μ : <span class="fn"><a href="../.././Mathlib/MeasureTheory/Measure/MeasureSpaceDef.html#MeasureTheory.Measure">MeasureTheory.Measure</a> <span class="fn">Ω</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hG : <span class="fn"><a href="../.././LeanCamCombi/ErdosRenyi/Basic.html#ErdosRenyi">ErdosRenyi</a> <span class="fn">G</span> <span class="fn">p</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(e : <span class="fn"><a href="../.././Mathlib/Data/Sym/Sym2.html#Sym2">Sym2</a> <span class="fn">α</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../.././Mathlib/MeasureTheory/Measure/NullMeasurable.html#MeasureTheory.NullMeasurableSet">MeasureTheory.NullMeasurableSet</a> <span class="fn">{<span class="fn">ω</span> | <span class="fn"><span class="fn">e</span> <a href="../.././Init/Prelude.html#Membership.mem">∈</a> <span class="fn"><a href="../.././Mathlib/Combinatorics/SimpleGraph/Basic.html#SimpleGraph.edgeSet">SimpleGraph.edgeSet</a> (<span class="fn"><span class="fn">G</span> <span class="fn">ω</span></span>)</span></span>}</span></span></div></div></div></div><div class="decl" id="ErdosRenyi.identDistrib"><div class="theorem"><div class="gh_link"><a href="https://github.com/YaelDillies/LeanCamCombi/blob/41ed909d6e8b5e6b618db6412ed63ba09eba61c3//LeanCamCombi/ErdosRenyi/Basic.lean#L45-L47">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././LeanCamCombi/ErdosRenyi/Basic.html#ErdosRenyi.identDistrib"><span class="name">ErdosRenyi</span>.<span class="name">identDistrib</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{Ω : <a href="../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/MeasureTheory/MeasurableSpace/Defs.html#MeasurableSpace">MeasurableSpace</a> <span class="fn">Ω</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{G : <span class="fn"><span class="fn">Ω</span> → <span class="fn"><a href="../.././Mathlib/Combinatorics/SimpleGraph/Basic.html#SimpleGraph">SimpleGraph</a> <span class="fn">α</span></span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn">(<span class="fn">ω</span> : <span class="fn">Ω</span>) → <span class="fn"><a href="../.././Init/Prelude.html#DecidableRel">DecidableRel</a> <span class="fn">(<span class="fn"><span class="fn">G</span> <span class="fn">ω</span></span>).Adj</span></span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{p : <a href="../.././Mathlib/Data/Real/NNReal.html#NNReal">NNReal</a>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(μ : <span class="fn"><a href="../.././Mathlib/MeasureTheory/Measure/MeasureSpaceDef.html#MeasureTheory.Measure">MeasureTheory.Measure</a> <span class="fn">Ω</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hG : <span class="fn"><a href="../.././LeanCamCombi/ErdosRenyi/Basic.html#ErdosRenyi">ErdosRenyi</a> <span class="fn">G</span> <span class="fn">p</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(d : <span class="fn"><a href="../.././Mathlib/Data/Sym/Sym2.html#Sym2">Sym2</a> <span class="fn">α</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(e : <span class="fn"><a href="../.././Mathlib/Data/Sym/Sym2.html#Sym2">Sym2</a> <span class="fn">α</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../.././Mathlib/Probability/IdentDistrib.html#ProbabilityTheory.IdentDistrib">ProbabilityTheory.IdentDistrib</a> (<span class="fn">fun <span class="fn">ω</span> =&gt <span class="fn"><span class="fn">d</span> <a href="../.././Init/Prelude.html#Membership.mem">∈</a> <span class="fn"><a href="../.././Mathlib/Combinatorics/SimpleGraph/Basic.html#SimpleGraph.edgeSet">SimpleGraph.edgeSet</a> (<span class="fn"><span class="fn">G</span> <span class="fn">ω</span></span>)</span></span></span>) <span class="fn">fun <span class="fn">ω</span> =&gt <span class="fn"><span class="fn">e</span> <a href="../.././Init/Prelude.html#Membership.mem">∈</a> <span class="fn"><a href="../.././Mathlib/Combinatorics/SimpleGraph/Basic.html#SimpleGraph.edgeSet">SimpleGraph.edgeSet</a> (<span class="fn"><span class="fn">G</span> <span class="fn">ω</span></span>)</span></span></span></span></div></div></div></div><div class="decl" id="ErdosRenyi.meas_edge"><div class="theorem"><div class="gh_link"><a href="https://github.com/YaelDillies/LeanCamCombi/blob/41ed909d6e8b5e6b618db6412ed63ba09eba61c3//LeanCamCombi/ErdosRenyi/Basic.lean#L49-L49">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././LeanCamCombi/ErdosRenyi/Basic.html#ErdosRenyi.meas_edge"><span class="name">ErdosRenyi</span>.<span class="name">meas_edge</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{Ω : <a href="../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/MeasureTheory/MeasurableSpace/Defs.html#MeasurableSpace">MeasurableSpace</a> <span class="fn">Ω</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{G : <span class="fn"><span class="fn">Ω</span> → <span class="fn"><a href="../.././Mathlib/Combinatorics/SimpleGraph/Basic.html#SimpleGraph">SimpleGraph</a> <span class="fn">α</span></span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn">(<span class="fn">ω</span> : <span class="fn">Ω</span>) → <span class="fn"><a href="../.././Init/Prelude.html#DecidableRel">DecidableRel</a> <span class="fn">(<span class="fn"><span class="fn">G</span> <span class="fn">ω</span></span>).Adj</span></span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{p : <a href="../.././Mathlib/Data/Real/NNReal.html#NNReal">NNReal</a>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(μ : <span class="fn"><a href="../.././Mathlib/MeasureTheory/Measure/MeasureSpaceDef.html#MeasureTheory.Measure">MeasureTheory.Measure</a> <span class="fn">Ω</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hG : <span class="fn"><a href="../.././LeanCamCombi/ErdosRenyi/Basic.html#ErdosRenyi">ErdosRenyi</a> <span class="fn">G</span> <span class="fn">p</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(e : <span class="fn"><a href="../.././Mathlib/Data/Sym/Sym2.html#Sym2">Sym2</a> <span class="fn">α</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">↑<span class="fn">↑<span class="fn">μ</span></span> <span class="fn">{<span class="fn">ω</span> | <span class="fn"><span class="fn">e</span> <a href="../.././Init/Prelude.html#Membership.mem">∈</a> <span class="fn"><a href="../.././Mathlib/Combinatorics/SimpleGraph/Basic.html#SimpleGraph.edgeSet">SimpleGraph.edgeSet</a> (<span class="fn"><span class="fn">G</span> <span class="fn">ω</span></span>)</span></span>}</span></span> <a href="../.././Init/Prelude.html#Eq">=</a> <span class="fn">↑<span class="fn">p</span></span></span></div></div></div></div><div class="decl" id="ErdosRenyi.meas"><div class="theorem"><div class="gh_link"><a href="https://github.com/YaelDillies/LeanCamCombi/blob/41ed909d6e8b5e6b618db6412ed63ba09eba61c3//LeanCamCombi/ErdosRenyi/Basic.lean#L51-L54">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././LeanCamCombi/ErdosRenyi/Basic.html#ErdosRenyi.meas"><span class="name">ErdosRenyi</span>.<span class="name">meas</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{Ω : <a href="../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/MeasureTheory/MeasurableSpace/Defs.html#MeasurableSpace">MeasurableSpace</a> <span class="fn">Ω</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{G : <span class="fn"><span class="fn">Ω</span> → <span class="fn"><a href="../.././Mathlib/Combinatorics/SimpleGraph/Basic.html#SimpleGraph">SimpleGraph</a> <span class="fn">α</span></span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{H : <span class="fn"><a href="../.././Mathlib/Combinatorics/SimpleGraph/Basic.html#SimpleGraph">SimpleGraph</a> <span class="fn">α</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn">(<span class="fn">ω</span> : <span class="fn">Ω</span>) → <span class="fn"><a href="../.././Init/Prelude.html#DecidableRel">DecidableRel</a> <span class="fn">(<span class="fn"><span class="fn">G</span> <span class="fn">ω</span></span>).Adj</span></span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{p : <a href="../.././Mathlib/Data/Real/NNReal.html#NNReal">NNReal</a>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(μ : <span class="fn"><a href="../.././Mathlib/MeasureTheory/Measure/MeasureSpaceDef.html#MeasureTheory.Measure">MeasureTheory.Measure</a> <span class="fn">Ω</span></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/MeasureTheory/Measure/MeasureSpace.html#MeasureTheory.IsProbabilityMeasure">MeasureTheory.IsProbabilityMeasure</a> <span class="fn">μ</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(hG : <span class="fn"><a href="../.././LeanCamCombi/ErdosRenyi/Basic.html#ErdosRenyi">ErdosRenyi</a> <span class="fn">G</span> <span class="fn">p</span></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Data/Fintype/Basic.html#Fintype">Fintype</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Init/Prelude.html#DecidableEq">DecidableEq</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Init/Prelude.html#DecidableRel">DecidableRel</a> <span class="fn"><span class="fn">H</span>.Adj</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">↑<span class="fn">↑<span class="fn">μ</span></span> <span class="fn">{<span class="fn">ω</span> | <span class="fn"><span class="fn"><span class="fn">G</span> <span class="fn">ω</span></span> <a href="../.././Init/Prelude.html#Eq">=</a> <span class="fn">H</span></span>}</span></span> <a href="../.././Init/Prelude.html#Eq">=</a>   <span class="fn">↑(<span class="fn"><span class="fn"><span class="fn">p</span> <a href="../.././Init/Prelude.html#HPow.hPow">^</a> <span class="fn"><a href="../.././Mathlib/Data/Finset/Card.html#Finset.card">Finset.card</a> (<span class="fn"><a href="../.././Mathlib/Combinatorics/SimpleGraph/Basic.html#SimpleGraph.edgeFinset">SimpleGraph.edgeFinset</a> <span class="fn">H</span></span>)</span></span> <a href="../.././Init/Prelude.html#HMul.hMul">*</a>       <span class="fn">(<span class="fn"><span class="fn">1</span> <a href="../.././Init/Prelude.html#HSub.hSub">-</a> <span class="fn">p</span></span>) <a href="../.././Init/Prelude.html#HPow.hPow">^</a> (<span class="fn"><span class="fn"><a href="../.././Mathlib/Data/Fintype/Card.html#Fintype.card">Fintype.card</a> (<span class="fn"><a href="../.././Mathlib/Data/Sym/Sym2.html#Sym2">Sym2</a> <span class="fn">α</span></span>)</span> <a href="../.././Init/Prelude.html#HSub.hSub">-</a> <span class="fn"><a href="../.././Mathlib/Data/Finset/Card.html#Finset.card">Finset.card</a> (<span class="fn"><a href="../.././Mathlib/Combinatorics/SimpleGraph/Basic.html#SimpleGraph.edgeFinset">SimpleGraph.edgeFinset</a> <span class="fn">H</span></span>)</span></span>)</span></span>)</span></span></div></div></div></div></main>
+<nav class="nav"><iframe src="../.././navbar.html" class="navframe" frameBorder="0"></iframe></nav></body></html>

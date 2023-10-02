@@ -1,0 +1,1 @@
+{"name":"LeanCamCombi.ExampleSheets.Graph.ES2","instances":[],"imports":["Init","Mathlib.Combinatorics.Hall.Basic","Mathlib.Combinatorics.SimpleGraph.Acyclic","Mathlib.Combinatorics.SimpleGraph.Clique","Mathlib.Data.Real.Sqrt","Mathlib.SetTheory.Cardinal.Basic"],"declarations":[]}

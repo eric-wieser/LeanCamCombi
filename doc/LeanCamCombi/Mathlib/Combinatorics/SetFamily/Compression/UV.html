@@ -1,0 +1,518 @@
+<html lang="en"><head><meta charset="UTF-8"></meta><meta name="viewport" content="width=device-width, initial-scale=1"></meta><link rel="stylesheet" href="../../../../.././style.css"></link><link rel="stylesheet" href="../../../../.././src/pygments.css"></link><link rel="shortcut icon" href="../../../../.././favicon.ico"></link><link rel="prefetch" href="../../../../.././/declarations/declaration-data.bmp" as="image"></link><title>LeanCamCombi.Mathlib.Combinatorics.SetFamily.Compression.UV</title><script defer="true" src="../../../../.././mathjax-config.js"></script><script defer="true" src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script><script defer="true" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script><script>const SITE_ROOT="../../../../.././";</script><script>const MODULE_NAME="LeanCamCombi.Mathlib.Combinatorics.SetFamily.Compression.UV";</script><script type="module" src="../../../../.././jump-src.js"></script><script type="module" src="../../../../.././search.js"></script><script type="module" src="../../../../.././expand-nav.js"></script><script type="module" src="../../../../.././how-about.js"></script><script type="module" src="../../../../.././instances.js"></script><script type="module" src="../../../../.././importedBy.js"></script></head><body><input id="nav_toggle" type="checkbox"></input><header><h1><label for="nav_toggle"></label>Documentation</h1><p class="header_filename break_within"><span class="name">LeanCamCombi</span>.<span class="name">Mathlib</span>.<span class="name">Combinatorics</span>.<span class="name">SetFamily</span>.<span class="name">Compression</span>.<span class="name">UV</span></p><form action="https://google.com/search" method="get" id="search_form"><input type="hidden" name="sitesearch" value="https://leanprover-community.github.io/mathlib4_docs"></input><input type="text" name="q" autocomplete="off"></input>&#32;
+            <button id="search_button" onclick="javascript: form.action='../../../../.././search.html';">Search</button><button>Google site search</button></form></header><nav class="internal_nav"><h3><a class="break_within" href="#top"><span class="name">LeanCamCombi</span>.<span class="name">Mathlib</span>.<span class="name">Combinatorics</span>.<span class="name">SetFamily</span>.<span class="name">Compression</span>.<span class="name">UV</span></a></h3><p class="gh_nav_link"><a href="https://github.com/YaelDillies/LeanCamCombi/blob/41ed909d6e8b5e6b618db6412ed63ba09eba61c3//LeanCamCombi/Mathlib/Combinatorics/SetFamily/Compression/UV.lean">source</a></p><div class="imports"><details><summary>Imports</summary><ul><li><a href="../../../../.././Init.html">Init</a></li><li><a href="../../../../.././Mathlib/Combinatorics/SetFamily/Compression/UV.html">Mathlib.Combinatorics.SetFamily.Compression.UV</a></li></ul></details><details><summary>Imported by</summary><ul id="imported-by-LeanCamCombi.Mathlib.Combinatorics.SetFamily.Compression.UV" class="imported-by-list"></ul></details></div><div class="nav_link"><a class="break_within" href="#UW.compress"><span class="name">UW</span>.<span class="name">compress</span></a></div><div class="nav_link"><a class="break_within" href="#UW.compress_of_disjoint_of_le"><span class="name">UW</span>.<span class="name">compress_of_disjoint_of_le</span></a></div><div class="nav_link"><a class="break_within" href="#UW.compress_of_disjoint_of_le'"><span class="name">UW</span>.<span class="name">compress_of_disjoint_of_le'</span></a></div><div class="nav_link"><a class="break_within" href="#UW.compress_self"><span class="name">UW</span>.<span class="name">compress_self</span></a></div><div class="nav_link"><a class="break_within" href="#UW.compress_sdiff_sdiff"><span class="name">UW</span>.<span class="name">compress_sdiff_sdiff</span></a></div><div class="nav_link"><a class="break_within" href="#UW.compress_idem"><span class="name">UW</span>.<span class="name">compress_idem</span></a></div><div class="nav_link"><a class="break_within" href="#UW.compression"><span class="name">UW</span>.<span class="name">compression</span></a></div><div class="nav_link"><a class="break_within" href="#FinsetFamily.term𝓓"><span class="name">FinsetFamily</span>.<span class="name">term𝓓</span></a></div><div class="nav_link"><a class="break_within" href="#UW.IsCompressed"><span class="name">UW</span>.<span class="name">IsCompressed</span></a></div><div class="nav_link"><a class="break_within" href="#UW.compress_injOn"><span class="name">UW</span>.<span class="name">compress_injOn</span></a></div><div class="nav_link"><a class="break_within" href="#UW.mem_compression"><span class="name">UW</span>.<span class="name">mem_compression</span></a></div><div class="nav_link"><a class="break_within" href="#UW.IsCompressed.eq"><span class="name">UW</span>.<span class="name">IsCompressed</span>.<span class="name">eq</span></a></div><div class="nav_link"><a class="break_within" href="#UW.compression_self"><span class="name">UW</span>.<span class="name">compression_self</span></a></div><div class="nav_link"><a class="break_within" href="#UW.isCompressed_self"><span class="name">UW</span>.<span class="name">isCompressed_self</span></a></div><div class="nav_link"><a class="break_within" href="#UW.compress_disjoint"><span class="name">UW</span>.<span class="name">compress_disjoint</span></a></div><div class="nav_link"><a class="break_within" href="#UW.compress_mem_compression"><span class="name">UW</span>.<span class="name">compress_mem_compression</span></a></div><div class="nav_link"><a class="break_within" href="#UW.compress_mem_compression_of_mem_compression"><span class="name">UW</span>.<span class="name">compress_mem_compression_of_mem_compression</span></a></div><div class="nav_link"><a class="break_within" href="#UW.compression_idem"><span class="name">UW</span>.<span class="name">compression_idem</span></a></div><div class="nav_link"><a class="break_within" href="#UW.card_compression"><span class="name">UW</span>.<span class="name">card_compression</span></a></div><div class="nav_link"><a class="break_within" href="#UW.le_of_mem_compression_of_not_mem"><span class="name">UW</span>.<span class="name">le_of_mem_compression_of_not_mem</span></a></div><div class="nav_link"><a class="break_within" href="#UW.disjoint_of_mem_compression_of_not_mem"><span class="name">UW</span>.<span class="name">disjoint_of_mem_compression_of_not_mem</span></a></div><div class="nav_link"><a class="break_within" href="#UW.sup_sdiff_mem_of_mem_compression_of_not_mem"><span class="name">UW</span>.<span class="name">sup_sdiff_mem_of_mem_compression_of_not_mem</span></a></div><div class="nav_link"><a class="break_within" href="#UW.sup_sdiff_mem_of_mem_compression"><span class="name">UW</span>.<span class="name">sup_sdiff_mem_of_mem_compression</span></a></div><div class="nav_link"><a class="break_within" href="#UW.mem_of_mem_compression"><span class="name">UW</span>.<span class="name">mem_of_mem_compression</span></a></div><div class="nav_link"><a class="break_within" href="#UW.card_compress"><span class="name">UW</span>.<span class="name">card_compress</span></a></div><div class="nav_link"><a class="break_within" href="#Set.Sized.uwCompression"><span class="name">Set</span>.<span class="name">Sized</span>.<span class="name">uwCompression</span></a></div><div class="nav_link"><a class="break_within" href="#UW.shadow_compression_subset_compression_shadow"><span class="name">UW</span>.<span class="name">shadow_compression_subset_compression_shadow</span></a></div><div class="nav_link"><a class="break_within" href="#UW.card_shadow_compression_le"><span class="name">UW</span>.<span class="name">card_shadow_compression_le</span></a></div></nav><main>
+<div class="mod_doc"><h1 class="markdown-heading" id="UW-compressions">UW-compressions <a class="hover-link" href="#UW-compressions">#</a></h1><p>This file defines UW-compression. It is an operation on a set family that reduces its shadow.</p><p>UW-compressing <code>a : α</code> along <code>u v : α</code> means replacing <code>a</code> by <code>(a ⊔ u) \ v</code> if <code>a</code> and <code>u</code> are
+disjoint and <code>v ≤ a</code>. In some sense, it's moving <code>a</code> from <code>v</code> to <code>u</code>.</p><p>UW-compressions are immensely useful to prove the Kruskal-Katona theorem. The idea is that
+compressing a set family might decrease the size of its shadow, so iterated compressions hopefully
+minimise the shadow.</p><h2 class="markdown-heading" id="Main-declarations">Main declarations <a class="hover-link" href="#Main-declarations">#</a></h2><ul>
+<li><code><a href="../../../../.././LeanCamCombi/Mathlib/Combinatorics/SetFamily/Compression/UV.html#UW.compress">UW.compress</a></code>: <code><a href="../../../../.././LeanCamCombi/Mathlib/Combinatorics/SetFamily/Compression/UV.html#UW.compress">compress</a> u v a</code> is <code>a</code> compressed along <code>u</code> and <code>v</code>.</li>
+<li><code><a href="../../../../.././LeanCamCombi/Mathlib/Combinatorics/SetFamily/Compression/UV.html#UW.compression">UW.compression</a></code>: <code><a href="../../../../.././LeanCamCombi/Mathlib/Combinatorics/SetFamily/Compression/UV.html#UW.compression">compression</a> u v s</code> is the compression of the set family <code>s</code> along <code>u</code> and <code>v</code>.
+It is the compressions of the elements of <code>s</code> whose compression is not already in <code>s</code> along with
+the element whose compression is already in <code>s</code>. This way of splitting into what moves and what
+does not ensures the compression doesn't squash the set family, which is proved by
+<code><a href="../../../../.././LeanCamCombi/Mathlib/Combinatorics/SetFamily/Compression/UV.html#UW.card_compression">UW.card_compression</a></code>.</li>
+<li><code><a href="../../../../.././LeanCamCombi/Mathlib/Combinatorics/SetFamily/Compression/UV.html#UW.card_shadow_compression_le">UW.card_shadow_compression_le</a></code>: Compressing reduces the size of the shadow. This is a key fact in
+the proof of Kruskal-Katona.</li>
+</ul><h2 class="markdown-heading" id="Notation">Notation <a class="hover-link" href="#Notation">#</a></h2><p><code>𝓓</code> (typed with <code>\MCC</code>) is notation for <code><a href="../../../../.././LeanCamCombi/Mathlib/Combinatorics/SetFamily/Compression/UV.html#UW.compression">UW.compression</a></code> in locale <code>FinsetFamily</code>.</p><h2 class="markdown-heading" id="Notes">Notes <a class="hover-link" href="#Notes">#</a></h2><p>Even though our emphasis is on <code><a href="../../../../.././Mathlib/Data/Finset/Basic.html#Finset">Finset</a> α</code>, we define UW-compressions more generally in a generalized
+boolean algebra, so that one can use it for <code><a href="../../../../.././Mathlib/Init/Set.html#Set">Set</a> α</code>.</p><h2 class="markdown-heading" id="References">References <a class="hover-link" href="#References">#</a></h2><ul>
+<li>https://github.com/b-mehta/maths-notes/blob/master/iii/mich/combinatorics.pdf</li>
+</ul><h2 class="markdown-heading" id="Tags">Tags <a class="hover-link" href="#Tags">#</a></h2><p>compression, UW-compression, shadow</p></div><div class="mod_doc"><h3 class="markdown-heading" id="UW-compression-in-generalized-boolean-algebras">UW-compression in generalized boolean algebras <a class="hover-link" href="#UW-compression-in-generalized-boolean-algebras">#</a></h3></div><div class="decl" id="UW.compress"><div class="def"><div class="gh_link"><a href="https://github.com/YaelDillies/LeanCamCombi/blob/41ed909d6e8b5e6b618db6412ed63ba09eba61c3//LeanCamCombi/Mathlib/Combinatorics/SetFamily/Compression/UV.lean#L62-L63">source</a></div><div class="decl_header"><span class="decl_kind">def</span>
+<span class="decl_name"><a class="break_within" href="../../../../.././LeanCamCombi/Mathlib/Combinatorics/SetFamily/Compression/UV.html#UW.compress"><span class="name">UW</span>.<span class="name">compress</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../../.././Mathlib/Order/BooleanAlgebra.html#GeneralizedBooleanAlgebra">GeneralizedBooleanAlgebra</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../../.././Init/Prelude.html#DecidableRel">DecidableRel</a> <span class="fn">Disjoint</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../../.././Init/Prelude.html#DecidableRel">DecidableRel</a> <span class="fn">fun <span class="fn">x</span> <span class="fn">x_1</span> =&gt <span class="fn"><span class="fn">x</span> <a href="../../../../.././Init/Prelude.html#LE.le">≤</a> <span class="fn">x_1</span></span></span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(u : <span class="fn">α</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(v : <span class="fn">α</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(a : <span class="fn">α</span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn">α</span></div></div><p>UW-compressing <code>a</code> means removing <code>v</code> from it and adding <code>u</code> if <code>a</code> and <code>u</code> are disjoint and
+<code>v ≤ a</code> (it replaces the <code>v</code> part of <code>a</code> by the <code>u</code> part). Else, UW-compressing <code>a</code> doesn't do
+anything. This is most useful when <code>u</code> and <code>v</code> are disjoint finsets of the same size.</p><details class="instances"><summary>Instances For</summary><ul id="instances-for-list-UW.compress" class="instances-for-list"></ul></details></div></div><div class="decl" id="UW.compress_of_disjoint_of_le"><div class="theorem"><div class="gh_link"><a href="https://github.com/YaelDillies/LeanCamCombi/blob/41ed909d6e8b5e6b618db6412ed63ba09eba61c3//LeanCamCombi/Mathlib/Combinatorics/SetFamily/Compression/UV.lean#L65-L67">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../../.././LeanCamCombi/Mathlib/Combinatorics/SetFamily/Compression/UV.html#UW.compress_of_disjoint_of_le"><span class="name">UW</span>.<span class="name">compress_of_disjoint_of_le</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../../.././Mathlib/Order/BooleanAlgebra.html#GeneralizedBooleanAlgebra">GeneralizedBooleanAlgebra</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../../.././Init/Prelude.html#DecidableRel">DecidableRel</a> <span class="fn">Disjoint</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../../.././Init/Prelude.html#DecidableRel">DecidableRel</a> <span class="fn">fun <span class="fn">x</span> <span class="fn">x_1</span> =&gt <span class="fn"><span class="fn">x</span> <a href="../../../../.././Init/Prelude.html#LE.le">≤</a> <span class="fn">x_1</span></span></span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{u : <span class="fn">α</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{v : <span class="fn">α</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{a : <span class="fn">α</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hua : <span class="fn"><a href="../../../../.././Mathlib/Order/Disjoint.html#Disjoint">Disjoint</a> <span class="fn">u</span> <span class="fn">a</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hva : <span class="fn"><span class="fn">v</span> <a href="../../../../.././Init/Prelude.html#LE.le">≤</a> <span class="fn">a</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../../../../.././LeanCamCombi/Mathlib/Combinatorics/SetFamily/Compression/UV.html#UW.compress">UW.compress</a> <span class="fn">u</span> <span class="fn">v</span> <span class="fn">a</span></span> <a href="../../../../.././Init/Prelude.html#Eq">=</a> <span class="fn">(<span class="fn"><span class="fn">a</span> <a href="../../../../.././Mathlib/Order/Basic.html#Sup.sup">⊔</a> <span class="fn">u</span></span>) <a href="../../../../.././Std/Classes/SetNotation.html#SDiff.sdiff">\</a> <span class="fn">v</span></span></span></div></div></div></div><div class="decl" id="UW.compress_of_disjoint_of_le'"><div class="theorem"><div class="gh_link"><a href="https://github.com/YaelDillies/LeanCamCombi/blob/41ed909d6e8b5e6b618db6412ed63ba09eba61c3//LeanCamCombi/Mathlib/Combinatorics/SetFamily/Compression/UV.lean#L69-L73">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../../.././LeanCamCombi/Mathlib/Combinatorics/SetFamily/Compression/UV.html#UW.compress_of_disjoint_of_le'"><span class="name">UW</span>.<span class="name">compress_of_disjoint_of_le'</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../../.././Mathlib/Order/BooleanAlgebra.html#GeneralizedBooleanAlgebra">GeneralizedBooleanAlgebra</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../../.././Init/Prelude.html#DecidableRel">DecidableRel</a> <span class="fn">Disjoint</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../../.././Init/Prelude.html#DecidableRel">DecidableRel</a> <span class="fn">fun <span class="fn">x</span> <span class="fn">x_1</span> =&gt <span class="fn"><span class="fn">x</span> <a href="../../../../.././Init/Prelude.html#LE.le">≤</a> <span class="fn">x_1</span></span></span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{u : <span class="fn">α</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{v : <span class="fn">α</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{a : <span class="fn">α</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hva : <span class="fn"><a href="../../../../.././Mathlib/Order/Disjoint.html#Disjoint">Disjoint</a> <span class="fn">v</span> <span class="fn">a</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hua : <span class="fn"><span class="fn">u</span> <a href="../../../../.././Init/Prelude.html#LE.le">≤</a> <span class="fn">a</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../../../../.././LeanCamCombi/Mathlib/Combinatorics/SetFamily/Compression/UV.html#UW.compress">UW.compress</a> <span class="fn">u</span> <span class="fn">v</span> (<span class="fn">(<span class="fn"><span class="fn">a</span> <a href="../../../../.././Mathlib/Order/Basic.html#Sup.sup">⊔</a> <span class="fn">v</span></span>) <a href="../../../../.././Std/Classes/SetNotation.html#SDiff.sdiff">\</a> <span class="fn">u</span></span>)</span> <a href="../../../../.././Init/Prelude.html#Eq">=</a> <span class="fn">a</span></span></div></div></div></div><div class="decl" id="UW.compress_self"><div class="theorem"><div class="gh_link"><a href="https://github.com/YaelDillies/LeanCamCombi/blob/41ed909d6e8b5e6b618db6412ed63ba09eba61c3//LeanCamCombi/Mathlib/Combinatorics/SetFamily/Compression/UV.lean#L76-L80">source</a></div><div class="attributes">@[simp]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../../.././LeanCamCombi/Mathlib/Combinatorics/SetFamily/Compression/UV.html#UW.compress_self"><span class="name">UW</span>.<span class="name">compress_self</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../../.././Mathlib/Order/BooleanAlgebra.html#GeneralizedBooleanAlgebra">GeneralizedBooleanAlgebra</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../../.././Init/Prelude.html#DecidableRel">DecidableRel</a> <span class="fn">Disjoint</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../../.././Init/Prelude.html#DecidableRel">DecidableRel</a> <span class="fn">fun <span class="fn">x</span> <span class="fn">x_1</span> =&gt <span class="fn"><span class="fn">x</span> <a href="../../../../.././Init/Prelude.html#LE.le">≤</a> <span class="fn">x_1</span></span></span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(u : <span class="fn">α</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(a : <span class="fn">α</span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../../../../.././LeanCamCombi/Mathlib/Combinatorics/SetFamily/Compression/UV.html#UW.compress">UW.compress</a> <span class="fn">u</span> <span class="fn">u</span> <span class="fn">a</span></span> <a href="../../../../.././Init/Prelude.html#Eq">=</a> <span class="fn">a</span></span></div></div></div></div><div class="decl" id="UW.compress_sdiff_sdiff"><div class="theorem"><div class="gh_link"><a href="https://github.com/YaelDillies/LeanCamCombi/blob/41ed909d6e8b5e6b618db6412ed63ba09eba61c3//LeanCamCombi/Mathlib/Combinatorics/SetFamily/Compression/UV.lean#L84-L87">source</a></div><div class="attributes">@[simp]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../../.././LeanCamCombi/Mathlib/Combinatorics/SetFamily/Compression/UV.html#UW.compress_sdiff_sdiff"><span class="name">UW</span>.<span class="name">compress_sdiff_sdiff</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../../.././Mathlib/Order/BooleanAlgebra.html#GeneralizedBooleanAlgebra">GeneralizedBooleanAlgebra</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../../.././Init/Prelude.html#DecidableRel">DecidableRel</a> <span class="fn">Disjoint</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../../.././Init/Prelude.html#DecidableRel">DecidableRel</a> <span class="fn">fun <span class="fn">x</span> <span class="fn">x_1</span> =&gt <span class="fn"><span class="fn">x</span> <a href="../../../../.././Init/Prelude.html#LE.le">≤</a> <span class="fn">x_1</span></span></span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(a : <span class="fn">α</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(b : <span class="fn">α</span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../../../../.././LeanCamCombi/Mathlib/Combinatorics/SetFamily/Compression/UV.html#UW.compress">UW.compress</a> (<span class="fn"><span class="fn">a</span> <a href="../../../../.././Std/Classes/SetNotation.html#SDiff.sdiff">\</a> <span class="fn">b</span></span>) (<span class="fn"><span class="fn">b</span> <a href="../../../../.././Std/Classes/SetNotation.html#SDiff.sdiff">\</a> <span class="fn">a</span></span>) <span class="fn">b</span></span> <a href="../../../../.././Init/Prelude.html#Eq">=</a> <span class="fn">a</span></span></div></div><p>An element can be compressed to any other element by removing/adding the differences.</p></div></div><div class="decl" id="UW.compress_idem"><div class="theorem"><div class="gh_link"><a href="https://github.com/YaelDillies/LeanCamCombi/blob/41ed909d6e8b5e6b618db6412ed63ba09eba61c3//LeanCamCombi/Mathlib/Combinatorics/SetFamily/Compression/UV.lean#L91-L96">source</a></div><div class="attributes">@[simp]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../../.././LeanCamCombi/Mathlib/Combinatorics/SetFamily/Compression/UV.html#UW.compress_idem"><span class="name">UW</span>.<span class="name">compress_idem</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../../.././Mathlib/Order/BooleanAlgebra.html#GeneralizedBooleanAlgebra">GeneralizedBooleanAlgebra</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../../.././Init/Prelude.html#DecidableRel">DecidableRel</a> <span class="fn">Disjoint</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../../.././Init/Prelude.html#DecidableRel">DecidableRel</a> <span class="fn">fun <span class="fn">x</span> <span class="fn">x_1</span> =&gt <span class="fn"><span class="fn">x</span> <a href="../../../../.././Init/Prelude.html#LE.le">≤</a> <span class="fn">x_1</span></span></span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(u : <span class="fn">α</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(v : <span class="fn">α</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(a : <span class="fn">α</span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../../../../.././LeanCamCombi/Mathlib/Combinatorics/SetFamily/Compression/UV.html#UW.compress">UW.compress</a> <span class="fn">u</span> <span class="fn">v</span> (<span class="fn"><a href="../../../../.././LeanCamCombi/Mathlib/Combinatorics/SetFamily/Compression/UV.html#UW.compress">UW.compress</a> <span class="fn">u</span> <span class="fn">v</span> <span class="fn">a</span></span>)</span> <a href="../../../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><a href="../../../../.././LeanCamCombi/Mathlib/Combinatorics/SetFamily/Compression/UV.html#UW.compress">UW.compress</a> <span class="fn">u</span> <span class="fn">v</span> <span class="fn">a</span></span></span></div></div><p>Compressing an element is idempotent.</p></div></div><div class="decl" id="UW.compression"><div class="def"><div class="gh_link"><a href="https://github.com/YaelDillies/LeanCamCombi/blob/41ed909d6e8b5e6b618db6412ed63ba09eba61c3//LeanCamCombi/Mathlib/Combinatorics/SetFamily/Compression/UV.lean#L102-L103">source</a></div><div class="decl_header"><span class="decl_kind">def</span>
+<span class="decl_name"><a class="break_within" href="../../../../.././LeanCamCombi/Mathlib/Combinatorics/SetFamily/Compression/UV.html#UW.compression"><span class="name">UW</span>.<span class="name">compression</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../../.././Mathlib/Order/BooleanAlgebra.html#GeneralizedBooleanAlgebra">GeneralizedBooleanAlgebra</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../../.././Init/Prelude.html#DecidableRel">DecidableRel</a> <span class="fn">Disjoint</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../../.././Init/Prelude.html#DecidableRel">DecidableRel</a> <span class="fn">fun <span class="fn">x</span> <span class="fn">x_1</span> =&gt <span class="fn"><span class="fn">x</span> <a href="../../../../.././Init/Prelude.html#LE.le">≤</a> <span class="fn">x_1</span></span></span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../../.././Init/Prelude.html#DecidableEq">DecidableEq</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(u : <span class="fn">α</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(v : <span class="fn">α</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(s : <span class="fn"><a href="../../../../.././Mathlib/Data/Finset/Basic.html#Finset">Finset</a> <span class="fn">α</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../../../.././Mathlib/Data/Finset/Basic.html#Finset">Finset</a> <span class="fn">α</span></span></div></div><p>To UW-compress a set family, we compress each of its elements, except that we don't want to
+reduce the cardinality, so we keep all elements whose compression is already present.</p><details class="instances"><summary>Instances For</summary><ul id="instances-for-list-UW.compression" class="instances-for-list"></ul></details></div></div><div class="decl" id="FinsetFamily.term𝓓"><div class="def"><div class="gh_link"><a href="https://github.com/YaelDillies/LeanCamCombi/blob/41ed909d6e8b5e6b618db6412ed63ba09eba61c3//LeanCamCombi/Mathlib/Combinatorics/SetFamily/Compression/UV.lean#L105-L105">source</a></div><div class="decl_header"><span class="decl_kind">def</span>
+<span class="decl_name"><a class="break_within" href="../../../../.././LeanCamCombi/Mathlib/Combinatorics/SetFamily/Compression/UV.html#FinsetFamily.term𝓓"><span class="name">FinsetFamily</span>.<span class="name">term𝓓</span></a></span><span class="decl_args"> :</span><div class="decl_type"><a href="../../../../.././Init/Prelude.html#Lean.ParserDescr">Lean.ParserDescr</a></div></div><details class="instances"><summary>Instances For</summary><ul id="instances-for-list-FinsetFamily.term𝓓" class="instances-for-list"></ul></details></div></div><div class="decl" id="UW.IsCompressed"><div class="def"><div class="gh_link"><a href="https://github.com/YaelDillies/LeanCamCombi/blob/41ed909d6e8b5e6b618db6412ed63ba09eba61c3//LeanCamCombi/Mathlib/Combinatorics/SetFamily/Compression/UV.lean#L110-L111">source</a></div><div class="decl_header"><span class="decl_kind">def</span>
+<span class="decl_name"><a class="break_within" href="../../../../.././LeanCamCombi/Mathlib/Combinatorics/SetFamily/Compression/UV.html#UW.IsCompressed"><span class="name">UW</span>.<span class="name">IsCompressed</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../../.././Mathlib/Order/BooleanAlgebra.html#GeneralizedBooleanAlgebra">GeneralizedBooleanAlgebra</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../../.././Init/Prelude.html#DecidableRel">DecidableRel</a> <span class="fn">Disjoint</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../../.././Init/Prelude.html#DecidableRel">DecidableRel</a> <span class="fn">fun <span class="fn">x</span> <span class="fn">x_1</span> =&gt <span class="fn"><span class="fn">x</span> <a href="../../../../.././Init/Prelude.html#LE.le">≤</a> <span class="fn">x_1</span></span></span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../../.././Init/Prelude.html#DecidableEq">DecidableEq</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(u : <span class="fn">α</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(v : <span class="fn">α</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(s : <span class="fn"><a href="../../../../.././Mathlib/Data/Finset/Basic.html#Finset">Finset</a> <span class="fn">α</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><a href="../../../../.././foundational_types.html">Prop</a></div></div><p><code><a href="../../../../.././LeanCamCombi/Mathlib/Combinatorics/SetFamily/Compression/UV.html#UW.IsCompressed">IsCompressed</a> u v s</code> expresses that <code>s</code> is UW-compressed.</p><details class="instances"><summary>Instances For</summary><ul id="instances-for-list-UW.IsCompressed" class="instances-for-list"></ul></details></div></div><div class="decl" id="UW.compress_injOn"><div class="theorem"><div class="gh_link"><a href="https://github.com/YaelDillies/LeanCamCombi/blob/41ed909d6e8b5e6b618db6412ed63ba09eba61c3//LeanCamCombi/Mathlib/Combinatorics/SetFamily/Compression/UV.lean#L114-L123">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../../.././LeanCamCombi/Mathlib/Combinatorics/SetFamily/Compression/UV.html#UW.compress_injOn"><span class="name">UW</span>.<span class="name">compress_injOn</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../../.././Mathlib/Order/BooleanAlgebra.html#GeneralizedBooleanAlgebra">GeneralizedBooleanAlgebra</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../../.././Init/Prelude.html#DecidableRel">DecidableRel</a> <span class="fn">Disjoint</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../../.././Init/Prelude.html#DecidableRel">DecidableRel</a> <span class="fn">fun <span class="fn">x</span> <span class="fn">x_1</span> =&gt <span class="fn"><span class="fn">x</span> <a href="../../../../.././Init/Prelude.html#LE.le">≤</a> <span class="fn">x_1</span></span></span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{s : <span class="fn"><a href="../../../../.././Mathlib/Data/Finset/Basic.html#Finset">Finset</a> <span class="fn">α</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{u : <span class="fn">α</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{v : <span class="fn">α</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../../.././Init/Prelude.html#DecidableEq">DecidableEq</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../../../.././Mathlib/Data/Set/Function.html#Set.InjOn">Set.InjOn</a> (<span class="fn"><a href="../../../../.././LeanCamCombi/Mathlib/Combinatorics/SetFamily/Compression/UV.html#UW.compress">UW.compress</a> <span class="fn">u</span> <span class="fn">v</span></span>) <span class="fn">↑(<span class="fn"><a href="../../../../.././Mathlib/Data/Finset/Basic.html#Finset.filter">Finset.filter</a> (<span class="fn">fun <span class="fn">a</span> =&gt <span class="fn"><a href="../../../../.././Init/Prelude.html#Not">¬</a><span class="fn"><span class="fn"><a href="../../../../.././LeanCamCombi/Mathlib/Combinatorics/SetFamily/Compression/UV.html#UW.compress">UW.compress</a> <span class="fn">u</span> <span class="fn">v</span> <span class="fn">a</span></span> <a href="../../../../.././Init/Prelude.html#Membership.mem">∈</a> <span class="fn">s</span></span></span></span>) <span class="fn">s</span></span>)</span></span></div></div><p>UW-compression is injective on the sets that are not UW-compressed.</p></div></div><div class="decl" id="UW.mem_compression"><div class="theorem"><div class="gh_link"><a href="https://github.com/YaelDillies/LeanCamCombi/blob/41ed909d6e8b5e6b618db6412ed63ba09eba61c3//LeanCamCombi/Mathlib/Combinatorics/SetFamily/Compression/UV.lean#L127-L129">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../../.././LeanCamCombi/Mathlib/Combinatorics/SetFamily/Compression/UV.html#UW.mem_compression"><span class="name">UW</span>.<span class="name">mem_compression</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../../.././Mathlib/Order/BooleanAlgebra.html#GeneralizedBooleanAlgebra">GeneralizedBooleanAlgebra</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../../.././Init/Prelude.html#DecidableRel">DecidableRel</a> <span class="fn">Disjoint</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../../.././Init/Prelude.html#DecidableRel">DecidableRel</a> <span class="fn">fun <span class="fn">x</span> <span class="fn">x_1</span> =&gt <span class="fn"><span class="fn">x</span> <a href="../../../../.././Init/Prelude.html#LE.le">≤</a> <span class="fn">x_1</span></span></span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{s : <span class="fn"><a href="../../../../.././Mathlib/Data/Finset/Basic.html#Finset">Finset</a> <span class="fn">α</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{u : <span class="fn">α</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{v : <span class="fn">α</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{a : <span class="fn">α</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../../.././Init/Prelude.html#DecidableEq">DecidableEq</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">a</span> <a href="../../../../.././Init/Prelude.html#Membership.mem">∈</a> <span class="fn"><a href="../../../../.././LeanCamCombi/Mathlib/Combinatorics/SetFamily/Compression/UV.html#UW.compression">UW.compression</a> <span class="fn">u</span> <span class="fn">v</span> <span class="fn">s</span></span></span> <a href="../../../../.././Init/Core.html#Iff">↔</a> <span class="fn"><span class="fn"><span class="fn"><span class="fn">a</span> <a href="../../../../.././Init/Prelude.html#Membership.mem">∈</a> <span class="fn">s</span></span> <a href="../../../../.././Init/Prelude.html#And">∧</a> <span class="fn"><span class="fn"><a href="../../../../.././LeanCamCombi/Mathlib/Combinatorics/SetFamily/Compression/UV.html#UW.compress">UW.compress</a> <span class="fn">u</span> <span class="fn">v</span> <span class="fn">a</span></span> <a href="../../../../.././Init/Prelude.html#Membership.mem">∈</a> <span class="fn">s</span></span></span> <a href="../../../../.././Init/Prelude.html#Or">∨</a> <span class="fn"><span class="fn"><a href="../../../../.././Init/Prelude.html#Not">¬</a><span class="fn"><span class="fn">a</span> <a href="../../../../.././Init/Prelude.html#Membership.mem">∈</a> <span class="fn">s</span></span></span> <a href="../../../../.././Init/Prelude.html#And">∧</a> <span class="fn">∃ <span class="fn">b</span>, <span class="fn"><span class="fn"><span class="fn">b</span> <a href="../../../../.././Init/Prelude.html#Membership.mem">∈</a> <span class="fn">s</span></span> <a href="../../../../.././Init/Prelude.html#And">∧</a> <span class="fn"><span class="fn"><a href="../../../../.././LeanCamCombi/Mathlib/Combinatorics/SetFamily/Compression/UV.html#UW.compress">UW.compress</a> <span class="fn">u</span> <span class="fn">v</span> <span class="fn">b</span></span> <a href="../../../../.././Init/Prelude.html#Eq">=</a> <span class="fn">a</span></span></span></span></span></span></span></div></div><p><code>a</code> is in the UW-compressed family iff it's in the original and its compression is in the
+original, or it's not in the original but it's the compression of something in the original.</p></div></div><div class="decl" id="UW.IsCompressed.eq"><div class="theorem"><div class="gh_link"><a href="https://github.com/YaelDillies/LeanCamCombi/blob/41ed909d6e8b5e6b618db6412ed63ba09eba61c3//LeanCamCombi/Mathlib/Combinatorics/SetFamily/Compression/UV.lean#L131-L131">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../../.././LeanCamCombi/Mathlib/Combinatorics/SetFamily/Compression/UV.html#UW.IsCompressed.eq"><span class="name">UW</span>.<span class="name">IsCompressed</span>.<span class="name">eq</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../../.././Mathlib/Order/BooleanAlgebra.html#GeneralizedBooleanAlgebra">GeneralizedBooleanAlgebra</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../../.././Init/Prelude.html#DecidableRel">DecidableRel</a> <span class="fn">Disjoint</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../../.././Init/Prelude.html#DecidableRel">DecidableRel</a> <span class="fn">fun <span class="fn">x</span> <span class="fn">x_1</span> =&gt <span class="fn"><span class="fn">x</span> <a href="../../../../.././Init/Prelude.html#LE.le">≤</a> <span class="fn">x_1</span></span></span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{s : <span class="fn"><a href="../../../../.././Mathlib/Data/Finset/Basic.html#Finset">Finset</a> <span class="fn">α</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{u : <span class="fn">α</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{v : <span class="fn">α</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../../.././Init/Prelude.html#DecidableEq">DecidableEq</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(h : <span class="fn"><a href="../../../../.././LeanCamCombi/Mathlib/Combinatorics/SetFamily/Compression/UV.html#UW.IsCompressed">UW.IsCompressed</a> <span class="fn">u</span> <span class="fn">v</span> <span class="fn">s</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../../../../.././LeanCamCombi/Mathlib/Combinatorics/SetFamily/Compression/UV.html#UW.compression">UW.compression</a> <span class="fn">u</span> <span class="fn">v</span> <span class="fn">s</span></span> <a href="../../../../.././Init/Prelude.html#Eq">=</a> <span class="fn">s</span></span></div></div></div></div><div class="decl" id="UW.compression_self"><div class="theorem"><div class="gh_link"><a href="https://github.com/YaelDillies/LeanCamCombi/blob/41ed909d6e8b5e6b618db6412ed63ba09eba61c3//LeanCamCombi/Mathlib/Combinatorics/SetFamily/Compression/UV.lean#L134-L142">source</a></div><div class="attributes">@[simp]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../../.././LeanCamCombi/Mathlib/Combinatorics/SetFamily/Compression/UV.html#UW.compression_self"><span class="name">UW</span>.<span class="name">compression_self</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../../.././Mathlib/Order/BooleanAlgebra.html#GeneralizedBooleanAlgebra">GeneralizedBooleanAlgebra</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../../.././Init/Prelude.html#DecidableRel">DecidableRel</a> <span class="fn">Disjoint</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../../.././Init/Prelude.html#DecidableRel">DecidableRel</a> <span class="fn">fun <span class="fn">x</span> <span class="fn">x_1</span> =&gt <span class="fn"><span class="fn">x</span> <a href="../../../../.././Init/Prelude.html#LE.le">≤</a> <span class="fn">x_1</span></span></span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../../.././Init/Prelude.html#DecidableEq">DecidableEq</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(u : <span class="fn">α</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(s : <span class="fn"><a href="../../../../.././Mathlib/Data/Finset/Basic.html#Finset">Finset</a> <span class="fn">α</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../../../../.././LeanCamCombi/Mathlib/Combinatorics/SetFamily/Compression/UV.html#UW.compression">UW.compression</a> <span class="fn">u</span> <span class="fn">u</span> <span class="fn">s</span></span> <a href="../../../../.././Init/Prelude.html#Eq">=</a> <span class="fn">s</span></span></div></div></div></div><div class="decl" id="UW.isCompressed_self"><div class="theorem"><div class="gh_link"><a href="https://github.com/YaelDillies/LeanCamCombi/blob/41ed909d6e8b5e6b618db6412ed63ba09eba61c3//LeanCamCombi/Mathlib/Combinatorics/SetFamily/Compression/UV.lean#L145-L145">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../../.././LeanCamCombi/Mathlib/Combinatorics/SetFamily/Compression/UV.html#UW.isCompressed_self"><span class="name">UW</span>.<span class="name">isCompressed_self</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../../.././Mathlib/Order/BooleanAlgebra.html#GeneralizedBooleanAlgebra">GeneralizedBooleanAlgebra</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../../.././Init/Prelude.html#DecidableRel">DecidableRel</a> <span class="fn">Disjoint</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../../.././Init/Prelude.html#DecidableRel">DecidableRel</a> <span class="fn">fun <span class="fn">x</span> <span class="fn">x_1</span> =&gt <span class="fn"><span class="fn">x</span> <a href="../../../../.././Init/Prelude.html#LE.le">≤</a> <span class="fn">x_1</span></span></span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../../.././Init/Prelude.html#DecidableEq">DecidableEq</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(u : <span class="fn">α</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(s : <span class="fn"><a href="../../../../.././Mathlib/Data/Finset/Basic.html#Finset">Finset</a> <span class="fn">α</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../../../.././LeanCamCombi/Mathlib/Combinatorics/SetFamily/Compression/UV.html#UW.IsCompressed">UW.IsCompressed</a> <span class="fn">u</span> <span class="fn">u</span> <span class="fn">s</span></span></div></div><p>Any family is compressed along two identical elements.</p></div></div><div class="decl" id="UW.compress_disjoint"><div class="theorem"><div class="gh_link"><a href="https://github.com/YaelDillies/LeanCamCombi/blob/41ed909d6e8b5e6b618db6412ed63ba09eba61c3//LeanCamCombi/Mathlib/Combinatorics/SetFamily/Compression/UV.lean#L147-L149">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../../.././LeanCamCombi/Mathlib/Combinatorics/SetFamily/Compression/UV.html#UW.compress_disjoint"><span class="name">UW</span>.<span class="name">compress_disjoint</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../../.././Mathlib/Order/BooleanAlgebra.html#GeneralizedBooleanAlgebra">GeneralizedBooleanAlgebra</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../../.././Init/Prelude.html#DecidableRel">DecidableRel</a> <span class="fn">Disjoint</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../../.././Init/Prelude.html#DecidableRel">DecidableRel</a> <span class="fn">fun <span class="fn">x</span> <span class="fn">x_1</span> =&gt <span class="fn"><span class="fn">x</span> <a href="../../../../.././Init/Prelude.html#LE.le">≤</a> <span class="fn">x_1</span></span></span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{s : <span class="fn"><a href="../../../../.././Mathlib/Data/Finset/Basic.html#Finset">Finset</a> <span class="fn">α</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{u : <span class="fn">α</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{v : <span class="fn">α</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../../.././Init/Prelude.html#DecidableEq">DecidableEq</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../../../.././Mathlib/Order/Disjoint.html#Disjoint">Disjoint</a> (<span class="fn"><a href="../../../../.././Mathlib/Data/Finset/Basic.html#Finset.filter">Finset.filter</a> (<span class="fn">fun <span class="fn">a</span> =&gt <span class="fn"><span class="fn"><a href="../../../../.././LeanCamCombi/Mathlib/Combinatorics/SetFamily/Compression/UV.html#UW.compress">UW.compress</a> <span class="fn">u</span> <span class="fn">v</span> <span class="fn">a</span></span> <a href="../../../../.././Init/Prelude.html#Membership.mem">∈</a> <span class="fn">s</span></span></span>) <span class="fn">s</span></span>)
+  (<span class="fn"><a href="../../../../.././Mathlib/Data/Finset/Basic.html#Finset.filter">Finset.filter</a> (<span class="fn">fun <span class="fn">x</span> =&gt <span class="fn"><a href="../../../../.././Init/Prelude.html#Not">¬</a><span class="fn"><span class="fn">x</span> <a href="../../../../.././Init/Prelude.html#Membership.mem">∈</a> <span class="fn">s</span></span></span></span>) (<span class="fn"><a href="../../../../.././Mathlib/Data/Finset/Image.html#Finset.image">Finset.image</a> (<span class="fn"><a href="../../../../.././LeanCamCombi/Mathlib/Combinatorics/SetFamily/Compression/UV.html#UW.compress">UW.compress</a> <span class="fn">u</span> <span class="fn">v</span></span>) <span class="fn">s</span></span>)</span>)</span></div></div></div></div><div class="decl" id="UW.compress_mem_compression"><div class="theorem"><div class="gh_link"><a href="https://github.com/YaelDillies/LeanCamCombi/blob/41ed909d6e8b5e6b618db6412ed63ba09eba61c3//LeanCamCombi/Mathlib/Combinatorics/SetFamily/Compression/UV.lean#L151-L156">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../../.././LeanCamCombi/Mathlib/Combinatorics/SetFamily/Compression/UV.html#UW.compress_mem_compression"><span class="name">UW</span>.<span class="name">compress_mem_compression</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../../.././Mathlib/Order/BooleanAlgebra.html#GeneralizedBooleanAlgebra">GeneralizedBooleanAlgebra</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../../.././Init/Prelude.html#DecidableRel">DecidableRel</a> <span class="fn">Disjoint</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../../.././Init/Prelude.html#DecidableRel">DecidableRel</a> <span class="fn">fun <span class="fn">x</span> <span class="fn">x_1</span> =&gt <span class="fn"><span class="fn">x</span> <a href="../../../../.././Init/Prelude.html#LE.le">≤</a> <span class="fn">x_1</span></span></span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{s : <span class="fn"><a href="../../../../.././Mathlib/Data/Finset/Basic.html#Finset">Finset</a> <span class="fn">α</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{u : <span class="fn">α</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{v : <span class="fn">α</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{a : <span class="fn">α</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../../.././Init/Prelude.html#DecidableEq">DecidableEq</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(ha : <span class="fn"><span class="fn">a</span> <a href="../../../../.././Init/Prelude.html#Membership.mem">∈</a> <span class="fn">s</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../../../../.././LeanCamCombi/Mathlib/Combinatorics/SetFamily/Compression/UV.html#UW.compress">UW.compress</a> <span class="fn">u</span> <span class="fn">v</span> <span class="fn">a</span></span> <a href="../../../../.././Init/Prelude.html#Membership.mem">∈</a> <span class="fn"><a href="../../../../.././LeanCamCombi/Mathlib/Combinatorics/SetFamily/Compression/UV.html#UW.compression">UW.compression</a> <span class="fn">u</span> <span class="fn">v</span> <span class="fn">s</span></span></span></div></div></div></div><div class="decl" id="UW.compress_mem_compression_of_mem_compression"><div class="theorem"><div class="gh_link"><a href="https://github.com/YaelDillies/LeanCamCombi/blob/41ed909d6e8b5e6b618db6412ed63ba09eba61c3//LeanCamCombi/Mathlib/Combinatorics/SetFamily/Compression/UV.lean#L159-L165">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../../.././LeanCamCombi/Mathlib/Combinatorics/SetFamily/Compression/UV.html#UW.compress_mem_compression_of_mem_compression"><span class="name">UW</span>.<span class="name">compress_mem_compression_of_mem_compression</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../../.././Mathlib/Order/BooleanAlgebra.html#GeneralizedBooleanAlgebra">GeneralizedBooleanAlgebra</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../../.././Init/Prelude.html#DecidableRel">DecidableRel</a> <span class="fn">Disjoint</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../../.././Init/Prelude.html#DecidableRel">DecidableRel</a> <span class="fn">fun <span class="fn">x</span> <span class="fn">x_1</span> =&gt <span class="fn"><span class="fn">x</span> <a href="../../../../.././Init/Prelude.html#LE.le">≤</a> <span class="fn">x_1</span></span></span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{s : <span class="fn"><a href="../../../../.././Mathlib/Data/Finset/Basic.html#Finset">Finset</a> <span class="fn">α</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{u : <span class="fn">α</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{v : <span class="fn">α</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{a : <span class="fn">α</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../../.././Init/Prelude.html#DecidableEq">DecidableEq</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(ha : <span class="fn"><span class="fn">a</span> <a href="../../../../.././Init/Prelude.html#Membership.mem">∈</a> <span class="fn"><a href="../../../../.././LeanCamCombi/Mathlib/Combinatorics/SetFamily/Compression/UV.html#UW.compression">UW.compression</a> <span class="fn">u</span> <span class="fn">v</span> <span class="fn">s</span></span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../../../../.././LeanCamCombi/Mathlib/Combinatorics/SetFamily/Compression/UV.html#UW.compress">UW.compress</a> <span class="fn">u</span> <span class="fn">v</span> <span class="fn">a</span></span> <a href="../../../../.././Init/Prelude.html#Membership.mem">∈</a> <span class="fn"><a href="../../../../.././LeanCamCombi/Mathlib/Combinatorics/SetFamily/Compression/UV.html#UW.compression">UW.compression</a> <span class="fn">u</span> <span class="fn">v</span> <span class="fn">s</span></span></span></div></div></div></div><div class="decl" id="UW.compression_idem"><div class="theorem"><div class="gh_link"><a href="https://github.com/YaelDillies/LeanCamCombi/blob/41ed909d6e8b5e6b618db6412ed63ba09eba61c3//LeanCamCombi/Mathlib/Combinatorics/SetFamily/Compression/UV.lean#L169-L173">source</a></div><div class="attributes">@[simp]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../../.././LeanCamCombi/Mathlib/Combinatorics/SetFamily/Compression/UV.html#UW.compression_idem"><span class="name">UW</span>.<span class="name">compression_idem</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../../.././Mathlib/Order/BooleanAlgebra.html#GeneralizedBooleanAlgebra">GeneralizedBooleanAlgebra</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../../.././Init/Prelude.html#DecidableRel">DecidableRel</a> <span class="fn">Disjoint</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../../.././Init/Prelude.html#DecidableRel">DecidableRel</a> <span class="fn">fun <span class="fn">x</span> <span class="fn">x_1</span> =&gt <span class="fn"><span class="fn">x</span> <a href="../../../../.././Init/Prelude.html#LE.le">≤</a> <span class="fn">x_1</span></span></span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../../.././Init/Prelude.html#DecidableEq">DecidableEq</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(u : <span class="fn">α</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(v : <span class="fn">α</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(s : <span class="fn"><a href="../../../../.././Mathlib/Data/Finset/Basic.html#Finset">Finset</a> <span class="fn">α</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../../../../.././LeanCamCombi/Mathlib/Combinatorics/SetFamily/Compression/UV.html#UW.compression">UW.compression</a> <span class="fn">u</span> <span class="fn">v</span> (<span class="fn"><a href="../../../../.././LeanCamCombi/Mathlib/Combinatorics/SetFamily/Compression/UV.html#UW.compression">UW.compression</a> <span class="fn">u</span> <span class="fn">v</span> <span class="fn">s</span></span>)</span> <a href="../../../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><a href="../../../../.././LeanCamCombi/Mathlib/Combinatorics/SetFamily/Compression/UV.html#UW.compression">UW.compression</a> <span class="fn">u</span> <span class="fn">v</span> <span class="fn">s</span></span></span></div></div><p>Compressing a family is idempotent.</p></div></div><div class="decl" id="UW.card_compression"><div class="theorem"><div class="gh_link"><a href="https://github.com/YaelDillies/LeanCamCombi/blob/41ed909d6e8b5e6b618db6412ed63ba09eba61c3//LeanCamCombi/Mathlib/Combinatorics/SetFamily/Compression/UV.lean#L177-L180">source</a></div><div class="attributes">@[simp]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../../.././LeanCamCombi/Mathlib/Combinatorics/SetFamily/Compression/UV.html#UW.card_compression"><span class="name">UW</span>.<span class="name">card_compression</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../../.././Mathlib/Order/BooleanAlgebra.html#GeneralizedBooleanAlgebra">GeneralizedBooleanAlgebra</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../../.././Init/Prelude.html#DecidableRel">DecidableRel</a> <span class="fn">Disjoint</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../../.././Init/Prelude.html#DecidableRel">DecidableRel</a> <span class="fn">fun <span class="fn">x</span> <span class="fn">x_1</span> =&gt <span class="fn"><span class="fn">x</span> <a href="../../../../.././Init/Prelude.html#LE.le">≤</a> <span class="fn">x_1</span></span></span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../../.././Init/Prelude.html#DecidableEq">DecidableEq</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(u : <span class="fn">α</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(v : <span class="fn">α</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(s : <span class="fn"><a href="../../../../.././Mathlib/Data/Finset/Basic.html#Finset">Finset</a> <span class="fn">α</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../../../../.././Mathlib/Data/Finset/Card.html#Finset.card">Finset.card</a> (<span class="fn"><a href="../../../../.././LeanCamCombi/Mathlib/Combinatorics/SetFamily/Compression/UV.html#UW.compression">UW.compression</a> <span class="fn">u</span> <span class="fn">v</span> <span class="fn">s</span></span>)</span> <a href="../../../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><a href="../../../../.././Mathlib/Data/Finset/Card.html#Finset.card">Finset.card</a> <span class="fn">s</span></span></span></div></div><p>Compressing a family doesn't change its size.</p></div></div><div class="decl" id="UW.le_of_mem_compression_of_not_mem"><div class="theorem"><div class="gh_link"><a href="https://github.com/YaelDillies/LeanCamCombi/blob/41ed909d6e8b5e6b618db6412ed63ba09eba61c3//LeanCamCombi/Mathlib/Combinatorics/SetFamily/Compression/UV.lean#L182-L190">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../../.././LeanCamCombi/Mathlib/Combinatorics/SetFamily/Compression/UV.html#UW.le_of_mem_compression_of_not_mem"><span class="name">UW</span>.<span class="name">le_of_mem_compression_of_not_mem</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../../.././Mathlib/Order/BooleanAlgebra.html#GeneralizedBooleanAlgebra">GeneralizedBooleanAlgebra</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../../.././Init/Prelude.html#DecidableRel">DecidableRel</a> <span class="fn">Disjoint</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../../.././Init/Prelude.html#DecidableRel">DecidableRel</a> <span class="fn">fun <span class="fn">x</span> <span class="fn">x_1</span> =&gt <span class="fn"><span class="fn">x</span> <a href="../../../../.././Init/Prelude.html#LE.le">≤</a> <span class="fn">x_1</span></span></span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{s : <span class="fn"><a href="../../../../.././Mathlib/Data/Finset/Basic.html#Finset">Finset</a> <span class="fn">α</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{u : <span class="fn">α</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{v : <span class="fn">α</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{a : <span class="fn">α</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../../.././Init/Prelude.html#DecidableEq">DecidableEq</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(h : <span class="fn"><span class="fn">a</span> <a href="../../../../.././Init/Prelude.html#Membership.mem">∈</a> <span class="fn"><a href="../../../../.././LeanCamCombi/Mathlib/Combinatorics/SetFamily/Compression/UV.html#UW.compression">UW.compression</a> <span class="fn">u</span> <span class="fn">v</span> <span class="fn">s</span></span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(ha : <span class="fn"><a href="../../../../.././Init/Prelude.html#Not">¬</a><span class="fn"><span class="fn">a</span> <a href="../../../../.././Init/Prelude.html#Membership.mem">∈</a> <span class="fn">s</span></span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">u</span> <a href="../../../../.././Init/Prelude.html#LE.le">≤</a> <span class="fn">a</span></span></div></div></div></div><div class="decl" id="UW.disjoint_of_mem_compression_of_not_mem"><div class="theorem"><div class="gh_link"><a href="https://github.com/YaelDillies/LeanCamCombi/blob/41ed909d6e8b5e6b618db6412ed63ba09eba61c3//LeanCamCombi/Mathlib/Combinatorics/SetFamily/Compression/UV.lean#L192-L200">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../../.././LeanCamCombi/Mathlib/Combinatorics/SetFamily/Compression/UV.html#UW.disjoint_of_mem_compression_of_not_mem"><span class="name">UW</span>.<span class="name">disjoint_of_mem_compression_of_not_mem</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../../.././Mathlib/Order/BooleanAlgebra.html#GeneralizedBooleanAlgebra">GeneralizedBooleanAlgebra</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../../.././Init/Prelude.html#DecidableRel">DecidableRel</a> <span class="fn">Disjoint</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../../.././Init/Prelude.html#DecidableRel">DecidableRel</a> <span class="fn">fun <span class="fn">x</span> <span class="fn">x_1</span> =&gt <span class="fn"><span class="fn">x</span> <a href="../../../../.././Init/Prelude.html#LE.le">≤</a> <span class="fn">x_1</span></span></span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{s : <span class="fn"><a href="../../../../.././Mathlib/Data/Finset/Basic.html#Finset">Finset</a> <span class="fn">α</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{u : <span class="fn">α</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{v : <span class="fn">α</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{a : <span class="fn">α</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../../.././Init/Prelude.html#DecidableEq">DecidableEq</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(h : <span class="fn"><span class="fn">a</span> <a href="../../../../.././Init/Prelude.html#Membership.mem">∈</a> <span class="fn"><a href="../../../../.././LeanCamCombi/Mathlib/Combinatorics/SetFamily/Compression/UV.html#UW.compression">UW.compression</a> <span class="fn">u</span> <span class="fn">v</span> <span class="fn">s</span></span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(ha : <span class="fn"><a href="../../../../.././Init/Prelude.html#Not">¬</a><span class="fn"><span class="fn">a</span> <a href="../../../../.././Init/Prelude.html#Membership.mem">∈</a> <span class="fn">s</span></span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../../../.././Mathlib/Order/Disjoint.html#Disjoint">Disjoint</a> <span class="fn">v</span> <span class="fn">a</span></span></div></div></div></div><div class="decl" id="UW.sup_sdiff_mem_of_mem_compression_of_not_mem"><div class="theorem"><div class="gh_link"><a href="https://github.com/YaelDillies/LeanCamCombi/blob/41ed909d6e8b5e6b618db6412ed63ba09eba61c3//LeanCamCombi/Mathlib/Combinatorics/SetFamily/Compression/UV.lean#L202-L211">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../../.././LeanCamCombi/Mathlib/Combinatorics/SetFamily/Compression/UV.html#UW.sup_sdiff_mem_of_mem_compression_of_not_mem"><span class="name">UW</span>.<span class="name">sup_sdiff_mem_of_mem_compression_of_not_mem</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../../.././Mathlib/Order/BooleanAlgebra.html#GeneralizedBooleanAlgebra">GeneralizedBooleanAlgebra</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../../.././Init/Prelude.html#DecidableRel">DecidableRel</a> <span class="fn">Disjoint</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../../.././Init/Prelude.html#DecidableRel">DecidableRel</a> <span class="fn">fun <span class="fn">x</span> <span class="fn">x_1</span> =&gt <span class="fn"><span class="fn">x</span> <a href="../../../../.././Init/Prelude.html#LE.le">≤</a> <span class="fn">x_1</span></span></span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{s : <span class="fn"><a href="../../../../.././Mathlib/Data/Finset/Basic.html#Finset">Finset</a> <span class="fn">α</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{u : <span class="fn">α</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{v : <span class="fn">α</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{a : <span class="fn">α</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../../.././Init/Prelude.html#DecidableEq">DecidableEq</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(h : <span class="fn"><span class="fn">a</span> <a href="../../../../.././Init/Prelude.html#Membership.mem">∈</a> <span class="fn"><a href="../../../../.././LeanCamCombi/Mathlib/Combinatorics/SetFamily/Compression/UV.html#UW.compression">UW.compression</a> <span class="fn">u</span> <span class="fn">v</span> <span class="fn">s</span></span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(ha : <span class="fn"><a href="../../../../.././Init/Prelude.html#Not">¬</a><span class="fn"><span class="fn">a</span> <a href="../../../../.././Init/Prelude.html#Membership.mem">∈</a> <span class="fn">s</span></span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">(<span class="fn"><span class="fn">a</span> <a href="../../../../.././Mathlib/Order/Basic.html#Sup.sup">⊔</a> <span class="fn">v</span></span>) <a href="../../../../.././Std/Classes/SetNotation.html#SDiff.sdiff">\</a> <span class="fn">u</span></span> <a href="../../../../.././Init/Prelude.html#Membership.mem">∈</a> <span class="fn">s</span></span></div></div></div></div><div class="decl" id="UW.sup_sdiff_mem_of_mem_compression"><div class="theorem"><div class="gh_link"><a href="https://github.com/YaelDillies/LeanCamCombi/blob/41ed909d6e8b5e6b618db6412ed63ba09eba61c3//LeanCamCombi/Mathlib/Combinatorics/SetFamily/Compression/UV.lean#L215-L230">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../../.././LeanCamCombi/Mathlib/Combinatorics/SetFamily/Compression/UV.html#UW.sup_sdiff_mem_of_mem_compression"><span class="name">UW</span>.<span class="name">sup_sdiff_mem_of_mem_compression</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../../.././Mathlib/Order/BooleanAlgebra.html#GeneralizedBooleanAlgebra">GeneralizedBooleanAlgebra</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../../.././Init/Prelude.html#DecidableRel">DecidableRel</a> <span class="fn">Disjoint</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../../.././Init/Prelude.html#DecidableRel">DecidableRel</a> <span class="fn">fun <span class="fn">x</span> <span class="fn">x_1</span> =&gt <span class="fn"><span class="fn">x</span> <a href="../../../../.././Init/Prelude.html#LE.le">≤</a> <span class="fn">x_1</span></span></span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{s : <span class="fn"><a href="../../../../.././Mathlib/Data/Finset/Basic.html#Finset">Finset</a> <span class="fn">α</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{u : <span class="fn">α</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{v : <span class="fn">α</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{a : <span class="fn">α</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../../.././Init/Prelude.html#DecidableEq">DecidableEq</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(ha : <span class="fn"><span class="fn">a</span> <a href="../../../../.././Init/Prelude.html#Membership.mem">∈</a> <span class="fn"><a href="../../../../.././LeanCamCombi/Mathlib/Combinatorics/SetFamily/Compression/UV.html#UW.compression">UW.compression</a> <span class="fn">u</span> <span class="fn">v</span> <span class="fn">s</span></span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hva : <span class="fn"><span class="fn">v</span> <a href="../../../../.././Init/Prelude.html#LE.le">≤</a> <span class="fn">a</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hua : <span class="fn"><a href="../../../../.././Mathlib/Order/Disjoint.html#Disjoint">Disjoint</a> <span class="fn">u</span> <span class="fn">a</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">(<span class="fn"><span class="fn">a</span> <a href="../../../../.././Mathlib/Order/Basic.html#Sup.sup">⊔</a> <span class="fn">u</span></span>) <a href="../../../../.././Std/Classes/SetNotation.html#SDiff.sdiff">\</a> <span class="fn">v</span></span> <a href="../../../../.././Init/Prelude.html#Membership.mem">∈</a> <span class="fn">s</span></span></div></div><p>If <code>a</code> is in the family compression and can be compressed, then its compression is in the
+original family.</p></div></div><div class="decl" id="UW.mem_of_mem_compression"><div class="theorem"><div class="gh_link"><a href="https://github.com/YaelDillies/LeanCamCombi/blob/41ed909d6e8b5e6b618db6412ed63ba09eba61c3//LeanCamCombi/Mathlib/Combinatorics/SetFamily/Compression/UV.lean#L234-L242">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../../.././LeanCamCombi/Mathlib/Combinatorics/SetFamily/Compression/UV.html#UW.mem_of_mem_compression"><span class="name">UW</span>.<span class="name">mem_of_mem_compression</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../../.././Mathlib/Order/BooleanAlgebra.html#GeneralizedBooleanAlgebra">GeneralizedBooleanAlgebra</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../../.././Init/Prelude.html#DecidableRel">DecidableRel</a> <span class="fn">Disjoint</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../../.././Init/Prelude.html#DecidableRel">DecidableRel</a> <span class="fn">fun <span class="fn">x</span> <span class="fn">x_1</span> =&gt <span class="fn"><span class="fn">x</span> <a href="../../../../.././Init/Prelude.html#LE.le">≤</a> <span class="fn">x_1</span></span></span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{s : <span class="fn"><a href="../../../../.././Mathlib/Data/Finset/Basic.html#Finset">Finset</a> <span class="fn">α</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{u : <span class="fn">α</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{v : <span class="fn">α</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{a : <span class="fn">α</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../../.././Init/Prelude.html#DecidableEq">DecidableEq</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(ha : <span class="fn"><span class="fn">a</span> <a href="../../../../.././Init/Prelude.html#Membership.mem">∈</a> <span class="fn"><a href="../../../../.././LeanCamCombi/Mathlib/Combinatorics/SetFamily/Compression/UV.html#UW.compression">UW.compression</a> <span class="fn">u</span> <span class="fn">v</span> <span class="fn">s</span></span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hva : <span class="fn"><span class="fn">v</span> <a href="../../../../.././Init/Prelude.html#LE.le">≤</a> <span class="fn">a</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hvu : <span class="fn"><span class="fn"><span class="fn">v</span> <a href="../../../../.././Init/Prelude.html#Eq">=</a> <a href="../../../../.././Mathlib/Order/BoundedOrder.html#Bot.bot">⊥</a></span> → <span class="fn"><span class="fn">u</span> <a href="../../../../.././Init/Prelude.html#Eq">=</a> <a href="../../../../.././Mathlib/Order/BoundedOrder.html#Bot.bot">⊥</a></span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">a</span> <a href="../../../../.././Init/Prelude.html#Membership.mem">∈</a> <span class="fn">s</span></span></div></div><p>If <code>a</code> is in the <code>u, v</code>-compression but <code>v ≤ a</code>, then <code>a</code> must have been in the original
+family.</p></div></div><div class="mod_doc"><h3 class="markdown-heading" id="UW-compression-on-finsets">UW-compression on finsets <a class="hover-link" href="#UW-compression-on-finsets">#</a></h3></div><div class="decl" id="UW.card_compress"><div class="theorem"><div class="gh_link"><a href="https://github.com/YaelDillies/LeanCamCombi/blob/41ed909d6e8b5e6b618db6412ed63ba09eba61c3//LeanCamCombi/Mathlib/Combinatorics/SetFamily/Compression/UV.lean#L253-L258">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../../.././LeanCamCombi/Mathlib/Combinatorics/SetFamily/Compression/UV.html#UW.card_compress"><span class="name">UW</span>.<span class="name">card_compress</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../../.././Init/Prelude.html#DecidableEq">DecidableEq</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{u : <span class="fn"><a href="../../../../.././Mathlib/Data/Finset/Basic.html#Finset">Finset</a> <span class="fn">α</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{v : <span class="fn"><a href="../../../../.././Mathlib/Data/Finset/Basic.html#Finset">Finset</a> <span class="fn">α</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hUV : <span class="fn"><span class="fn"><a href="../../../../.././Mathlib/Data/Finset/Card.html#Finset.card">Finset.card</a> <span class="fn">u</span></span> <a href="../../../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><a href="../../../../.././Mathlib/Data/Finset/Card.html#Finset.card">Finset.card</a> <span class="fn">v</span></span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(A : <span class="fn"><a href="../../../../.././Mathlib/Data/Finset/Basic.html#Finset">Finset</a> <span class="fn">α</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../../../../.././Mathlib/Data/Finset/Card.html#Finset.card">Finset.card</a> (<span class="fn"><a href="../../../../.././LeanCamCombi/Mathlib/Combinatorics/SetFamily/Compression/UV.html#UW.compress">UW.compress</a> <span class="fn">u</span> <span class="fn">v</span> <span class="fn">A</span></span>)</span> <a href="../../../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><a href="../../../../.././Mathlib/Data/Finset/Card.html#Finset.card">Finset.card</a> <span class="fn">A</span></span></span></div></div><p>Compressing a finset doesn't change its size.</p></div></div><div class="decl" id="Set.Sized.uwCompression"><div class="theorem"><div class="gh_link"><a href="https://github.com/YaelDillies/LeanCamCombi/blob/41ed909d6e8b5e6b618db6412ed63ba09eba61c3//LeanCamCombi/Mathlib/Combinatorics/SetFamily/Compression/UV.lean#L260-L265">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../../.././LeanCamCombi/Mathlib/Combinatorics/SetFamily/Compression/UV.html#Set.Sized.uwCompression"><span class="name">Set</span>.<span class="name">Sized</span>.<span class="name">uwCompression</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../../.././Init/Prelude.html#DecidableEq">DecidableEq</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{𝒜 : <span class="fn"><a href="../../../../.././Mathlib/Data/Finset/Basic.html#Finset">Finset</a> (<span class="fn"><a href="../../../../.././Mathlib/Data/Finset/Basic.html#Finset">Finset</a> <span class="fn">α</span></span>)</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{u : <span class="fn"><a href="../../../../.././Mathlib/Data/Finset/Basic.html#Finset">Finset</a> <span class="fn">α</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{v : <span class="fn"><a href="../../../../.././Mathlib/Data/Finset/Basic.html#Finset">Finset</a> <span class="fn">α</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{r : <a href="../../../../.././Init/Prelude.html#Nat">ℕ</a>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(huv : <span class="fn"><span class="fn"><a href="../../../../.././Mathlib/Data/Finset/Card.html#Finset.card">Finset.card</a> <span class="fn">u</span></span> <a href="../../../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><a href="../../../../.././Mathlib/Data/Finset/Card.html#Finset.card">Finset.card</a> <span class="fn">v</span></span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(h𝒜 : <span class="fn"><a href="../../../../.././Mathlib/Data/Finset/Slice.html#Set.Sized">Set.Sized</a> <span class="fn">r</span> <span class="fn">↑<span class="fn">𝒜</span></span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../../../.././Mathlib/Data/Finset/Slice.html#Set.Sized">Set.Sized</a> <span class="fn">r</span> <span class="fn">↑(<span class="fn"><a href="../../../../.././LeanCamCombi/Mathlib/Combinatorics/SetFamily/Compression/UV.html#UW.compression">UW.compression</a> <span class="fn">u</span> <span class="fn">v</span> <span class="fn">𝒜</span></span>)</span></span></div></div></div></div><div class="decl" id="UW.shadow_compression_subset_compression_shadow"><div class="theorem"><div class="gh_link"><a href="https://github.com/YaelDillies/LeanCamCombi/blob/41ed909d6e8b5e6b618db6412ed63ba09eba61c3//LeanCamCombi/Mathlib/Combinatorics/SetFamily/Compression/UV.lean#L274-L375">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../../.././LeanCamCombi/Mathlib/Combinatorics/SetFamily/Compression/UV.html#UW.shadow_compression_subset_compression_shadow"><span class="name">UW</span>.<span class="name">shadow_compression_subset_compression_shadow</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../../.././Init/Prelude.html#DecidableEq">DecidableEq</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{𝒜 : <span class="fn"><a href="../../../../.././Mathlib/Data/Finset/Basic.html#Finset">Finset</a> (<span class="fn"><a href="../../../../.././Mathlib/Data/Finset/Basic.html#Finset">Finset</a> <span class="fn">α</span></span>)</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(u : <span class="fn"><a href="../../../../.././Mathlib/Data/Finset/Basic.html#Finset">Finset</a> <span class="fn">α</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(v : <span class="fn"><a href="../../../../.././Mathlib/Data/Finset/Basic.html#Finset">Finset</a> <span class="fn">α</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(huv : <span class="fn">∀ (<span class="fn">x</span> : <span class="fn">α</span>), <span class="fn"><span class="fn"><span class="fn">x</span> <a href="../../../../.././Init/Prelude.html#Membership.mem">∈</a> <span class="fn">u</span></span> → <span class="fn">∃ <span class="fn">y</span>, <span class="fn"><span class="fn"><span class="fn">y</span> <a href="../../../../.././Init/Prelude.html#Membership.mem">∈</a> <span class="fn">v</span></span> <a href="../../../../.././Init/Prelude.html#And">∧</a> <span class="fn"><a href="../../../../.././LeanCamCombi/Mathlib/Combinatorics/SetFamily/Compression/UV.html#UW.IsCompressed">UW.IsCompressed</a> (<span class="fn"><a href="../../../../.././Mathlib/Data/Finset/Basic.html#Finset.erase">Finset.erase</a> <span class="fn">u</span> <span class="fn">x</span></span>) (<span class="fn"><a href="../../../../.././Mathlib/Data/Finset/Basic.html#Finset.erase">Finset.erase</a> <span class="fn">v</span> <span class="fn">y</span></span>) <span class="fn">𝒜</span></span></span></span></span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../../../../.././Mathlib/Combinatorics/SetFamily/Shadow.html#Finset.shadow">Finset.shadow</a> (<span class="fn"><a href="../../../../.././LeanCamCombi/Mathlib/Combinatorics/SetFamily/Compression/UV.html#UW.compression">UW.compression</a> <span class="fn">u</span> <span class="fn">v</span> <span class="fn">𝒜</span></span>)</span> <a href="../../../../.././Std/Classes/SetNotation.html#HasSubset.Subset">⊆</a> <span class="fn"><a href="../../../../.././LeanCamCombi/Mathlib/Combinatorics/SetFamily/Compression/UV.html#UW.compression">UW.compression</a> <span class="fn">u</span> <span class="fn">v</span> (<span class="fn"><a href="../../../../.././Mathlib/Combinatorics/SetFamily/Shadow.html#Finset.shadow">Finset.shadow</a> <span class="fn">𝒜</span></span>)</span></span></div></div><p>UW-compression reduces the size of the shadow of <code>𝒜</code> if, for all <code>x ∈ u</code> there is <code>y ∈ v</code> such
+that <code>𝒜</code> is <code>(u.erase x, v.erase y)</code>-compressed. This is the key fact about compression for
+Kruskal-Katona.</p></div></div><div class="decl" id="UW.card_shadow_compression_le"><div class="theorem"><div class="gh_link"><a href="https://github.com/YaelDillies/LeanCamCombi/blob/41ed909d6e8b5e6b618db6412ed63ba09eba61c3//LeanCamCombi/Mathlib/Combinatorics/SetFamily/Compression/UV.lean#L380-L384">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../../.././LeanCamCombi/Mathlib/Combinatorics/SetFamily/Compression/UV.html#UW.card_shadow_compression_le"><span class="name">UW</span>.<span class="name">card_shadow_compression_le</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../../.././Init/Prelude.html#DecidableEq">DecidableEq</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{𝒜 : <span class="fn"><a href="../../../../.././Mathlib/Data/Finset/Basic.html#Finset">Finset</a> (<span class="fn"><a href="../../../../.././Mathlib/Data/Finset/Basic.html#Finset">Finset</a> <span class="fn">α</span></span>)</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(u : <span class="fn"><a href="../../../../.././Mathlib/Data/Finset/Basic.html#Finset">Finset</a> <span class="fn">α</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(v : <span class="fn"><a href="../../../../.././Mathlib/Data/Finset/Basic.html#Finset">Finset</a> <span class="fn">α</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(huv : <span class="fn">∀ (<span class="fn">x</span> : <span class="fn">α</span>), <span class="fn"><span class="fn"><span class="fn">x</span> <a href="../../../../.././Init/Prelude.html#Membership.mem">∈</a> <span class="fn">u</span></span> → <span class="fn">∃ <span class="fn">y</span>, <span class="fn"><span class="fn"><span class="fn">y</span> <a href="../../../../.././Init/Prelude.html#Membership.mem">∈</a> <span class="fn">v</span></span> <a href="../../../../.././Init/Prelude.html#And">∧</a> <span class="fn"><a href="../../../../.././LeanCamCombi/Mathlib/Combinatorics/SetFamily/Compression/UV.html#UW.IsCompressed">UW.IsCompressed</a> (<span class="fn"><a href="../../../../.././Mathlib/Data/Finset/Basic.html#Finset.erase">Finset.erase</a> <span class="fn">u</span> <span class="fn">x</span></span>) (<span class="fn"><a href="../../../../.././Mathlib/Data/Finset/Basic.html#Finset.erase">Finset.erase</a> <span class="fn">v</span> <span class="fn">y</span></span>) <span class="fn">𝒜</span></span></span></span></span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../../../../.././Mathlib/Data/Finset/Card.html#Finset.card">Finset.card</a> (<span class="fn"><a href="../../../../.././Mathlib/Combinatorics/SetFamily/Shadow.html#Finset.shadow">Finset.shadow</a> (<span class="fn"><a href="../../../../.././LeanCamCombi/Mathlib/Combinatorics/SetFamily/Compression/UV.html#UW.compression">UW.compression</a> <span class="fn">u</span> <span class="fn">v</span> <span class="fn">𝒜</span></span>)</span>)</span> <a href="../../../../.././Init/Prelude.html#LE.le">≤</a> <span class="fn"><a href="../../../../.././Mathlib/Data/Finset/Card.html#Finset.card">Finset.card</a> (<span class="fn"><a href="../../../../.././Mathlib/Combinatorics/SetFamily/Shadow.html#Finset.shadow">Finset.shadow</a> <span class="fn">𝒜</span></span>)</span></span></div></div><p>UW-compression reduces the size of the shadow of <code>𝒜</code> if, for all <code>x ∈ u</code> there is <code>y ∈ v</code>
+such that <code>𝒜</code> is <code>(u.erase x, v.erase y)</code>-compressed. This is the key UW-compression fact needed for
+Kruskal-Katona.</p></div></div></main>
+<nav class="nav"><iframe src="../../../../.././navbar.html" class="navframe" frameBorder="0"></iframe></nav></body></html>

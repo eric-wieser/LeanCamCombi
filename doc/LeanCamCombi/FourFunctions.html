@@ -1,0 +1,410 @@
+<html lang="en"><head><meta charset="UTF-8"></meta><meta name="viewport" content="width=device-width, initial-scale=1"></meta><link rel="stylesheet" href=".././style.css"></link><link rel="stylesheet" href=".././src/pygments.css"></link><link rel="shortcut icon" href=".././favicon.ico"></link><link rel="prefetch" href=".././/declarations/declaration-data.bmp" as="image"></link><title>LeanCamCombi.FourFunctions</title><script defer="true" src=".././mathjax-config.js"></script><script defer="true" src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script><script defer="true" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script><script>const SITE_ROOT=".././";</script><script>const MODULE_NAME="LeanCamCombi.FourFunctions";</script><script type="module" src=".././jump-src.js"></script><script type="module" src=".././search.js"></script><script type="module" src=".././expand-nav.js"></script><script type="module" src=".././how-about.js"></script><script type="module" src=".././instances.js"></script><script type="module" src=".././importedBy.js"></script></head><body><input id="nav_toggle" type="checkbox"></input><header><h1><label for="nav_toggle"></label>Documentation</h1><p class="header_filename break_within"><span class="name">LeanCamCombi</span>.<span class="name">FourFunctions</span></p><form action="https://google.com/search" method="get" id="search_form"><input type="hidden" name="sitesearch" value="https://leanprover-community.github.io/mathlib4_docs"></input><input type="text" name="q" autocomplete="off"></input>&#32;
+            <button id="search_button" onclick="javascript: form.action='.././search.html';">Search</button><button>Google site search</button></form></header><nav class="internal_nav"><h3><a class="break_within" href="#top"><span class="name">LeanCamCombi</span>.<span class="name">FourFunctions</span></a></h3><p class="gh_nav_link"><a href="https://github.com/YaelDillies/LeanCamCombi/blob/41ed909d6e8b5e6b618db6412ed63ba09eba61c3//LeanCamCombi/FourFunctions.lean">source</a></p><div class="imports"><details><summary>Imports</summary><ul><li><a href=".././Init.html">Init</a></li><li><a href=".././Mathlib/Tactic/Ring.html">Mathlib.Tactic.Ring</a></li><li><a href=".././LeanCamCombi/Mathlib/Order/Birkhoff.html">LeanCamCombi.Mathlib.Order.Birkhoff</a></li><li><a href=".././LeanCamCombi/Mathlib/Order/Booleanisation.html">LeanCamCombi.Mathlib.Order.Booleanisation</a></li><li><a href=".././LeanCamCombi/Mathlib/Order/Sublattice.html">LeanCamCombi.Mathlib.Order.Sublattice</a></li><li><a href=".././Mathlib/Algebra/BigOperators/Order.html">Mathlib.Algebra.BigOperators.Order</a></li><li><a href=".././Mathlib/Algebra/Order/Pi.html">Mathlib.Algebra.Order.Pi</a></li><li><a href=".././LeanCamCombi/Mathlib/Data/Finset/Sups.html">LeanCamCombi.Mathlib.Data.Finset.Sups</a></li></ul></details><details><summary>Imported by</summary><ul id="imported-by-LeanCamCombi.FourFunctions" class="imported-by-list"></ul></details></div><div class="nav_link"><a class="break_within" href="#collapse_eq"><span class="name">collapse_eq</span></a></div><div class="nav_link"><a class="break_within" href="#collapse_of_mem"><span class="name">collapse_of_mem</span></a></div><div class="nav_link"><a class="break_within" href="#le_collapse_of_mem"><span class="name">le_collapse_of_mem</span></a></div><div class="nav_link"><a class="break_within" href="#le_collapse_of_insert_mem"><span class="name">le_collapse_of_insert_mem</span></a></div><div class="nav_link"><a class="break_within" href="#collapse_nonneg"><span class="name">collapse_nonneg</span></a></div><div class="nav_link"><a class="break_within" href="#collapse_modular"><span class="name">collapse_modular</span></a></div><div class="nav_link"><a class="break_within" href="#sum_collapse"><span class="name">sum_collapse</span></a></div><div class="nav_link"><a class="break_within" href="#Finset.four_functions_theorem"><span class="name">Finset</span>.<span class="name">four_functions_theorem</span></a></div><div class="nav_link"><a class="break_within" href="#four_functions_theorem"><span class="name">four_functions_theorem</span></a></div><div class="nav_link"><a class="break_within" href="#Finset.le_card_infs_mul_card_sups"><span class="name">Finset</span>.<span class="name">le_card_infs_mul_card_sups</span></a></div><div class="nav_link"><a class="break_within" href="#four_functions_theorem_univ"><span class="name">four_functions_theorem_univ</span></a></div><div class="nav_link"><a class="break_within" href="#holley"><span class="name">holley</span></a></div><div class="nav_link"><a class="break_within" href="#fkg"><span class="name">fkg</span></a></div><div class="nav_link"><a class="break_within" href="#Finset.le_card_diffs_mul_card_diffs"><span class="name">Finset</span>.<span class="name">le_card_diffs_mul_card_diffs</span></a></div><div class="nav_link"><a class="break_within" href="#Finset.card_le_card_diffs"><span class="name">Finset</span>.<span class="name">card_le_card_diffs</span></a></div></nav><main>
+<div class="mod_doc"><h1 class="markdown-heading" id="The-four-functions-theorem-and-corollaries">The four functions theorem and corollaries <a class="hover-link" href="#The-four-functions-theorem-and-corollaries">#</a></h1><p>This file proves the four functions theorem. The statement is that if
+<code>f₁ a * f₂ b ≤ f₃ (a ⊓ b) * f (a ⊔ b)</code> for all <code>a</code>, <code>b</code> in a finite distributive lattice, then
+<code>(∑ x in s, f₁ x) * (∑ x in t, f₂ x) ≤ (∑ x in s ⊼ t, f₃ x) * (∑ x in s ⊻ t, f₄ x)</code> where
+<code>s ⊼ t = {a ⊓ b | a ∈ s, b ∈ t}</code>, <code>s ⊻ t = {a ⊔ b | a ∈ s, b ∈ t}</code>.</p><p>The proof uses Birkhoff's representation theorem to restrict to the case where the finite
+distributive lattice is in fact a finite powerset algebra, namely <code><a href=".././Mathlib/Data/Finset/Basic.html#Finset">Finset</a> α</code> for some finite <code>α</code>.
+Then it proves this new statement by induction on the size of <code>α</code>.</p><h2 class="markdown-heading" id="Main-declarations">Main declarations <a class="hover-link" href="#Main-declarations">#</a></h2><p>The two versions of the four functions theorem are</p><ul>
+<li><code><a href=".././LeanCamCombi/FourFunctions.html#Finset.four_functions_theorem">Finset.four_functions_theorem</a></code> for finite powerset algebras.</li>
+<li><code><a href=".././LeanCamCombi/FourFunctions.html#four_functions_theorem">four_functions_theorem</a></code> for any finite distributive lattices.</li>
+</ul><p>We deduce a number of corollaries:</p><ul>
+<li><code><a href=".././LeanCamCombi/FourFunctions.html#Finset.le_card_infs_mul_card_sups">Finset.le_card_infs_mul_card_sups</a></code>: Daykin inequality. <code>|s| |t| ≤ |s ⊼ t| |s ⊻ t|</code></li>
+<li><code><a href=".././LeanCamCombi/FourFunctions.html#holley">holley</a></code>: Holley inequality.</li>
+<li><code><a href=".././LeanCamCombi/FourFunctions.html#fkg">fkg</a></code>: Fortuin-Kastelyn-Ginibre inequality.</li>
+<li><code><a href=".././LeanCamCombi/FourFunctions.html#Finset.card_le_card_diffs">Finset.card_le_card_diffs</a></code>: Marica-Schönheim inequality. <code>|s| ≤ |{a \ b | a, b ∈ s}|</code></li>
+</ul><h2 class="markdown-heading" id="TODO">TODO <a class="hover-link" href="#TODO">#</a></h2><p>Prove that lattices in which <code><a href=".././LeanCamCombi/FourFunctions.html#Finset.le_card_infs_mul_card_sups">Finset.le_card_infs_mul_card_sups</a></code> holds are distributive. See
+Daykin, <em>A lattice is distributive iff |A| |B| <= |A ∨ B| |A ∧ B|</em></p><p>Prove the Fishburn-Shepp inequality.</p><p>Is <code>collapse</code> a construct generally useful for set family inductions? If so, we should move it to an
+earlier file and give it a proper API.</p></div><div class="decl" id="collapse_eq"><div class="theorem"><div class="gh_link"><a href="https://github.com/YaelDillies/LeanCamCombi/blob/41ed909d6e8b5e6b618db6412ed63ba09eba61c3//LeanCamCombi/FourFunctions.lean#L94-L98">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href=".././LeanCamCombi/FourFunctions.html#collapse_eq"><span class="name">collapse_eq</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href=".././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{β : <a href=".././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href=".././Init/Prelude.html#DecidableEq">DecidableEq</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href=".././Mathlib/Algebra/Order/Ring/Defs.html#LinearOrderedCommSemiring">LinearOrderedCommSemiring</a> <span class="fn">β</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{a : <span class="fn">α</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{s : <span class="fn"><a href=".././Mathlib/Data/Finset/Basic.html#Finset">Finset</a> <span class="fn">α</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(ha : <span class="fn"><a href=".././Init/Prelude.html#Not">¬</a><span class="fn"><span class="fn">a</span> <a href=".././Init/Prelude.html#Membership.mem">∈</a> <span class="fn">s</span></span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(𝒜 : <span class="fn"><a href=".././Mathlib/Data/Finset/Basic.html#Finset">Finset</a> (<span class="fn"><a href=".././Mathlib/Data/Finset/Basic.html#Finset">Finset</a> <span class="fn">α</span></span>)</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(f : <span class="fn"><span class="fn"><a href=".././Mathlib/Data/Finset/Basic.html#Finset">Finset</a> <span class="fn">α</span></span> → <span class="fn">β</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href=".././LeanCamCombi/FourFunctions.html#_private.LeanCamCombi.FourFunctions.0.collapse">collapse</a> <span class="fn">𝒜</span> <span class="fn">a</span> <span class="fn">f</span> <span class="fn">s</span></span> <a href=".././Init/Prelude.html#Eq">=</a> <span class="fn">(<span class="fn">if <span class="fn"><span class="fn">s</span> <a href=".././Init/Prelude.html#Membership.mem">∈</a> <span class="fn">𝒜</span></span> then <span class="fn"><span class="fn">f</span> <span class="fn">s</span></span> else <span class="fn">0</span></span>) <a href=".././Init/Prelude.html#HAdd.hAdd">+</a> <span class="fn">if <span class="fn"><span class="fn"><a href=".././Std/Classes/SetNotation.html#Insert.insert">insert</a> <span class="fn">a</span> <span class="fn">s</span></span> <a href=".././Init/Prelude.html#Membership.mem">∈</a> <span class="fn">𝒜</span></span> then <span class="fn"><span class="fn">f</span> (<span class="fn"><a href=".././Std/Classes/SetNotation.html#Insert.insert">insert</a> <span class="fn">a</span> <span class="fn">s</span></span>)</span> else <span class="fn">0</span></span></span></span></div></div></div></div><div class="decl" id="collapse_of_mem"><div class="theorem"><div class="gh_link"><a href="https://github.com/YaelDillies/LeanCamCombi/blob/41ed909d6e8b5e6b618db6412ed63ba09eba61c3//LeanCamCombi/FourFunctions.lean#L100-L102">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href=".././LeanCamCombi/FourFunctions.html#collapse_of_mem"><span class="name">collapse_of_mem</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href=".././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{β : <a href=".././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href=".././Init/Prelude.html#DecidableEq">DecidableEq</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href=".././Mathlib/Algebra/Order/Ring/Defs.html#LinearOrderedCommSemiring">LinearOrderedCommSemiring</a> <span class="fn">β</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{𝒜 : <span class="fn"><a href=".././Mathlib/Data/Finset/Basic.html#Finset">Finset</a> (<span class="fn"><a href=".././Mathlib/Data/Finset/Basic.html#Finset">Finset</a> <span class="fn">α</span></span>)</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{a : <span class="fn">α</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{f : <span class="fn"><span class="fn"><a href=".././Mathlib/Data/Finset/Basic.html#Finset">Finset</a> <span class="fn">α</span></span> → <span class="fn">β</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{s : <span class="fn"><a href=".././Mathlib/Data/Finset/Basic.html#Finset">Finset</a> <span class="fn">α</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{t : <span class="fn"><a href=".././Mathlib/Data/Finset/Basic.html#Finset">Finset</a> <span class="fn">α</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{u : <span class="fn"><a href=".././Mathlib/Data/Finset/Basic.html#Finset">Finset</a> <span class="fn">α</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(ha : <span class="fn"><a href=".././Init/Prelude.html#Not">¬</a><span class="fn"><span class="fn">a</span> <a href=".././Init/Prelude.html#Membership.mem">∈</a> <span class="fn">s</span></span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(ht : <span class="fn"><span class="fn">t</span> <a href=".././Init/Prelude.html#Membership.mem">∈</a> <span class="fn">𝒜</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hu : <span class="fn"><span class="fn">u</span> <a href=".././Init/Prelude.html#Membership.mem">∈</a> <span class="fn">𝒜</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hts : <span class="fn"><span class="fn">t</span> <a href=".././Init/Prelude.html#Eq">=</a> <span class="fn">s</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hus : <span class="fn"><span class="fn">u</span> <a href=".././Init/Prelude.html#Eq">=</a> <span class="fn"><a href=".././Std/Classes/SetNotation.html#Insert.insert">insert</a> <span class="fn">a</span> <span class="fn">s</span></span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href=".././LeanCamCombi/FourFunctions.html#_private.LeanCamCombi.FourFunctions.0.collapse">collapse</a> <span class="fn">𝒜</span> <span class="fn">a</span> <span class="fn">f</span> <span class="fn">s</span></span> <a href=".././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn"><span class="fn">f</span> <span class="fn">t</span></span> <a href=".././Init/Prelude.html#HAdd.hAdd">+</a> <span class="fn"><span class="fn">f</span> <span class="fn">u</span></span></span></span></div></div></div></div><div class="decl" id="le_collapse_of_mem"><div class="theorem"><div class="gh_link"><a href="https://github.com/YaelDillies/LeanCamCombi/blob/41ed909d6e8b5e6b618db6412ed63ba09eba61c3//LeanCamCombi/FourFunctions.lean#L104-L110">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href=".././LeanCamCombi/FourFunctions.html#le_collapse_of_mem"><span class="name">le_collapse_of_mem</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href=".././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{β : <a href=".././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href=".././Init/Prelude.html#DecidableEq">DecidableEq</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href=".././Mathlib/Algebra/Order/Ring/Defs.html#LinearOrderedCommSemiring">LinearOrderedCommSemiring</a> <span class="fn">β</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{𝒜 : <span class="fn"><a href=".././Mathlib/Data/Finset/Basic.html#Finset">Finset</a> (<span class="fn"><a href=".././Mathlib/Data/Finset/Basic.html#Finset">Finset</a> <span class="fn">α</span></span>)</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{a : <span class="fn">α</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{f : <span class="fn"><span class="fn"><a href=".././Mathlib/Data/Finset/Basic.html#Finset">Finset</a> <span class="fn">α</span></span> → <span class="fn">β</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{s : <span class="fn"><a href=".././Mathlib/Data/Finset/Basic.html#Finset">Finset</a> <span class="fn">α</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{t : <span class="fn"><a href=".././Mathlib/Data/Finset/Basic.html#Finset">Finset</a> <span class="fn">α</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(ha : <span class="fn"><a href=".././Init/Prelude.html#Not">¬</a><span class="fn"><span class="fn">a</span> <a href=".././Init/Prelude.html#Membership.mem">∈</a> <span class="fn">s</span></span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hf : <span class="fn"><span class="fn">0</span> <a href=".././Init/Prelude.html#LE.le">≤</a> <span class="fn">f</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hts : <span class="fn"><span class="fn">t</span> <a href=".././Init/Prelude.html#Eq">=</a> <span class="fn">s</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(ht : <span class="fn"><span class="fn">t</span> <a href=".././Init/Prelude.html#Membership.mem">∈</a> <span class="fn">𝒜</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">f</span> <span class="fn">t</span></span> <a href=".././Init/Prelude.html#LE.le">≤</a> <span class="fn"><a href=".././LeanCamCombi/FourFunctions.html#_private.LeanCamCombi.FourFunctions.0.collapse">collapse</a> <span class="fn">𝒜</span> <span class="fn">a</span> <span class="fn">f</span> <span class="fn">s</span></span></span></div></div></div></div><div class="decl" id="le_collapse_of_insert_mem"><div class="theorem"><div class="gh_link"><a href="https://github.com/YaelDillies/LeanCamCombi/blob/41ed909d6e8b5e6b618db6412ed63ba09eba61c3//LeanCamCombi/FourFunctions.lean#L112-L117">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href=".././LeanCamCombi/FourFunctions.html#le_collapse_of_insert_mem"><span class="name">le_collapse_of_insert_mem</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href=".././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{β : <a href=".././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href=".././Init/Prelude.html#DecidableEq">DecidableEq</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href=".././Mathlib/Algebra/Order/Ring/Defs.html#LinearOrderedCommSemiring">LinearOrderedCommSemiring</a> <span class="fn">β</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{𝒜 : <span class="fn"><a href=".././Mathlib/Data/Finset/Basic.html#Finset">Finset</a> (<span class="fn"><a href=".././Mathlib/Data/Finset/Basic.html#Finset">Finset</a> <span class="fn">α</span></span>)</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{a : <span class="fn">α</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{f : <span class="fn"><span class="fn"><a href=".././Mathlib/Data/Finset/Basic.html#Finset">Finset</a> <span class="fn">α</span></span> → <span class="fn">β</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{s : <span class="fn"><a href=".././Mathlib/Data/Finset/Basic.html#Finset">Finset</a> <span class="fn">α</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{t : <span class="fn"><a href=".././Mathlib/Data/Finset/Basic.html#Finset">Finset</a> <span class="fn">α</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(ha : <span class="fn"><a href=".././Init/Prelude.html#Not">¬</a><span class="fn"><span class="fn">a</span> <a href=".././Init/Prelude.html#Membership.mem">∈</a> <span class="fn">s</span></span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hf : <span class="fn"><span class="fn">0</span> <a href=".././Init/Prelude.html#LE.le">≤</a> <span class="fn">f</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hts : <span class="fn"><span class="fn">t</span> <a href=".././Init/Prelude.html#Eq">=</a> <span class="fn"><a href=".././Std/Classes/SetNotation.html#Insert.insert">insert</a> <span class="fn">a</span> <span class="fn">s</span></span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(ht : <span class="fn"><span class="fn">t</span> <a href=".././Init/Prelude.html#Membership.mem">∈</a> <span class="fn">𝒜</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">f</span> <span class="fn">t</span></span> <a href=".././Init/Prelude.html#LE.le">≤</a> <span class="fn"><a href=".././LeanCamCombi/FourFunctions.html#_private.LeanCamCombi.FourFunctions.0.collapse">collapse</a> <span class="fn">𝒜</span> <span class="fn">a</span> <span class="fn">f</span> <span class="fn">s</span></span></span></div></div></div></div><div class="decl" id="collapse_nonneg"><div class="theorem"><div class="gh_link"><a href="https://github.com/YaelDillies/LeanCamCombi/blob/41ed909d6e8b5e6b618db6412ed63ba09eba61c3//LeanCamCombi/FourFunctions.lean#L119-L119">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href=".././LeanCamCombi/FourFunctions.html#collapse_nonneg"><span class="name">collapse_nonneg</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href=".././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{β : <a href=".././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href=".././Init/Prelude.html#DecidableEq">DecidableEq</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href=".././Mathlib/Algebra/Order/Ring/Defs.html#LinearOrderedCommSemiring">LinearOrderedCommSemiring</a> <span class="fn">β</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{𝒜 : <span class="fn"><a href=".././Mathlib/Data/Finset/Basic.html#Finset">Finset</a> (<span class="fn"><a href=".././Mathlib/Data/Finset/Basic.html#Finset">Finset</a> <span class="fn">α</span></span>)</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{a : <span class="fn">α</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{f : <span class="fn"><span class="fn"><a href=".././Mathlib/Data/Finset/Basic.html#Finset">Finset</a> <span class="fn">α</span></span> → <span class="fn">β</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hf : <span class="fn"><span class="fn">0</span> <a href=".././Init/Prelude.html#LE.le">≤</a> <span class="fn">f</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">0</span> <a href=".././Init/Prelude.html#LE.le">≤</a> <span class="fn"><a href=".././LeanCamCombi/FourFunctions.html#_private.LeanCamCombi.FourFunctions.0.collapse">collapse</a> <span class="fn">𝒜</span> <span class="fn">a</span> <span class="fn">f</span></span></span></div></div></div></div><div class="decl" id="collapse_modular"><div class="theorem"><div class="gh_link"><a href="https://github.com/YaelDillies/LeanCamCombi/blob/41ed909d6e8b5e6b618db6412ed63ba09eba61c3//LeanCamCombi/FourFunctions.lean#L121-L200">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href=".././LeanCamCombi/FourFunctions.html#collapse_modular"><span class="name">collapse_modular</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href=".././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{β : <a href=".././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href=".././Init/Prelude.html#DecidableEq">DecidableEq</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href=".././Mathlib/Algebra/Order/Ring/Defs.html#LinearOrderedCommSemiring">LinearOrderedCommSemiring</a> <span class="fn">β</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href=".././Mathlib/Algebra/Order/Monoid/Canonical/Defs.html#ExistsAddOfLE">ExistsAddOfLE</a> <span class="fn">β</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{a : <span class="fn">α</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{f₁ : <span class="fn"><span class="fn"><a href=".././Mathlib/Data/Finset/Basic.html#Finset">Finset</a> <span class="fn">α</span></span> → <span class="fn">β</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{f₂ : <span class="fn"><span class="fn"><a href=".././Mathlib/Data/Finset/Basic.html#Finset">Finset</a> <span class="fn">α</span></span> → <span class="fn">β</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{f₃ : <span class="fn"><span class="fn"><a href=".././Mathlib/Data/Finset/Basic.html#Finset">Finset</a> <span class="fn">α</span></span> → <span class="fn">β</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{f₄ : <span class="fn"><span class="fn"><a href=".././Mathlib/Data/Finset/Basic.html#Finset">Finset</a> <span class="fn">α</span></span> → <span class="fn">β</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{u : <span class="fn"><a href=".././Mathlib/Data/Finset/Basic.html#Finset">Finset</a> <span class="fn">α</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hu : <span class="fn"><a href=".././Init/Prelude.html#Not">¬</a><span class="fn"><span class="fn">a</span> <a href=".././Init/Prelude.html#Membership.mem">∈</a> <span class="fn">u</span></span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(h₁ : <span class="fn"><span class="fn">0</span> <a href=".././Init/Prelude.html#LE.le">≤</a> <span class="fn">f₁</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(h₂ : <span class="fn"><span class="fn">0</span> <a href=".././Init/Prelude.html#LE.le">≤</a> <span class="fn">f₂</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(h₃ : <span class="fn"><span class="fn">0</span> <a href=".././Init/Prelude.html#LE.le">≤</a> <span class="fn">f₃</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(h₄ : <span class="fn"><span class="fn">0</span> <a href=".././Init/Prelude.html#LE.le">≤</a> <span class="fn">f₄</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(h : <span class="fn">∀ ⦃<span class="fn">s</span> : <span class="fn"><a href=".././Mathlib/Data/Finset/Basic.html#Finset">Finset</a> <span class="fn">α</span></span>⦄, <span class="fn"><span class="fn"><span class="fn">s</span> <a href=".././Std/Classes/SetNotation.html#HasSubset.Subset">⊆</a> <span class="fn"><a href=".././Std/Classes/SetNotation.html#Insert.insert">insert</a> <span class="fn">a</span> <span class="fn">u</span></span></span> → <span class="fn">∀ ⦃<span class="fn">t</span> : <span class="fn"><a href=".././Mathlib/Data/Finset/Basic.html#Finset">Finset</a> <span class="fn">α</span></span>⦄, <span class="fn"><span class="fn"><span class="fn">t</span> <a href=".././Std/Classes/SetNotation.html#HasSubset.Subset">⊆</a> <span class="fn"><a href=".././Std/Classes/SetNotation.html#Insert.insert">insert</a> <span class="fn">a</span> <span class="fn">u</span></span></span> → <span class="fn"><span class="fn"><span class="fn"><span class="fn">f₁</span> <span class="fn">s</span></span> <a href=".././Init/Prelude.html#HMul.hMul">*</a> <span class="fn"><span class="fn">f₂</span> <span class="fn">t</span></span></span> <a href=".././Init/Prelude.html#LE.le">≤</a> <span class="fn"><span class="fn"><span class="fn">f₃</span> (<span class="fn"><span class="fn">s</span> <a href=".././Std/Classes/SetNotation.html#Inter.inter">∩</a> <span class="fn">t</span></span>)</span> <a href=".././Init/Prelude.html#HMul.hMul">*</a> <span class="fn"><span class="fn">f₄</span> (<span class="fn"><span class="fn">s</span> <a href=".././Std/Classes/SetNotation.html#Union.union">∪</a> <span class="fn">t</span></span>)</span></span></span></span></span></span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(𝒜 : <span class="fn"><a href=".././Mathlib/Data/Finset/Basic.html#Finset">Finset</a> (<span class="fn"><a href=".././Mathlib/Data/Finset/Basic.html#Finset">Finset</a> <span class="fn">α</span></span>)</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(ℬ : <span class="fn"><a href=".././Mathlib/Data/Finset/Basic.html#Finset">Finset</a> (<span class="fn"><a href=".././Mathlib/Data/Finset/Basic.html#Finset">Finset</a> <span class="fn">α</span></span>)</span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">⦃s : <span class="fn"><a href=".././Mathlib/Data/Finset/Basic.html#Finset">Finset</a> <span class="fn">α</span></span>⦄</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">s</span> <a href=".././Std/Classes/SetNotation.html#HasSubset.Subset">⊆</a> <span class="fn">u</span></span> →
+  <span class="fn">∀ ⦃<span class="fn">t</span> : <span class="fn"><a href=".././Mathlib/Data/Finset/Basic.html#Finset">Finset</a> <span class="fn">α</span></span>⦄,
+    <span class="fn"><span class="fn"><span class="fn">t</span> <a href=".././Std/Classes/SetNotation.html#HasSubset.Subset">⊆</a> <span class="fn">u</span></span> → <span class="fn"><span class="fn"><span class="fn"><a href=".././LeanCamCombi/FourFunctions.html#_private.LeanCamCombi.FourFunctions.0.collapse">collapse</a> <span class="fn">𝒜</span> <span class="fn">a</span> <span class="fn">f₁</span> <span class="fn">s</span></span> <a href=".././Init/Prelude.html#HMul.hMul">*</a> <span class="fn"><a href=".././LeanCamCombi/FourFunctions.html#_private.LeanCamCombi.FourFunctions.0.collapse">collapse</a> <span class="fn">ℬ</span> <span class="fn">a</span> <span class="fn">f₂</span> <span class="fn">t</span></span></span> <a href=".././Init/Prelude.html#LE.le">≤</a> <span class="fn"><span class="fn"><a href=".././LeanCamCombi/FourFunctions.html#_private.LeanCamCombi.FourFunctions.0.collapse">collapse</a> (<span class="fn"><span class="fn">𝒜</span> <a href=".././Mathlib/Data/Set/Sups.html#HasInfs.infs">⊼</a> <span class="fn">ℬ</span></span>) <span class="fn">a</span> <span class="fn">f₃</span> (<span class="fn"><span class="fn">s</span> <a href=".././Std/Classes/SetNotation.html#Inter.inter">∩</a> <span class="fn">t</span></span>)</span> <a href=".././Init/Prelude.html#HMul.hMul">*</a> <span class="fn"><a href=".././LeanCamCombi/FourFunctions.html#_private.LeanCamCombi.FourFunctions.0.collapse">collapse</a> (<span class="fn"><span class="fn">𝒜</span> <a href=".././Mathlib/Data/Set/Sups.html#HasSups.sups">⊻</a> <span class="fn">ℬ</span></span>) <span class="fn">a</span> <span class="fn">f₄</span> (<span class="fn"><span class="fn">s</span> <a href=".././Std/Classes/SetNotation.html#Union.union">∪</a> <span class="fn">t</span></span>)</span></span></span></span></span></span></div></div></div></div><div class="decl" id="sum_collapse"><div class="theorem"><div class="gh_link"><a href="https://github.com/YaelDillies/LeanCamCombi/blob/41ed909d6e8b5e6b618db6412ed63ba09eba61c3//LeanCamCombi/FourFunctions.lean#L202-L220">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href=".././LeanCamCombi/FourFunctions.html#sum_collapse"><span class="name">sum_collapse</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href=".././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{β : <a href=".././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href=".././Init/Prelude.html#DecidableEq">DecidableEq</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href=".././Mathlib/Algebra/Order/Ring/Defs.html#LinearOrderedCommSemiring">LinearOrderedCommSemiring</a> <span class="fn">β</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{𝒜 : <span class="fn"><a href=".././Mathlib/Data/Finset/Basic.html#Finset">Finset</a> (<span class="fn"><a href=".././Mathlib/Data/Finset/Basic.html#Finset">Finset</a> <span class="fn">α</span></span>)</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{a : <span class="fn">α</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{f : <span class="fn"><span class="fn"><a href=".././Mathlib/Data/Finset/Basic.html#Finset">Finset</a> <span class="fn">α</span></span> → <span class="fn">β</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{u : <span class="fn"><a href=".././Mathlib/Data/Finset/Basic.html#Finset">Finset</a> <span class="fn">α</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(h𝒜 : <span class="fn"><span class="fn">𝒜</span> <a href=".././Std/Classes/SetNotation.html#HasSubset.Subset">⊆</a> <span class="fn"><a href=".././Mathlib/Data/Finset/Powerset.html#Finset.powerset">Finset.powerset</a> (<span class="fn"><a href=".././Std/Classes/SetNotation.html#Insert.insert">insert</a> <span class="fn">a</span> <span class="fn">u</span></span>)</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hu : <span class="fn"><a href=".././Init/Prelude.html#Not">¬</a><span class="fn"><span class="fn">a</span> <a href=".././Init/Prelude.html#Membership.mem">∈</a> <span class="fn">u</span></span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn">(<span class="fn"><a href=".././Mathlib/Algebra/BigOperators/Basic.html#Finset.sum">Finset.sum</a> (<span class="fn"><a href=".././Mathlib/Data/Finset/Powerset.html#Finset.powerset">Finset.powerset</a> <span class="fn">u</span></span>) <span class="fn">fun <span class="fn">s</span> =&gt <span class="fn"><a href=".././LeanCamCombi/FourFunctions.html#_private.LeanCamCombi.FourFunctions.0.collapse">collapse</a> <span class="fn">𝒜</span> <span class="fn">a</span> <span class="fn">f</span> <span class="fn">s</span></span></span></span>) <a href=".././Init/Prelude.html#Eq">=</a> <span class="fn"><a href=".././Mathlib/Algebra/BigOperators/Basic.html#Finset.sum">Finset.sum</a> <span class="fn">𝒜</span> <span class="fn">fun <span class="fn">s</span> =&gt <span class="fn"><span class="fn">f</span> <span class="fn">s</span></span></span></span></span></div></div></div></div><div class="decl" id="Finset.four_functions_theorem"><div class="theorem"><div class="gh_link"><a href="https://github.com/YaelDillies/LeanCamCombi/blob/41ed909d6e8b5e6b618db6412ed63ba09eba61c3//LeanCamCombi/FourFunctions.lean#L224-L236">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href=".././LeanCamCombi/FourFunctions.html#Finset.four_functions_theorem"><span class="name">Finset</span>.<span class="name">four_functions_theorem</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href=".././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{β : <a href=".././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href=".././Init/Prelude.html#DecidableEq">DecidableEq</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href=".././Mathlib/Algebra/Order/Ring/Defs.html#LinearOrderedCommSemiring">LinearOrderedCommSemiring</a> <span class="fn">β</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href=".././Mathlib/Algebra/Order/Monoid/Canonical/Defs.html#ExistsAddOfLE">ExistsAddOfLE</a> <span class="fn">β</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{f₁ : <span class="fn"><span class="fn"><a href=".././Mathlib/Data/Finset/Basic.html#Finset">Finset</a> <span class="fn">α</span></span> → <span class="fn">β</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{f₂ : <span class="fn"><span class="fn"><a href=".././Mathlib/Data/Finset/Basic.html#Finset">Finset</a> <span class="fn">α</span></span> → <span class="fn">β</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{f₃ : <span class="fn"><span class="fn"><a href=".././Mathlib/Data/Finset/Basic.html#Finset">Finset</a> <span class="fn">α</span></span> → <span class="fn">β</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{f₄ : <span class="fn"><span class="fn"><a href=".././Mathlib/Data/Finset/Basic.html#Finset">Finset</a> <span class="fn">α</span></span> → <span class="fn">β</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(u : <span class="fn"><a href=".././Mathlib/Data/Finset/Basic.html#Finset">Finset</a> <span class="fn">α</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(h₁ : <span class="fn"><span class="fn">0</span> <a href=".././Init/Prelude.html#LE.le">≤</a> <span class="fn">f₁</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(h₂ : <span class="fn"><span class="fn">0</span> <a href=".././Init/Prelude.html#LE.le">≤</a> <span class="fn">f₂</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(h₃ : <span class="fn"><span class="fn">0</span> <a href=".././Init/Prelude.html#LE.le">≤</a> <span class="fn">f₃</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(h₄ : <span class="fn"><span class="fn">0</span> <a href=".././Init/Prelude.html#LE.le">≤</a> <span class="fn">f₄</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(h : <span class="fn">∀ ⦃<span class="fn">s</span> : <span class="fn"><a href=".././Mathlib/Data/Finset/Basic.html#Finset">Finset</a> <span class="fn">α</span></span>⦄, <span class="fn"><span class="fn"><span class="fn">s</span> <a href=".././Std/Classes/SetNotation.html#HasSubset.Subset">⊆</a> <span class="fn">u</span></span> → <span class="fn">∀ ⦃<span class="fn">t</span> : <span class="fn"><a href=".././Mathlib/Data/Finset/Basic.html#Finset">Finset</a> <span class="fn">α</span></span>⦄, <span class="fn"><span class="fn"><span class="fn">t</span> <a href=".././Std/Classes/SetNotation.html#HasSubset.Subset">⊆</a> <span class="fn">u</span></span> → <span class="fn"><span class="fn"><span class="fn"><span class="fn">f₁</span> <span class="fn">s</span></span> <a href=".././Init/Prelude.html#HMul.hMul">*</a> <span class="fn"><span class="fn">f₂</span> <span class="fn">t</span></span></span> <a href=".././Init/Prelude.html#LE.le">≤</a> <span class="fn"><span class="fn"><span class="fn">f₃</span> (<span class="fn"><span class="fn">s</span> <a href=".././Std/Classes/SetNotation.html#Inter.inter">∩</a> <span class="fn">t</span></span>)</span> <a href=".././Init/Prelude.html#HMul.hMul">*</a> <span class="fn"><span class="fn">f₄</span> (<span class="fn"><span class="fn">s</span> <a href=".././Std/Classes/SetNotation.html#Union.union">∪</a> <span class="fn">t</span></span>)</span></span></span></span></span></span></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">{𝒜 : <span class="fn"><a href=".././Mathlib/Data/Finset/Basic.html#Finset">Finset</a> (<span class="fn"><a href=".././Mathlib/Data/Finset/Basic.html#Finset">Finset</a> <span class="fn">α</span></span>)</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{ℬ : <span class="fn"><a href=".././Mathlib/Data/Finset/Basic.html#Finset">Finset</a> (<span class="fn"><a href=".././Mathlib/Data/Finset/Basic.html#Finset">Finset</a> <span class="fn">α</span></span>)</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(h𝒜 : <span class="fn"><span class="fn">𝒜</span> <a href=".././Std/Classes/SetNotation.html#HasSubset.Subset">⊆</a> <span class="fn"><a href=".././Mathlib/Data/Finset/Powerset.html#Finset.powerset">Finset.powerset</a> <span class="fn">u</span></span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hℬ : <span class="fn"><span class="fn">ℬ</span> <a href=".././Std/Classes/SetNotation.html#HasSubset.Subset">⊆</a> <span class="fn"><a href=".././Mathlib/Data/Finset/Powerset.html#Finset.powerset">Finset.powerset</a> <span class="fn">u</span></span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn">(<span class="fn">(<span class="fn"><a href=".././Mathlib/Algebra/BigOperators/Basic.html#Finset.sum">Finset.sum</a> <span class="fn">𝒜</span> <span class="fn">fun <span class="fn">s</span> =&gt <span class="fn"><span class="fn">f₁</span> <span class="fn">s</span></span></span></span>) <a href=".././Init/Prelude.html#HMul.hMul">*</a> <span class="fn"><a href=".././Mathlib/Algebra/BigOperators/Basic.html#Finset.sum">Finset.sum</a> <span class="fn">ℬ</span> <span class="fn">fun <span class="fn">s</span> =&gt <span class="fn"><span class="fn">f₂</span> <span class="fn">s</span></span></span></span></span>) <a href=".././Init/Prelude.html#LE.le">≤</a>   <span class="fn">(<span class="fn"><a href=".././Mathlib/Algebra/BigOperators/Basic.html#Finset.sum">Finset.sum</a> (<span class="fn"><span class="fn">𝒜</span> <a href=".././Mathlib/Data/Set/Sups.html#HasInfs.infs">⊼</a> <span class="fn">ℬ</span></span>) <span class="fn">fun <span class="fn">s</span> =&gt <span class="fn"><span class="fn">f₃</span> <span class="fn">s</span></span></span></span>) <a href=".././Init/Prelude.html#HMul.hMul">*</a> <span class="fn"><a href=".././Mathlib/Algebra/BigOperators/Basic.html#Finset.sum">Finset.sum</a> (<span class="fn"><span class="fn">𝒜</span> <a href=".././Mathlib/Data/Set/Sups.html#HasSups.sups">⊻</a> <span class="fn">ℬ</span></span>) <span class="fn">fun <span class="fn">s</span> =&gt <span class="fn"><span class="fn">f₄</span> <span class="fn">s</span></span></span></span></span></span></div></div><p>The <strong>Four Functions Theorem</strong> on a powerset algebra. See <code><a href=".././LeanCamCombi/FourFunctions.html#four_functions_theorem">four_functions_theorem</a></code> for the
+finite distributive lattice generalisation.</p></div></div><div class="decl" id="four_functions_theorem"><div class="theorem"><div class="gh_link"><a href="https://github.com/YaelDillies/LeanCamCombi/blob/41ed909d6e8b5e6b618db6412ed63ba09eba61c3//LeanCamCombi/FourFunctions.lean#L254-L286">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href=".././LeanCamCombi/FourFunctions.html#four_functions_theorem"><span class="name">four_functions_theorem</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href=".././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{β : <a href=".././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href=".././Mathlib/Order/Lattice.html#DistribLattice">DistribLattice</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href=".././Init/Prelude.html#DecidableEq">DecidableEq</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href=".././Mathlib/Algebra/Order/Ring/Defs.html#LinearOrderedCommSemiring">LinearOrderedCommSemiring</a> <span class="fn">β</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href=".././Mathlib/Algebra/Order/Monoid/Canonical/Defs.html#ExistsAddOfLE">ExistsAddOfLE</a> <span class="fn">β</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(f₁ : <span class="fn"><span class="fn">α</span> → <span class="fn">β</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(f₂ : <span class="fn"><span class="fn">α</span> → <span class="fn">β</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(f₃ : <span class="fn"><span class="fn">α</span> → <span class="fn">β</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(f₄ : <span class="fn"><span class="fn">α</span> → <span class="fn">β</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(h₁ : <span class="fn"><span class="fn">0</span> <a href=".././Init/Prelude.html#LE.le">≤</a> <span class="fn">f₁</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(h₂ : <span class="fn"><span class="fn">0</span> <a href=".././Init/Prelude.html#LE.le">≤</a> <span class="fn">f₂</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(h₃ : <span class="fn"><span class="fn">0</span> <a href=".././Init/Prelude.html#LE.le">≤</a> <span class="fn">f₃</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(h₄ : <span class="fn"><span class="fn">0</span> <a href=".././Init/Prelude.html#LE.le">≤</a> <span class="fn">f₄</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(h : <span class="fn">∀ (<span class="fn">a </span>b : <span class="fn">α</span>), <span class="fn"><span class="fn"><span class="fn"><span class="fn">f₁</span> <span class="fn">a</span></span> <a href=".././Init/Prelude.html#HMul.hMul">*</a> <span class="fn"><span class="fn">f₂</span> <span class="fn">b</span></span></span> <a href=".././Init/Prelude.html#LE.le">≤</a> <span class="fn"><span class="fn"><span class="fn">f₃</span> (<span class="fn"><span class="fn">a</span> <a href=".././Mathlib/Order/Basic.html#Inf.inf">⊓</a> <span class="fn">b</span></span>)</span> <a href=".././Init/Prelude.html#HMul.hMul">*</a> <span class="fn"><span class="fn">f₄</span> (<span class="fn"><span class="fn">a</span> <a href=".././Mathlib/Order/Basic.html#Sup.sup">⊔</a> <span class="fn">b</span></span>)</span></span></span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(s : <span class="fn"><a href=".././Mathlib/Data/Finset/Basic.html#Finset">Finset</a> <span class="fn">α</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(t : <span class="fn"><a href=".././Mathlib/Data/Finset/Basic.html#Finset">Finset</a> <span class="fn">α</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn">(<span class="fn">(<span class="fn"><a href=".././Mathlib/Algebra/BigOperators/Basic.html#Finset.sum">Finset.sum</a> <span class="fn">s</span> <span class="fn">fun <span class="fn">a</span> =&gt <span class="fn"><span class="fn">f₁</span> <span class="fn">a</span></span></span></span>) <a href=".././Init/Prelude.html#HMul.hMul">*</a> <span class="fn"><a href=".././Mathlib/Algebra/BigOperators/Basic.html#Finset.sum">Finset.sum</a> <span class="fn">t</span> <span class="fn">fun <span class="fn">a</span> =&gt <span class="fn"><span class="fn">f₂</span> <span class="fn">a</span></span></span></span></span>) <a href=".././Init/Prelude.html#LE.le">≤</a>   <span class="fn">(<span class="fn"><a href=".././Mathlib/Algebra/BigOperators/Basic.html#Finset.sum">Finset.sum</a> (<span class="fn"><span class="fn">s</span> <a href=".././Mathlib/Data/Set/Sups.html#HasInfs.infs">⊼</a> <span class="fn">t</span></span>) <span class="fn">fun <span class="fn">a</span> =&gt <span class="fn"><span class="fn">f₃</span> <span class="fn">a</span></span></span></span>) <a href=".././Init/Prelude.html#HMul.hMul">*</a> <span class="fn"><a href=".././Mathlib/Algebra/BigOperators/Basic.html#Finset.sum">Finset.sum</a> (<span class="fn"><span class="fn">s</span> <a href=".././Mathlib/Data/Set/Sups.html#HasSups.sups">⊻</a> <span class="fn">t</span></span>) <span class="fn">fun <span class="fn">a</span> =&gt <span class="fn"><span class="fn">f₄</span> <span class="fn">a</span></span></span></span></span></span></div></div><p>The <strong>Four Functions Theorem</strong>, aka <strong>Ahlswede-Daykin Inequality</strong>.</p></div></div><div class="decl" id="Finset.le_card_infs_mul_card_sups"><div class="theorem"><div class="gh_link"><a href="https://github.com/YaelDillies/LeanCamCombi/blob/41ed909d6e8b5e6b618db6412ed63ba09eba61c3//LeanCamCombi/FourFunctions.lean#L290-L293">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href=".././LeanCamCombi/FourFunctions.html#Finset.le_card_infs_mul_card_sups"><span class="name">Finset</span>.<span class="name">le_card_infs_mul_card_sups</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href=".././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href=".././Mathlib/Order/Lattice.html#DistribLattice">DistribLattice</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href=".././Init/Prelude.html#DecidableEq">DecidableEq</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(s : <span class="fn"><a href=".././Mathlib/Data/Finset/Basic.html#Finset">Finset</a> <span class="fn">α</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(t : <span class="fn"><a href=".././Mathlib/Data/Finset/Basic.html#Finset">Finset</a> <span class="fn">α</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn"><a href=".././Mathlib/Data/Finset/Card.html#Finset.card">Finset.card</a> <span class="fn">s</span></span> <a href=".././Init/Prelude.html#HMul.hMul">*</a> <span class="fn"><a href=".././Mathlib/Data/Finset/Card.html#Finset.card">Finset.card</a> <span class="fn">t</span></span></span> <a href=".././Init/Prelude.html#LE.le">≤</a> <span class="fn"><span class="fn"><a href=".././Mathlib/Data/Finset/Card.html#Finset.card">Finset.card</a> (<span class="fn"><span class="fn">s</span> <a href=".././Mathlib/Data/Set/Sups.html#HasInfs.infs">⊼</a> <span class="fn">t</span></span>)</span> <a href=".././Init/Prelude.html#HMul.hMul">*</a> <span class="fn"><a href=".././Mathlib/Data/Finset/Card.html#Finset.card">Finset.card</a> (<span class="fn"><span class="fn">s</span> <a href=".././Mathlib/Data/Set/Sups.html#HasSups.sups">⊻</a> <span class="fn">t</span></span>)</span></span></span></div></div><p>An inequality of Daykin. Interestingly, any lattice in which this inequality holds is
+distributive.</p></div></div><div class="decl" id="four_functions_theorem_univ"><div class="theorem"><div class="gh_link"><a href="https://github.com/YaelDillies/LeanCamCombi/blob/41ed909d6e8b5e6b618db6412ed63ba09eba61c3//LeanCamCombi/FourFunctions.lean#L298-L301">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href=".././LeanCamCombi/FourFunctions.html#four_functions_theorem_univ"><span class="name">four_functions_theorem_univ</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href=".././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{β : <a href=".././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href=".././Mathlib/Order/Lattice.html#DistribLattice">DistribLattice</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href=".././Init/Prelude.html#DecidableEq">DecidableEq</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href=".././Mathlib/Algebra/Order/Ring/Defs.html#LinearOrderedCommSemiring">LinearOrderedCommSemiring</a> <span class="fn">β</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href=".././Mathlib/Algebra/Order/Monoid/Canonical/Defs.html#ExistsAddOfLE">ExistsAddOfLE</a> <span class="fn">β</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(f₁ : <span class="fn"><span class="fn">α</span> → <span class="fn">β</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(f₂ : <span class="fn"><span class="fn">α</span> → <span class="fn">β</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(f₃ : <span class="fn"><span class="fn">α</span> → <span class="fn">β</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(f₄ : <span class="fn"><span class="fn">α</span> → <span class="fn">β</span></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href=".././Mathlib/Data/Fintype/Basic.html#Fintype">Fintype</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(h₁ : <span class="fn"><span class="fn">0</span> <a href=".././Init/Prelude.html#LE.le">≤</a> <span class="fn">f₁</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(h₂ : <span class="fn"><span class="fn">0</span> <a href=".././Init/Prelude.html#LE.le">≤</a> <span class="fn">f₂</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(h₃ : <span class="fn"><span class="fn">0</span> <a href=".././Init/Prelude.html#LE.le">≤</a> <span class="fn">f₃</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(h₄ : <span class="fn"><span class="fn">0</span> <a href=".././Init/Prelude.html#LE.le">≤</a> <span class="fn">f₄</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(h : <span class="fn">∀ (<span class="fn">a </span>b : <span class="fn">α</span>), <span class="fn"><span class="fn"><span class="fn"><span class="fn">f₁</span> <span class="fn">a</span></span> <a href=".././Init/Prelude.html#HMul.hMul">*</a> <span class="fn"><span class="fn">f₂</span> <span class="fn">b</span></span></span> <a href=".././Init/Prelude.html#LE.le">≤</a> <span class="fn"><span class="fn"><span class="fn">f₃</span> (<span class="fn"><span class="fn">a</span> <a href=".././Mathlib/Order/Basic.html#Inf.inf">⊓</a> <span class="fn">b</span></span>)</span> <a href=".././Init/Prelude.html#HMul.hMul">*</a> <span class="fn"><span class="fn">f₄</span> (<span class="fn"><span class="fn">a</span> <a href=".././Mathlib/Order/Basic.html#Sup.sup">⊔</a> <span class="fn">b</span></span>)</span></span></span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn">(<span class="fn">(<span class="fn"><a href=".././Mathlib/Algebra/BigOperators/Basic.html#Finset.sum">Finset.sum</a> <span class="fn">Finset.univ</span> <span class="fn">fun <span class="fn">a</span> =&gt <span class="fn"><span class="fn">f₁</span> <span class="fn">a</span></span></span></span>) <a href=".././Init/Prelude.html#HMul.hMul">*</a> <span class="fn"><a href=".././Mathlib/Algebra/BigOperators/Basic.html#Finset.sum">Finset.sum</a> <span class="fn">Finset.univ</span> <span class="fn">fun <span class="fn">a</span> =&gt <span class="fn"><span class="fn">f₂</span> <span class="fn">a</span></span></span></span></span>) <a href=".././Init/Prelude.html#LE.le">≤</a>   <span class="fn">(<span class="fn"><a href=".././Mathlib/Algebra/BigOperators/Basic.html#Finset.sum">Finset.sum</a> <span class="fn">Finset.univ</span> <span class="fn">fun <span class="fn">a</span> =&gt <span class="fn"><span class="fn">f₃</span> <span class="fn">a</span></span></span></span>) <a href=".././Init/Prelude.html#HMul.hMul">*</a> <span class="fn"><a href=".././Mathlib/Algebra/BigOperators/Basic.html#Finset.sum">Finset.sum</a> <span class="fn">Finset.univ</span> <span class="fn">fun <span class="fn">a</span> =&gt <span class="fn"><span class="fn">f₄</span> <span class="fn">a</span></span></span></span></span></span></div></div><p>Special case of the <strong>Four Functions Theorem</strong> when <code>s = t = univ</code>.</p></div></div><div class="decl" id="holley"><div class="theorem"><div class="gh_link"><a href="https://github.com/YaelDillies/LeanCamCombi/blob/41ed909d6e8b5e6b618db6412ed63ba09eba61c3//LeanCamCombi/FourFunctions.lean#L304-L318">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href=".././LeanCamCombi/FourFunctions.html#holley"><span class="name">holley</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href=".././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{β : <a href=".././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href=".././Mathlib/Order/Lattice.html#DistribLattice">DistribLattice</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href=".././Init/Prelude.html#DecidableEq">DecidableEq</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href=".././Mathlib/Algebra/Order/Ring/Defs.html#LinearOrderedCommSemiring">LinearOrderedCommSemiring</a> <span class="fn">β</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href=".././Mathlib/Algebra/Order/Monoid/Canonical/Defs.html#ExistsAddOfLE">ExistsAddOfLE</a> <span class="fn">β</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(f : <span class="fn"><span class="fn">α</span> → <span class="fn">β</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(g : <span class="fn"><span class="fn">α</span> → <span class="fn">β</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(μ : <span class="fn"><span class="fn">α</span> → <span class="fn">β</span></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href=".././Mathlib/Data/Fintype/Basic.html#Fintype">Fintype</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(hμ₀ : <span class="fn"><span class="fn">0</span> <a href=".././Init/Prelude.html#LE.le">≤</a> <span class="fn">μ</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hf : <span class="fn"><span class="fn">0</span> <a href=".././Init/Prelude.html#LE.le">≤</a> <span class="fn">f</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hg : <span class="fn"><span class="fn">0</span> <a href=".././Init/Prelude.html#LE.le">≤</a> <span class="fn">g</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hμ : <span class="fn"><a href=".././Mathlib/Order/Monotone/Basic.html#Monotone">Monotone</a> <span class="fn">μ</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hfg : <span class="fn">(<span class="fn"><a href=".././Mathlib/Algebra/BigOperators/Basic.html#Finset.sum">Finset.sum</a> <span class="fn">Finset.univ</span> <span class="fn">fun <span class="fn">a</span> =&gt <span class="fn"><span class="fn">f</span> <span class="fn">a</span></span></span></span>) <a href=".././Init/Prelude.html#Eq">=</a> <span class="fn"><a href=".././Mathlib/Algebra/BigOperators/Basic.html#Finset.sum">Finset.sum</a> <span class="fn">Finset.univ</span> <span class="fn">fun <span class="fn">a</span> =&gt <span class="fn"><span class="fn">g</span> <span class="fn">a</span></span></span></span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(h : <span class="fn">∀ (<span class="fn">a </span>b : <span class="fn">α</span>), <span class="fn"><span class="fn"><span class="fn"><span class="fn">f</span> <span class="fn">a</span></span> <a href=".././Init/Prelude.html#HMul.hMul">*</a> <span class="fn"><span class="fn">g</span> <span class="fn">b</span></span></span> <a href=".././Init/Prelude.html#LE.le">≤</a> <span class="fn"><span class="fn"><span class="fn">f</span> (<span class="fn"><span class="fn">a</span> <a href=".././Mathlib/Order/Basic.html#Inf.inf">⊓</a> <span class="fn">b</span></span>)</span> <a href=".././Init/Prelude.html#HMul.hMul">*</a> <span class="fn"><span class="fn">g</span> (<span class="fn"><span class="fn">a</span> <a href=".././Mathlib/Order/Basic.html#Sup.sup">⊔</a> <span class="fn">b</span></span>)</span></span></span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn">(<span class="fn"><a href=".././Mathlib/Algebra/BigOperators/Basic.html#Finset.sum">Finset.sum</a> <span class="fn">Finset.univ</span> <span class="fn">fun <span class="fn">a</span> =&gt <span class="fn"><span class="fn"><span class="fn">μ</span> <span class="fn">a</span></span> <a href=".././Init/Prelude.html#HMul.hMul">*</a> <span class="fn"><span class="fn">f</span> <span class="fn">a</span></span></span></span></span>) <a href=".././Init/Prelude.html#LE.le">≤</a> <span class="fn"><a href=".././Mathlib/Algebra/BigOperators/Basic.html#Finset.sum">Finset.sum</a> <span class="fn">Finset.univ</span> <span class="fn">fun <span class="fn">a</span> =&gt <span class="fn"><span class="fn"><span class="fn">μ</span> <span class="fn">a</span></span> <a href=".././Init/Prelude.html#HMul.hMul">*</a> <span class="fn"><span class="fn">g</span> <span class="fn">a</span></span></span></span></span></span></div></div><p>The <strong>Holley Inequality</strong>.</p></div></div><div class="decl" id="fkg"><div class="theorem"><div class="gh_link"><a href="https://github.com/YaelDillies/LeanCamCombi/blob/41ed909d6e8b5e6b618db6412ed63ba09eba61c3//LeanCamCombi/FourFunctions.lean#L321-L329">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href=".././LeanCamCombi/FourFunctions.html#fkg"><span class="name">fkg</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href=".././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{β : <a href=".././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href=".././Mathlib/Order/Lattice.html#DistribLattice">DistribLattice</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href=".././Init/Prelude.html#DecidableEq">DecidableEq</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href=".././Mathlib/Algebra/Order/Ring/Defs.html#LinearOrderedCommSemiring">LinearOrderedCommSemiring</a> <span class="fn">β</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href=".././Mathlib/Algebra/Order/Monoid/Canonical/Defs.html#ExistsAddOfLE">ExistsAddOfLE</a> <span class="fn">β</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(f : <span class="fn"><span class="fn">α</span> → <span class="fn">β</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(g : <span class="fn"><span class="fn">α</span> → <span class="fn">β</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(μ : <span class="fn"><span class="fn">α</span> → <span class="fn">β</span></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href=".././Mathlib/Data/Fintype/Basic.html#Fintype">Fintype</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(hμ₀ : <span class="fn"><span class="fn">0</span> <a href=".././Init/Prelude.html#LE.le">≤</a> <span class="fn">μ</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hf₀ : <span class="fn"><span class="fn">0</span> <a href=".././Init/Prelude.html#LE.le">≤</a> <span class="fn">f</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hg₀ : <span class="fn"><span class="fn">0</span> <a href=".././Init/Prelude.html#LE.le">≤</a> <span class="fn">g</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hf : <span class="fn"><a href=".././Mathlib/Order/Monotone/Basic.html#Monotone">Monotone</a> <span class="fn">f</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hg : <span class="fn"><a href=".././Mathlib/Order/Monotone/Basic.html#Monotone">Monotone</a> <span class="fn">g</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hμ : <span class="fn">∀ (<span class="fn">a </span>b : <span class="fn">α</span>), <span class="fn"><span class="fn"><span class="fn"><span class="fn">μ</span> <span class="fn">a</span></span> <a href=".././Init/Prelude.html#HMul.hMul">*</a> <span class="fn"><span class="fn">μ</span> <span class="fn">b</span></span></span> <a href=".././Init/Prelude.html#LE.le">≤</a> <span class="fn"><span class="fn"><span class="fn">μ</span> (<span class="fn"><span class="fn">a</span> <a href=".././Mathlib/Order/Basic.html#Inf.inf">⊓</a> <span class="fn">b</span></span>)</span> <a href=".././Init/Prelude.html#HMul.hMul">*</a> <span class="fn"><span class="fn">μ</span> (<span class="fn"><span class="fn">a</span> <a href=".././Mathlib/Order/Basic.html#Sup.sup">⊔</a> <span class="fn">b</span></span>)</span></span></span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn">(<span class="fn">(<span class="fn"><a href=".././Mathlib/Algebra/BigOperators/Basic.html#Finset.sum">Finset.sum</a> <span class="fn">Finset.univ</span> <span class="fn">fun <span class="fn">a</span> =&gt <span class="fn"><span class="fn"><span class="fn">μ</span> <span class="fn">a</span></span> <a href=".././Init/Prelude.html#HMul.hMul">*</a> <span class="fn"><span class="fn">f</span> <span class="fn">a</span></span></span></span></span>) <a href=".././Init/Prelude.html#HMul.hMul">*</a> <span class="fn"><a href=".././Mathlib/Algebra/BigOperators/Basic.html#Finset.sum">Finset.sum</a> <span class="fn">Finset.univ</span> <span class="fn">fun <span class="fn">a</span> =&gt <span class="fn"><span class="fn"><span class="fn">μ</span> <span class="fn">a</span></span> <a href=".././Init/Prelude.html#HMul.hMul">*</a> <span class="fn"><span class="fn">g</span> <span class="fn">a</span></span></span></span></span></span>) <a href=".././Init/Prelude.html#LE.le">≤</a>   <span class="fn">(<span class="fn"><a href=".././Mathlib/Algebra/BigOperators/Basic.html#Finset.sum">Finset.sum</a> <span class="fn">Finset.univ</span> <span class="fn">fun <span class="fn">a</span> =&gt <span class="fn"><span class="fn">μ</span> <span class="fn">a</span></span></span></span>) <a href=".././Init/Prelude.html#HMul.hMul">*</a> <span class="fn"><a href=".././Mathlib/Algebra/BigOperators/Basic.html#Finset.sum">Finset.sum</a> <span class="fn">Finset.univ</span> <span class="fn">fun <span class="fn">a</span> =&gt <span class="fn"><span class="fn"><span class="fn">μ</span> <span class="fn">a</span></span> <a href=".././Init/Prelude.html#HMul.hMul">*</a> (<span class="fn"><span class="fn"><span class="fn">f</span> <span class="fn">a</span></span> <a href=".././Init/Prelude.html#HMul.hMul">*</a> <span class="fn"><span class="fn">g</span> <span class="fn">a</span></span></span>)</span></span></span></span></span></div></div><p>The <strong>Fortuin-Kastelyn-Ginibre Inequality</strong>.</p></div></div><div class="decl" id="Finset.le_card_diffs_mul_card_diffs"><div class="theorem"><div class="gh_link"><a href="https://github.com/YaelDillies/LeanCamCombi/blob/41ed909d6e8b5e6b618db6412ed63ba09eba61c3//LeanCamCombi/FourFunctions.lean#L338-L347">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href=".././LeanCamCombi/FourFunctions.html#Finset.le_card_diffs_mul_card_diffs"><span class="name">Finset</span>.<span class="name">le_card_diffs_mul_card_diffs</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href=".././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href=".././Init/Prelude.html#DecidableEq">DecidableEq</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href=".././Mathlib/Order/BooleanAlgebra.html#GeneralizedBooleanAlgebra">GeneralizedBooleanAlgebra</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(s : <span class="fn"><a href=".././Mathlib/Data/Finset/Basic.html#Finset">Finset</a> <span class="fn">α</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(t : <span class="fn"><a href=".././Mathlib/Data/Finset/Basic.html#Finset">Finset</a> <span class="fn">α</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn"><a href=".././Mathlib/Data/Finset/Card.html#Finset.card">Finset.card</a> <span class="fn">s</span></span> <a href=".././Init/Prelude.html#HMul.hMul">*</a> <span class="fn"><a href=".././Mathlib/Data/Finset/Card.html#Finset.card">Finset.card</a> <span class="fn">t</span></span></span> <a href=".././Init/Prelude.html#LE.le">≤</a> <span class="fn"><span class="fn"><a href=".././Mathlib/Data/Finset/Card.html#Finset.card">Finset.card</a> (<span class="fn"><a href=".././LeanCamCombi/Mathlib/Data/Finset/Sups.html#Finset.diffs">Finset.diffs</a> <span class="fn">s</span> <span class="fn">t</span></span>)</span> <a href=".././Init/Prelude.html#HMul.hMul">*</a> <span class="fn"><a href=".././Mathlib/Data/Finset/Card.html#Finset.card">Finset.card</a> (<span class="fn"><a href=".././LeanCamCombi/Mathlib/Data/Finset/Sups.html#Finset.diffs">Finset.diffs</a> <span class="fn">t</span> <span class="fn">s</span></span>)</span></span></span></div></div><p>A slight generalisation of the <strong>Marica-Schönheim Inequality</strong>.</p></div></div><div class="decl" id="Finset.card_le_card_diffs"><div class="theorem"><div class="gh_link"><a href="https://github.com/YaelDillies/LeanCamCombi/blob/41ed909d6e8b5e6b618db6412ed63ba09eba61c3//LeanCamCombi/FourFunctions.lean#L350-L351">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href=".././LeanCamCombi/FourFunctions.html#Finset.card_le_card_diffs"><span class="name">Finset</span>.<span class="name">card_le_card_diffs</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href=".././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href=".././Init/Prelude.html#DecidableEq">DecidableEq</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href=".././Mathlib/Order/BooleanAlgebra.html#GeneralizedBooleanAlgebra">GeneralizedBooleanAlgebra</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(s : <span class="fn"><a href=".././Mathlib/Data/Finset/Basic.html#Finset">Finset</a> <span class="fn">α</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href=".././Mathlib/Data/Finset/Card.html#Finset.card">Finset.card</a> <span class="fn">s</span></span> <a href=".././Init/Prelude.html#LE.le">≤</a> <span class="fn"><a href=".././Mathlib/Data/Finset/Card.html#Finset.card">Finset.card</a> (<span class="fn"><a href=".././LeanCamCombi/Mathlib/Data/Finset/Sups.html#Finset.diffs">Finset.diffs</a> <span class="fn">s</span> <span class="fn">s</span></span>)</span></span></div></div><p>The <strong>Marica-Schönheim Inequality</strong>.</p></div></div></main>
+<nav class="nav"><iframe src=".././navbar.html" class="navframe" frameBorder="0"></iframe></nav></body></html>

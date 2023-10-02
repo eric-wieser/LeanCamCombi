@@ -1,0 +1,202 @@
+<html lang="en"><head><meta charset="UTF-8"></meta><meta name="viewport" content="width=device-width, initial-scale=1"></meta><link rel="stylesheet" href=".././style.css"></link><link rel="stylesheet" href=".././src/pygments.css"></link><link rel="shortcut icon" href=".././favicon.ico"></link><link rel="prefetch" href=".././/declarations/declaration-data.bmp" as="image"></link><title>LeanCamCombi.BernoulliSeq</title><script defer="true" src=".././mathjax-config.js"></script><script defer="true" src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script><script defer="true" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script><script>const SITE_ROOT=".././";</script><script>const MODULE_NAME="LeanCamCombi.BernoulliSeq";</script><script type="module" src=".././jump-src.js"></script><script type="module" src=".././search.js"></script><script type="module" src=".././expand-nav.js"></script><script type="module" src=".././how-about.js"></script><script type="module" src=".././instances.js"></script><script type="module" src=".././importedBy.js"></script></head><body><input id="nav_toggle" type="checkbox"></input><header><h1><label for="nav_toggle"></label>Documentation</h1><p class="header_filename break_within"><span class="name">LeanCamCombi</span>.<span class="name">BernoulliSeq</span></p><form action="https://google.com/search" method="get" id="search_form"><input type="hidden" name="sitesearch" value="https://leanprover-community.github.io/mathlib4_docs"></input><input type="text" name="q" autocomplete="off"></input>&#32;
+            <button id="search_button" onclick="javascript: form.action='.././search.html';">Search</button><button>Google site search</button></form></header><nav class="internal_nav"><h3><a class="break_within" href="#top"><span class="name">LeanCamCombi</span>.<span class="name">BernoulliSeq</span></a></h3><p class="gh_nav_link"><a href="https://github.com/YaelDillies/LeanCamCombi/blob/41ed909d6e8b5e6b618db6412ed63ba09eba61c3//LeanCamCombi/BernoulliSeq.lean">source</a></p><div class="imports"><details><summary>Imports</summary><ul><li><a href=".././Init.html">Init</a></li><li><a href=".././LeanCamCombi/Mathlib/Pmf.html">LeanCamCombi.Mathlib.Pmf</a></li><li><a href=".././Mathlib/Probability/IdentDistrib.html">Mathlib.Probability.IdentDistrib</a></li><li><a href=".././Mathlib/Algebra/BigOperators/Basic.html">Mathlib.Algebra.BigOperators.Basic</a></li><li><a href=".././LeanCamCombi/Mathlib/Probability/Independence/Basic.html">LeanCamCombi.Mathlib.Probability.Independence.Basic</a></li></ul></details><details><summary>Imported by</summary><ul id="imported-by-LeanCamCombi.BernoulliSeq" class="imported-by-list"></ul></details></div><div class="nav_link"><a class="break_within" href="#ProbabilityTheory.IsBernoulliSeq"><span class="name">ProbabilityTheory</span>.<span class="name">IsBernoulliSeq</span></a></div><div class="nav_link"><a class="break_within" href="#ProbabilityTheory.IsBernoulliSeq.ne_zero"><span class="name">ProbabilityTheory</span>.<span class="name">IsBernoulliSeq</span>.<span class="name">ne_zero</span></a></div><div class="nav_link"><a class="break_within" href="#ProbabilityTheory.IsBernoulliSeq.aemeasurable"><span class="name">ProbabilityTheory</span>.<span class="name">IsBernoulliSeq</span>.<span class="name">aemeasurable</span></a></div><div class="nav_link"><a class="break_within" href="#ProbabilityTheory.IsBernoulliSeq.nullMeasurableSet"><span class="name">ProbabilityTheory</span>.<span class="name">IsBernoulliSeq</span>.<span class="name">nullMeasurableSet</span></a></div><div class="nav_link"><a class="break_within" href="#ProbabilityTheory.IsBernoulliSeq.identDistrib"><span class="name">ProbabilityTheory</span>.<span class="name">IsBernoulliSeq</span>.<span class="name">identDistrib</span></a></div><div class="nav_link"><a class="break_within" href="#ProbabilityTheory.IsBernoulliSeq.meas_apply"><span class="name">ProbabilityTheory</span>.<span class="name">IsBernoulliSeq</span>.<span class="name">meas_apply</span></a></div><div class="nav_link"><a class="break_within" href="#ProbabilityTheory.IsBernoulliSeq.meas"><span class="name">ProbabilityTheory</span>.<span class="name">IsBernoulliSeq</span>.<span class="name">meas</span></a></div><div class="nav_link"><a class="break_within" href="#ProbabilityTheory.IsBernoulliSeq.compl"><span class="name">ProbabilityTheory</span>.<span class="name">IsBernoulliSeq</span>.<span class="name">compl</span></a></div><div class="nav_link"><a class="break_within" href="#ProbabilityTheory.IsBernoulliSeq.inter"><span class="name">ProbabilityTheory</span>.<span class="name">IsBernoulliSeq</span>.<span class="name">inter</span></a></div><div class="nav_link"><a class="break_within" href="#ProbabilityTheory.IsBernoulliSeq.union"><span class="name">ProbabilityTheory</span>.<span class="name">IsBernoulliSeq</span>.<span class="name">union</span></a></div></nav><main>
+<div class="mod_doc"><h1 class="markdown-heading" id="Sequences-of-iid-Bernoulli-random-variables">Sequences of iid Bernoulli random variables <a class="hover-link" href="#Sequences-of-iid-Bernoulli-random-variables">#</a></h1><p>This file defines sequences of independent <code>p</code>-Bernoulli random variables and proves that the
+complement of a sequence of independent Bernoulli random variables, union/intersection of two
+independent sequences of independent Bernoulli random variables, are themselves sequences of
+independent Bernoulli random variables.</p><h2 class="markdown-heading" id="Main-declarations">Main declarations <a class="hover-link" href="#Main-declarations">#</a></h2><ul>
+<li><code><a href=".././LeanCamCombi/BernoulliSeq.html#ProbabilityTheory.IsBernoulliSeq">ProbabilityTheory.IsBernoulliSeq</a></code>: Typeclass for a sequence of iid Bernoulli random variables
+with parameter <code>p</code></li>
+</ul></div><div class="decl" id="ProbabilityTheory.IsBernoulliSeq"><div class="structure"><div class="gh_link"><a href="https://github.com/YaelDillies/LeanCamCombi/blob/41ed909d6e8b5e6b618db6412ed63ba09eba61c3//LeanCamCombi/BernoulliSeq.lean#L34-L38">source</a></div><div class="decl_header"><span class="decl_kind">structure</span>
+<span class="decl_name"><a class="break_within" href=".././LeanCamCombi/BernoulliSeq.html#ProbabilityTheory.IsBernoulliSeq"><span class="name">ProbabilityTheory</span>.<span class="name">IsBernoulliSeq</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href=".././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{Ω : <a href=".././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href=".././Mathlib/MeasureTheory/MeasurableSpace/Defs.html#MeasurableSpace">MeasurableSpace</a> <span class="fn">Ω</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(X : <span class="fn"><span class="fn">Ω</span> → <span class="fn"><a href=".././Mathlib/Init/Set.html#Set">Set</a> <span class="fn">α</span></span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(p : <span class="fn"><a href=".././Init/Prelude.html#outParam">outParam</a> <a href=".././Mathlib/Data/Real/NNReal.html#NNReal">NNReal</a></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(μ : <span class="fn"><a href=".././Init/Meta.html#autoParam">autoParam</a> (<span class="fn"><a href=".././Mathlib/MeasureTheory/Measure/MeasureSpaceDef.html#MeasureTheory.Measure">MeasureTheory.Measure</a> <span class="fn">Ω</span></span>) <a href=".././LeanCamCombi/BernoulliSeq.html#_auto._@.LeanCamCombi.BernoulliSeq._hyg.29">_auto✝</a></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><a href=".././foundational_types.html">Prop</a></div></div><ul class="structure_fields" id="ProbabilityTheory.IsBernoulliSeq.mk"><li id="ProbabilityTheory.IsBernoulliSeq.le_one" class="structure_field"><div class="structure_field_info">le_one : <span class="fn"><span class="fn">p</span> <a href=".././Init/Prelude.html#LE.le">≤</a> <span class="fn">1</span></span></div></li><li id="ProbabilityTheory.IsBernoulliSeq.iIndepFun" class="structure_field"><div class="structure_field_info">iIndepFun : <span class="fn"><a href=".././Mathlib/Probability/Independence/Basic.html#ProbabilityTheory.iIndepFun">ProbabilityTheory.iIndepFun</a> <span class="fn">inferInstance</span> <span class="fn">fun <span class="fn">a</span> <span class="fn">ω</span> =&gt <span class="fn"><span class="fn">a</span> <a href=".././Init/Prelude.html#Membership.mem">∈</a> <span class="fn"><span class="fn">X</span> <span class="fn">ω</span></span></span></span></span></div></li><li id="ProbabilityTheory.IsBernoulliSeq.map" class="structure_field"><div class="structure_field_info">map : <span class="fn">∀ (<span class="fn">a</span> : <span class="fn">α</span>), <span class="fn"><span class="fn"><a href=".././Mathlib/MeasureTheory/Measure/MeasureSpace.html#MeasureTheory.Measure.map">MeasureTheory.Measure.map</a> (<span class="fn">fun <span class="fn">ω</span> =&gt <span class="fn"><span class="fn">a</span> <a href=".././Init/Prelude.html#Membership.mem">∈</a> <span class="fn"><span class="fn">X</span> <span class="fn">ω</span></span></span></span>) <span class="fn">μ</span></span> <a href=".././Init/Prelude.html#Eq">=</a> <span class="fn"><a href=".././Mathlib/Probability/ProbabilityMassFunction/Basic.html#Pmf.toMeasure">Pmf.toMeasure</a> (<span class="fn"><a href=".././LeanCamCombi/Mathlib/Pmf.html#Pmf.bernoulli'">Pmf.bernoulli'</a> <span class="fn">p</span> <span class="fn">(_ : <span class="fn"><span class="fn">p</span> <a href=".././Init/Prelude.html#LE.le">≤</a> <span class="fn">1</span></span>)</span></span>)</span></span></span></div></li></ul><p>We say a <code>set α</code>-valued random is a sequence of iid Bernoulli random variables with parameter
+<code>p</code> if <code>p ≤ 1</code>, the <code>a</code> projections (for <code>a : α</code>) are independent and are <code>p</code>-Bernoulli distributed.</p><details class="instances"><summary>Instances For</summary><ul id="instances-for-list-ProbabilityTheory.IsBernoulliSeq" class="instances-for-list"></ul></details></div></div><div class="decl" id="ProbabilityTheory.IsBernoulliSeq.ne_zero"><div class="theorem"><div class="gh_link"><a href="https://github.com/YaelDillies/LeanCamCombi/blob/41ed909d6e8b5e6b618db6412ed63ba09eba61c3//LeanCamCombi/BernoulliSeq.lean#L45-L47">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href=".././LeanCamCombi/BernoulliSeq.html#ProbabilityTheory.IsBernoulliSeq.ne_zero"><span class="name">ProbabilityTheory</span>.<span class="name">IsBernoulliSeq</span>.<span class="name">ne_zero</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href=".././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{Ω : <a href=".././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href=".././Mathlib/MeasureTheory/MeasurableSpace/Defs.html#MeasurableSpace">MeasurableSpace</a> <span class="fn">Ω</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{X : <span class="fn"><span class="fn">Ω</span> → <span class="fn"><a href=".././Mathlib/Init/Set.html#Set">Set</a> <span class="fn">α</span></span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{μ : <span class="fn"><a href=".././Mathlib/MeasureTheory/Measure/MeasureSpaceDef.html#MeasureTheory.Measure">MeasureTheory.Measure</a> <span class="fn">Ω</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{p : <a href=".././Mathlib/Data/Real/NNReal.html#NNReal">NNReal</a>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hX : <span class="fn"><a href=".././LeanCamCombi/BernoulliSeq.html#ProbabilityTheory.IsBernoulliSeq">ProbabilityTheory.IsBernoulliSeq</a> <span class="fn">X</span> <span class="fn">p</span></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href=".././Init/Prelude.html#Nonempty">Nonempty</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">μ</span> <a href=".././Init/Core.html#Ne">≠</a> <span class="fn">0</span></span></div></div></div></div><div class="decl" id="ProbabilityTheory.IsBernoulliSeq.aemeasurable"><div class="theorem"><div class="gh_link"><a href="https://github.com/YaelDillies/LeanCamCombi/blob/41ed909d6e8b5e6b618db6412ed63ba09eba61c3//LeanCamCombi/BernoulliSeq.lean#L49-L56">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href=".././LeanCamCombi/BernoulliSeq.html#ProbabilityTheory.IsBernoulliSeq.aemeasurable"><span class="name">ProbabilityTheory</span>.<span class="name">IsBernoulliSeq</span>.<span class="name">aemeasurable</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href=".././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{Ω : <a href=".././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href=".././Mathlib/MeasureTheory/MeasurableSpace/Defs.html#MeasurableSpace">MeasurableSpace</a> <span class="fn">Ω</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{X : <span class="fn"><span class="fn">Ω</span> → <span class="fn"><a href=".././Mathlib/Init/Set.html#Set">Set</a> <span class="fn">α</span></span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{μ : <span class="fn"><a href=".././Mathlib/MeasureTheory/Measure/MeasureSpaceDef.html#MeasureTheory.Measure">MeasureTheory.Measure</a> <span class="fn">Ω</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{p : <a href=".././Mathlib/Data/Real/NNReal.html#NNReal">NNReal</a>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hX : <span class="fn"><a href=".././LeanCamCombi/BernoulliSeq.html#ProbabilityTheory.IsBernoulliSeq">ProbabilityTheory.IsBernoulliSeq</a> <span class="fn">X</span> <span class="fn">p</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(a : <span class="fn">α</span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href=".././Mathlib/MeasureTheory/Measure/MeasureSpaceDef.html#AEMeasurable">AEMeasurable</a> <span class="fn">fun <span class="fn">ω</span> =&gt <span class="fn"><span class="fn">a</span> <a href=".././Init/Prelude.html#Membership.mem">∈</a> <span class="fn"><span class="fn">X</span> <span class="fn">ω</span></span></span></span></span></div></div></div></div><div class="decl" id="ProbabilityTheory.IsBernoulliSeq.nullMeasurableSet"><div class="theorem"><div class="gh_link"><a href="https://github.com/YaelDillies/LeanCamCombi/blob/41ed909d6e8b5e6b618db6412ed63ba09eba61c3//LeanCamCombi/BernoulliSeq.lean#L58-L60">source</a></div><div class="attributes">@[simp]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href=".././LeanCamCombi/BernoulliSeq.html#ProbabilityTheory.IsBernoulliSeq.nullMeasurableSet"><span class="name">ProbabilityTheory</span>.<span class="name">IsBernoulliSeq</span>.<span class="name">nullMeasurableSet</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href=".././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{Ω : <a href=".././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href=".././Mathlib/MeasureTheory/MeasurableSpace/Defs.html#MeasurableSpace">MeasurableSpace</a> <span class="fn">Ω</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{X : <span class="fn"><span class="fn">Ω</span> → <span class="fn"><a href=".././Mathlib/Init/Set.html#Set">Set</a> <span class="fn">α</span></span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{μ : <span class="fn"><a href=".././Mathlib/MeasureTheory/Measure/MeasureSpaceDef.html#MeasureTheory.Measure">MeasureTheory.Measure</a> <span class="fn">Ω</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{p : <a href=".././Mathlib/Data/Real/NNReal.html#NNReal">NNReal</a>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hX : <span class="fn"><a href=".././LeanCamCombi/BernoulliSeq.html#ProbabilityTheory.IsBernoulliSeq">ProbabilityTheory.IsBernoulliSeq</a> <span class="fn">X</span> <span class="fn">p</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(a : <span class="fn">α</span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href=".././Mathlib/MeasureTheory/Measure/NullMeasurable.html#MeasureTheory.NullMeasurableSet">MeasureTheory.NullMeasurableSet</a> <span class="fn">{<span class="fn">ω</span> | <span class="fn"><span class="fn">a</span> <a href=".././Init/Prelude.html#Membership.mem">∈</a> <span class="fn"><span class="fn">X</span> <span class="fn">ω</span></span></span>}</span></span></div></div></div></div><div class="decl" id="ProbabilityTheory.IsBernoulliSeq.identDistrib"><div class="theorem"><div class="gh_link"><a href="https://github.com/YaelDillies/LeanCamCombi/blob/41ed909d6e8b5e6b618db6412ed63ba09eba61c3//LeanCamCombi/BernoulliSeq.lean#L62-L65">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href=".././LeanCamCombi/BernoulliSeq.html#ProbabilityTheory.IsBernoulliSeq.identDistrib"><span class="name">ProbabilityTheory</span>.<span class="name">IsBernoulliSeq</span>.<span class="name">identDistrib</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href=".././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{Ω : <a href=".././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href=".././Mathlib/MeasureTheory/MeasurableSpace/Defs.html#MeasurableSpace">MeasurableSpace</a> <span class="fn">Ω</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{X : <span class="fn"><span class="fn">Ω</span> → <span class="fn"><a href=".././Mathlib/Init/Set.html#Set">Set</a> <span class="fn">α</span></span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{μ : <span class="fn"><a href=".././Mathlib/MeasureTheory/Measure/MeasureSpaceDef.html#MeasureTheory.Measure">MeasureTheory.Measure</a> <span class="fn">Ω</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{p : <a href=".././Mathlib/Data/Real/NNReal.html#NNReal">NNReal</a>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hX : <span class="fn"><a href=".././LeanCamCombi/BernoulliSeq.html#ProbabilityTheory.IsBernoulliSeq">ProbabilityTheory.IsBernoulliSeq</a> <span class="fn">X</span> <span class="fn">p</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(a : <span class="fn">α</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(j : <span class="fn">α</span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href=".././Mathlib/Probability/IdentDistrib.html#ProbabilityTheory.IdentDistrib">ProbabilityTheory.IdentDistrib</a> (<span class="fn">fun <span class="fn">ω</span> =&gt <span class="fn"><span class="fn">a</span> <a href=".././Init/Prelude.html#Membership.mem">∈</a> <span class="fn"><span class="fn">X</span> <span class="fn">ω</span></span></span></span>) <span class="fn">fun <span class="fn">ω</span> =&gt <span class="fn"><span class="fn">X</span> <span class="fn">ω</span> <span class="fn">j</span></span></span></span></div></div></div></div><div class="decl" id="ProbabilityTheory.IsBernoulliSeq.meas_apply"><div class="theorem"><div class="gh_link"><a href="https://github.com/YaelDillies/LeanCamCombi/blob/41ed909d6e8b5e6b618db6412ed63ba09eba61c3//LeanCamCombi/BernoulliSeq.lean#L67-L72">source</a></div><div class="attributes">@[simp]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href=".././LeanCamCombi/BernoulliSeq.html#ProbabilityTheory.IsBernoulliSeq.meas_apply"><span class="name">ProbabilityTheory</span>.<span class="name">IsBernoulliSeq</span>.<span class="name">meas_apply</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href=".././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{Ω : <a href=".././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href=".././Mathlib/MeasureTheory/MeasurableSpace/Defs.html#MeasurableSpace">MeasurableSpace</a> <span class="fn">Ω</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{X : <span class="fn"><span class="fn">Ω</span> → <span class="fn"><a href=".././Mathlib/Init/Set.html#Set">Set</a> <span class="fn">α</span></span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{μ : <span class="fn"><a href=".././Mathlib/MeasureTheory/Measure/MeasureSpaceDef.html#MeasureTheory.Measure">MeasureTheory.Measure</a> <span class="fn">Ω</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{p : <a href=".././Mathlib/Data/Real/NNReal.html#NNReal">NNReal</a>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hX : <span class="fn"><a href=".././LeanCamCombi/BernoulliSeq.html#ProbabilityTheory.IsBernoulliSeq">ProbabilityTheory.IsBernoulliSeq</a> <span class="fn">X</span> <span class="fn">p</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(a : <span class="fn">α</span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">↑<span class="fn">↑<span class="fn">μ</span></span> <span class="fn">{<span class="fn">ω</span> | <span class="fn"><span class="fn">a</span> <a href=".././Init/Prelude.html#Membership.mem">∈</a> <span class="fn"><span class="fn">X</span> <span class="fn">ω</span></span></span>}</span></span> <a href=".././Init/Prelude.html#Eq">=</a> <span class="fn">↑<span class="fn">p</span></span></span></div></div></div></div><div class="decl" id="ProbabilityTheory.IsBernoulliSeq.meas"><div class="theorem"><div class="gh_link"><a href="https://github.com/YaelDillies/LeanCamCombi/blob/41ed909d6e8b5e6b618db6412ed63ba09eba61c3//LeanCamCombi/BernoulliSeq.lean#L76-L93">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href=".././LeanCamCombi/BernoulliSeq.html#ProbabilityTheory.IsBernoulliSeq.meas"><span class="name">ProbabilityTheory</span>.<span class="name">IsBernoulliSeq</span>.<span class="name">meas</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href=".././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{Ω : <a href=".././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href=".././Mathlib/MeasureTheory/MeasurableSpace/Defs.html#MeasurableSpace">MeasurableSpace</a> <span class="fn">Ω</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{X : <span class="fn"><span class="fn">Ω</span> → <span class="fn"><a href=".././Mathlib/Init/Set.html#Set">Set</a> <span class="fn">α</span></span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{μ : <span class="fn"><a href=".././Mathlib/MeasureTheory/Measure/MeasureSpaceDef.html#MeasureTheory.Measure">MeasureTheory.Measure</a> <span class="fn">Ω</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{p : <a href=".././Mathlib/Data/Real/NNReal.html#NNReal">NNReal</a>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hX : <span class="fn"><a href=".././LeanCamCombi/BernoulliSeq.html#ProbabilityTheory.IsBernoulliSeq">ProbabilityTheory.IsBernoulliSeq</a> <span class="fn">X</span> <span class="fn">p</span></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href=".././Mathlib/MeasureTheory/Measure/MeasureSpace.html#MeasureTheory.IsProbabilityMeasure">MeasureTheory.IsProbabilityMeasure</a> <span class="fn">μ</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href=".././Mathlib/Data/Fintype/Basic.html#Fintype">Fintype</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(s : <span class="fn"><a href=".././Mathlib/Data/Finset/Basic.html#Finset">Finset</a> <span class="fn">α</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">↑<span class="fn">↑<span class="fn">μ</span></span> <span class="fn">{<span class="fn">ω</span> | <span class="fn"><span class="fn">{<span class="fn">a</span> | <span class="fn"><span class="fn">a</span> <a href=".././Init/Prelude.html#Membership.mem">∈</a> <span class="fn"><span class="fn">X</span> <span class="fn">ω</span></span></span>}</span> <a href=".././Init/Prelude.html#Eq">=</a> <span class="fn">↑<span class="fn">s</span></span></span>}</span></span> <a href=".././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn"><span class="fn">↑<span class="fn">p</span></span> <a href=".././Init/Prelude.html#HPow.hPow">^</a> <span class="fn"><a href=".././Mathlib/Data/Finset/Card.html#Finset.card">Finset.card</a> <span class="fn">s</span></span></span> <a href=".././Init/Prelude.html#HMul.hMul">*</a> <span class="fn">(<span class="fn"><span class="fn">1</span> <a href=".././Init/Prelude.html#HSub.hSub">-</a> <span class="fn">↑<span class="fn">p</span></span></span>) <a href=".././Init/Prelude.html#HPow.hPow">^</a> (<span class="fn"><span class="fn"><a href=".././Mathlib/Data/Fintype/Card.html#Fintype.card">Fintype.card</a> <span class="fn">α</span></span> <a href=".././Init/Prelude.html#HSub.hSub">-</a> <span class="fn"><a href=".././Mathlib/Data/Finset/Card.html#Finset.card">Finset.card</a> <span class="fn">s</span></span></span>)</span></span></span></div></div></div></div><div class="decl" id="ProbabilityTheory.IsBernoulliSeq.compl"><div class="theorem"><div class="gh_link"><a href="https://github.com/YaelDillies/LeanCamCombi/blob/41ed909d6e8b5e6b618db6412ed63ba09eba61c3//LeanCamCombi/BernoulliSeq.lean#L97-L106">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href=".././LeanCamCombi/BernoulliSeq.html#ProbabilityTheory.IsBernoulliSeq.compl"><span class="name">ProbabilityTheory</span>.<span class="name">IsBernoulliSeq</span>.<span class="name">compl</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href=".././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{Ω : <a href=".././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href=".././Mathlib/MeasureTheory/MeasurableSpace/Defs.html#MeasurableSpace">MeasurableSpace</a> <span class="fn">Ω</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{X : <span class="fn"><span class="fn">Ω</span> → <span class="fn"><a href=".././Mathlib/Init/Set.html#Set">Set</a> <span class="fn">α</span></span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{μ : <span class="fn"><a href=".././Mathlib/MeasureTheory/Measure/MeasureSpaceDef.html#MeasureTheory.Measure">MeasureTheory.Measure</a> <span class="fn">Ω</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{p : <a href=".././Mathlib/Data/Real/NNReal.html#NNReal">NNReal</a>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hX : <span class="fn"><a href=".././LeanCamCombi/BernoulliSeq.html#ProbabilityTheory.IsBernoulliSeq">ProbabilityTheory.IsBernoulliSeq</a> <span class="fn">X</span> <span class="fn">p</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href=".././LeanCamCombi/BernoulliSeq.html#ProbabilityTheory.IsBernoulliSeq">ProbabilityTheory.IsBernoulliSeq</a> (<span class="fn">fun <span class="fn">ω</span> =&gt <span class="fn">(<span class="fn"><span class="fn">X</span> <span class="fn">ω</span></span>)<a href=".././Mathlib/Order/Basic.html#HasCompl.compl">ᶜ</a></span></span>) (<span class="fn"><span class="fn">1</span> <a href=".././Init/Prelude.html#HSub.hSub">-</a> <span class="fn">p</span></span>)</span></div></div><p>The complement of a sequence of independent <code>p</code>-Bernoulli random variables is a sequence of
+independent <code>1 - p</code>-Bernoulli random variables.</p></div></div><div class="decl" id="ProbabilityTheory.IsBernoulliSeq.inter"><div class="theorem"><div class="gh_link"><a href="https://github.com/YaelDillies/LeanCamCombi/blob/41ed909d6e8b5e6b618db6412ed63ba09eba61c3//LeanCamCombi/BernoulliSeq.lean#L110-L130">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href=".././LeanCamCombi/BernoulliSeq.html#ProbabilityTheory.IsBernoulliSeq.inter"><span class="name">ProbabilityTheory</span>.<span class="name">IsBernoulliSeq</span>.<span class="name">inter</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href=".././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{Ω : <a href=".././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href=".././Mathlib/MeasureTheory/MeasurableSpace/Defs.html#MeasurableSpace">MeasurableSpace</a> <span class="fn">Ω</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{X : <span class="fn"><span class="fn">Ω</span> → <span class="fn"><a href=".././Mathlib/Init/Set.html#Set">Set</a> <span class="fn">α</span></span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{Y : <span class="fn"><span class="fn">Ω</span> → <span class="fn"><a href=".././Mathlib/Init/Set.html#Set">Set</a> <span class="fn">α</span></span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{μ : <span class="fn"><a href=".././Mathlib/MeasureTheory/Measure/MeasureSpaceDef.html#MeasureTheory.Measure">MeasureTheory.Measure</a> <span class="fn">Ω</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{p : <a href=".././Mathlib/Data/Real/NNReal.html#NNReal">NNReal</a>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{q : <a href=".././Mathlib/Data/Real/NNReal.html#NNReal">NNReal</a>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hX : <span class="fn"><a href=".././LeanCamCombi/BernoulliSeq.html#ProbabilityTheory.IsBernoulliSeq">ProbabilityTheory.IsBernoulliSeq</a> <span class="fn">X</span> <span class="fn">p</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hY : <span class="fn"><a href=".././LeanCamCombi/BernoulliSeq.html#ProbabilityTheory.IsBernoulliSeq">ProbabilityTheory.IsBernoulliSeq</a> <span class="fn">Y</span> <span class="fn">q</span></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href=".././Mathlib/MeasureTheory/Measure/MeasureSpace.html#MeasureTheory.IsProbabilityMeasure">MeasureTheory.IsProbabilityMeasure</a> <span class="fn">μ</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(h : <span class="fn"><a href=".././Mathlib/Probability/Independence/Basic.html#ProbabilityTheory.IndepFun">ProbabilityTheory.IndepFun</a> <span class="fn">X</span> <span class="fn">Y</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href=".././LeanCamCombi/BernoulliSeq.html#ProbabilityTheory.IsBernoulliSeq">ProbabilityTheory.IsBernoulliSeq</a> (<span class="fn">fun <span class="fn">ω</span> =&gt <span class="fn"><span class="fn"><span class="fn">X</span> <span class="fn">ω</span></span> <a href=".././Std/Classes/SetNotation.html#Inter.inter">∩</a> <span class="fn"><span class="fn">Y</span> <span class="fn">ω</span></span></span></span>) (<span class="fn"><span class="fn">p</span> <a href=".././Init/Prelude.html#HMul.hMul">*</a> <span class="fn">q</span></span>)</span></div></div><p>The intersection of a sequence of independent <code>p</code>-Bernoulli and <code>q</code>-Bernoulli random variables
+is a sequence of independent <code>p * q</code>-Bernoulli random variables.</p></div></div><div class="decl" id="ProbabilityTheory.IsBernoulliSeq.union"><div class="theorem"><div class="gh_link"><a href="https://github.com/YaelDillies/LeanCamCombi/blob/41ed909d6e8b5e6b618db6412ed63ba09eba61c3//LeanCamCombi/BernoulliSeq.lean#L134-L144">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href=".././LeanCamCombi/BernoulliSeq.html#ProbabilityTheory.IsBernoulliSeq.union"><span class="name">ProbabilityTheory</span>.<span class="name">IsBernoulliSeq</span>.<span class="name">union</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href=".././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{Ω : <a href=".././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href=".././Mathlib/MeasureTheory/MeasurableSpace/Defs.html#MeasurableSpace">MeasurableSpace</a> <span class="fn">Ω</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{X : <span class="fn"><span class="fn">Ω</span> → <span class="fn"><a href=".././Mathlib/Init/Set.html#Set">Set</a> <span class="fn">α</span></span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{Y : <span class="fn"><span class="fn">Ω</span> → <span class="fn"><a href=".././Mathlib/Init/Set.html#Set">Set</a> <span class="fn">α</span></span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{μ : <span class="fn"><a href=".././Mathlib/MeasureTheory/Measure/MeasureSpaceDef.html#MeasureTheory.Measure">MeasureTheory.Measure</a> <span class="fn">Ω</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{p : <a href=".././Mathlib/Data/Real/NNReal.html#NNReal">NNReal</a>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{q : <a href=".././Mathlib/Data/Real/NNReal.html#NNReal">NNReal</a>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hX : <span class="fn"><a href=".././LeanCamCombi/BernoulliSeq.html#ProbabilityTheory.IsBernoulliSeq">ProbabilityTheory.IsBernoulliSeq</a> <span class="fn">X</span> <span class="fn">p</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hY : <span class="fn"><a href=".././LeanCamCombi/BernoulliSeq.html#ProbabilityTheory.IsBernoulliSeq">ProbabilityTheory.IsBernoulliSeq</a> <span class="fn">Y</span> <span class="fn">q</span></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href=".././Mathlib/MeasureTheory/Measure/MeasureSpace.html#MeasureTheory.IsProbabilityMeasure">MeasureTheory.IsProbabilityMeasure</a> <span class="fn">μ</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(h : <span class="fn"><a href=".././Mathlib/Probability/Independence/Basic.html#ProbabilityTheory.IndepFun">ProbabilityTheory.IndepFun</a> <span class="fn">X</span> <span class="fn">Y</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href=".././LeanCamCombi/BernoulliSeq.html#ProbabilityTheory.IsBernoulliSeq">ProbabilityTheory.IsBernoulliSeq</a> (<span class="fn">fun <span class="fn">ω</span> =&gt <span class="fn"><span class="fn"><span class="fn">X</span> <span class="fn">ω</span></span> <a href=".././Std/Classes/SetNotation.html#Union.union">∪</a> <span class="fn"><span class="fn">Y</span> <span class="fn">ω</span></span></span></span>) (<span class="fn"><span class="fn"><span class="fn">p</span> <a href=".././Init/Prelude.html#HAdd.hAdd">+</a> <span class="fn">q</span></span> <a href=".././Init/Prelude.html#HSub.hSub">-</a> <span class="fn"><span class="fn">p</span> <a href=".././Init/Prelude.html#HMul.hMul">*</a> <span class="fn">q</span></span></span>)</span></div></div><p>The union of a sequence of independent <code>p</code>-Bernoulli random variables and <code>q</code>-Bernoulli random
+variables is a sequence of independent <code>p + q - p * q</code>-Bernoulli random variables.</p></div></div></main>
+<nav class="nav"><iframe src=".././navbar.html" class="navframe" frameBorder="0"></iframe></nav></body></html>
