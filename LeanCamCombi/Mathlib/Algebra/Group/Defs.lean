@@ -6,5 +6,7 @@ class AddCancelSemigroup (α : Type*) extends AddLeftCancelSemigroup α, AddRigh
 
 /-- A `CancelSemigroup` is a semigroup such that `a * b = a * c` implies `b = c`, and
 `a * c = b * c` implies `a = b`. -/
-@[to_additive existing]
+@[to_additive]
 class CancelSemigroup (α : Type*) extends LeftCancelSemigroup α, RightCancelSemigroup α
+
+attribute [to_additive existing] CancelSemigroup.toRightCancelSemigroup

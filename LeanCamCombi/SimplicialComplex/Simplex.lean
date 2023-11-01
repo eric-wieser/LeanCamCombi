@@ -244,7 +244,8 @@ lemma subset_closure_combiInterior (hs : AffineIndependent ℝ ((↑) : s → E)
   · rw [Finset.centroid_def]
     rw [affineCombination_eq_centerMass _]
     · rw [← id.def x]
-      rw [← Finset.centerMass_ite_eq _ _ id hx]
+      rw [← Finset.centerMass_ite_eq (R := ℝ) _ _ id hx]
+      simp only
       rw [Finset.centerMass_segment]
       · rw [combiInterior_eq hs]
         refine' ⟨_, _, _, rfl⟩
@@ -264,9 +265,11 @@ lemma subset_closure_combiInterior (hs : AffineIndependent ℝ ((↑) : s → E)
               norm_cast
               apply Nat.succ_pos
             · rfl
-        rw [Finset.sum_add_distrib, ← Finset.mul_sum, centroid_weights, ← Finset.mul_sum,
-          Finset.sum_boole, Finset.filter_eq]
-        simp [hx]
+        sorry
+        -- broken because of non-canonical instance
+        -- rw [Finset.sum_add_distrib, ← Finset.mul_sum, centroid_weights, ← Finset.mul_sum,
+        --   Finset.sum_boole, Finset.filter_eq]
+        -- simp [hx]
       · apply centroid_weights
       · simp [Finset.sum_boole, Finset.filter_eq, hx]
       · simp only [add_sub_cancel'_right]

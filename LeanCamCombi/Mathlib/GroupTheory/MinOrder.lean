@@ -15,11 +15,16 @@ This file defines the minimum order of an element of a monoid.
 
 ## Main declarations
 
-* `monoid.min_order`: The minimum order of an element of a given monoid.
-* `monoid.min_order_eq_top`: The minimum order is infinite iff the monoid is torsion-free.
-* `zmod.min_order`: The minimum order of $$ℤ/nℤ$$ is the smallest factor of `n`, unless `n = 0, 1`.
+* `monoid.minOrder`: The minimum order of an element of a given monoid.
+* `monoid.minOrder_eq_top`: The minimum order is infinite iff the monoid is torsion-free.
+* `zmod.minOrder`: The minimum order of $$ℤ/nℤ$$ is the smallest factor of `n`, unless `n = 0, 1`.
 -/
 
+open Subgroup
+
+variable {α : Type*}
+
+namespace Monoid
 section Monoid
 variable (α) [Monoid α]
 
@@ -28,19 +33,19 @@ Returns `∞` if the monoid is torsion-free. -/
 @[to_additive
       "The minimum order of a non-identity element. Also the minimum size of a nontrivial\nsubgroup. Returns `∞` if the monoid is torsion-free."]
 noncomputable def minOrder : ℕ∞ :=
-  ⨅ (a : α) (ha : a ≠ 1) (ha' : IsOfFinOrder a), orderOf a
+  ⨅ (a : α) (_ha : a ≠ 1) (_ha' : IsOfFinOrder a), orderOf a
 
 variable {α} {a : α}
 
 @[to_additive (attr := simp)]
-lemma minOrder_eq_top : minOrder α = ⊤ ↔ IsTorsionFree α := by simpa [min_order]
+lemma minOrder_eq_top : minOrder α = ⊤ ↔ IsTorsionFree α := by simp [minOrder, IsTorsionFree]
 
 @[to_additive (attr := simp)]
-protected lemma IsTorsionFree.minOrder : IsTorsionFree α → minOrder α = ⊤ :=
-  minOrder_eq_top.2
+protected lemma IsTorsionFree.minOrder : IsTorsionFree α → minOrder α = ⊤ := minOrder_eq_top.2
 
 @[to_additive (attr := simp)]
-lemma le_minOrder {n : ℕ∞} : n ≤ minOrder α ↔ ∀ ⦃a : α⦄, a ≠ 1 → IsOfFinOrder a → n ≤ orderOf a := by simp [min_order]
+lemma le_minOrder {n : ℕ∞} :
+    n ≤ minOrder α ↔ ∀ ⦃a : α⦄, a ≠ 1 → IsOfFinOrder a → n ≤ orderOf a := by simp [minOrder]
 
 @[to_additive]
 lemma minOrder_le_orderOf (ha : a ≠ 1) (ha' : IsOfFinOrder a) : minOrder α ≤ orderOf a :=
@@ -51,9 +56,9 @@ end Monoid
 variable [Group α] {s : Subgroup α} {n : ℕ}
 
 @[to_additive]
-lemma le_min_order' {n : ℕ∞} :
+lemma le_minOrder' {n : ℕ∞} :
     n ≤ minOrder α ↔ ∀ ⦃s : Subgroup α⦄, s ≠ ⊥ → (s : Set α).Finite → n ≤ Nat.card s := by
-  rw [le_min_order]
+  rw [le_minOrder]
   refine' ⟨fun h s hs hs' => _, fun h a ha ha' => _⟩
   · obtain ⟨a, has, ha⟩ := s.bot_or_exists_ne_one.resolve_left hs
     exact
@@ -63,7 +68,7 @@ lemma le_min_order' {n : ℕ∞} :
 
 @[to_additive]
 lemma minOrder_le_nat_card (hs : s ≠ ⊥) (hs' : (s : Set α).Finite) : minOrder α ≤ Nat.card s :=
-  le_min_order'.1 le_rfl hs hs'
+  le_minOrder'.1 le_rfl hs hs'
 
 end Monoid
 
@@ -79,26 +84,23 @@ protected lemma minOrder {n : ℕ} (hn : n ≠ 0) (hn₁ : n ≠ 1) : minOrder (
       | contradiction
       | exact ⟨n.one_lt_succ_succ⟩
   classical
-  have : (↑(n / n.min_fac) : ZMod n) ≠ 0 := by
+  have : (↑(n / n.minFac) : ZMod n) ≠ 0 := by
     rw [Ne.def, ringChar.spec, ringChar.eq (ZMod n) n]
     exact
-      not_dvd_of_pos_of_lt (Nat.div_pos (min_fac_le hn.bot_lt) n.min_fac_pos)
-        (div_lt_self hn.bot_lt (min_fac_prime hn₁).one_lt)
+      not_dvd_of_pos_of_lt (Nat.div_pos (minFac_le hn.bot_lt) n.minFac_pos)
+        (div_lt_self hn.bot_lt (minFac_prime hn₁).one_lt)
   refine'
-    ((min_order_le_nat_card (zmultiples_eq_bot.not.2 this) <| to_finite _).trans _).antisymm
-      (le_min_order'.2 fun s hs _ => _)
+    ((minOrder_le_nat_card (zmultiples_eq_bot.not.2 this) <| toFinite _).trans _).antisymm
+      (le_minOrder'.2 fun s hs _ => _)
   · rw [card_eq_fintype_card, ← addOrderOf_eq_card_zmultiples, ZMod.addOrderOf_coe _ hn,
-      gcd_eq_right (div_dvd_of_dvd n.min_fac_dvd), Nat.div_div_self n.min_fac_dvd hn]
-    exact le_rfl
+      gcd_eq_right (div_dvd_of_dvd n.minFac_dvd), Nat.div_div_self n.minFac_dvd hn]
   · rw [card_eq_fintype_card]
     haveI : Nontrivial s := s.bot_or_nontrivial.resolve_left hs
-    exact
-      WithTop.coe_le_coe.2
-        (min_fac_le_of_dvd Fintype.one_lt_card <|
-          (card_add_subgroup_dvd_card _).trans (ZMod.card _).Dvd)
+    exact WithTop.coe_le_coe.2 $ minFac_le_of_dvd Fintype.one_lt_card <|
+      (card_addSubgroup_dvd_card _).trans (ZMod.card _).dvd
 
 @[simp]
 lemma minOrder_of_prime {p : ℕ} (hp : p.Prime) : minOrder (ZMod p) = p := by
-  rw [ZMod.minOrder hp.ne_zero hp.ne_one, hp.min_fac_eq]
+  rw [ZMod.minOrder hp.ne_zero hp.ne_one, hp.minFac_eq]
 
 end ZMod

@@ -1,10 +1,7 @@
 import Mathlib.Data.Nat.Lattice
 
-#align_import mathlib.data.nat.lattice
-
 namespace Nat
-
-variable {ι : Sort _}
+variable {ι : Sort*}
 
 @[simp]
 lemma iInf_empty [IsEmpty ι] (f : ι → ℕ) : (⨅ i : ι, f i) = 0 := by
@@ -13,7 +10,7 @@ lemma iInf_empty [IsEmpty ι] (f : ι → ℕ) : (⨅ i : ι, f i) = 0 := by
 @[simp]
 lemma iInf_const_zero : (⨅ i : ι, 0) = 0 := by
   cases isEmpty_or_nonempty ι
-  · exact infi_empty _
+  · exact iInf_empty _
   · exact ciInf_const
 
 end Nat

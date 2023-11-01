@@ -3,13 +3,15 @@ Copyright (c) 2021 Yaël Dillies, Bhavik Mehta. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Yaël Dillies, Bhavik Mehta
 -/
-import Mathlib.Analysis.Convex.SimplicialComplex.Basic
 import Mathlib.LinearAlgebra.AffineSpace.Independent
+import LeanCamCombi.Mathlib.Analysis.Convex.SimplicialComplex.Basic
 import LeanCamCombi.SimplicialComplex.Simplex
 
 /-!
 # Simplicial complexes
 -/
+
+open Finset
 
 variable {𝕜 E ι : Type*}
 
@@ -29,22 +31,21 @@ def subcells (K : SimplicialComplex 𝕜 E) : Set (Finset E) :=
   {s | s ∈ K ∧ s.card = FiniteDimensional.finrank 𝕜 E}
 
 lemma disjoint_interiors (hs : s ∈ K) (ht : t ∈ K) (hxs : x ∈ combiInterior 𝕜 s)
-    (hxt : x ∈ combiInterior 𝕜 t) : s = t := by by_contra
+    (hxt : x ∈ combiInterior 𝕜 t) : s = t := by
+  classical
+  by_contra h
   have hst : s ∩ t ⊂ s := by
     use inter_subset_left s t
     intro H
-    exact
-      hxt.2
-        (Set.mem_biUnion
-          ⟨subset.trans H (inter_subset_right s t), fun H2 =>
-            h (subset.antisymm (subset.trans H (inter_subset_right s t)) H2)⟩
-          hxs.1)
+    exact hxt.2 $ Set.mem_biUnion ⟨H.trans $ inter_subset_right _ _, fun H2 => h $ (H.trans $
+      inter_subset_right _ _).antisymm H2⟩ hxs.1
   refine' hxs.2 (Set.mem_biUnion hst _)
-  exact_mod_cast K.inter_subset_convex_hull hs ht ⟨hxs.1, hxt.1⟩
+  push_cast
+  exact K.inter_subset_convexHull hs ht ⟨hxs.1, hxt.1⟩
 
 lemma disjoint_interiors_aux (hs : s ∈ K) (ht : t ∈ K) (h : s ≠ t) :
     Disjoint (combiInterior 𝕜 s) (combiInterior 𝕜 t) :=
-  Set.disjoint_left.2 fun x hxs hxt => h <| disjoint_interiors hs ht hxs hxt
+  Set.disjoint_left.2 fun _x hxs hxt => h <| disjoint_interiors hs ht hxs hxt
 
 lemma eq_singleton_of_singleton_mem_combiInterior (hx : {x} ∈ K) (hs : s ∈ K)
     (hxs : x ∈ combiInterior 𝕜 s) : s = {x} := by

@@ -1,10 +1,7 @@
 import Mathlib.Order.Partition.Equipartition
-import Mathlib.Data.Set.Equitable
-
-#align_import mathlib.order.partition.equipartition
+import LeanCamCombi.Mathlib.Data.Set.Equitable
 
 namespace Finpartition
-
 variable {α : Type*} [DecidableEq α] {s : Finset α} {P : Finpartition s}
 
 @[simp]

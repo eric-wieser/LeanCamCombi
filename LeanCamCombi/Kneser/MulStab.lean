@@ -304,8 +304,11 @@ lemma card_mul_card_image_coe' (s t : Finset α) :
   replace temp := Fintype.card_congr temp
   simp only [← coe_mul, Fintype.card_prod, Fintype.card_coe, Fintype.card_ofFinset,
     toFinset_coe] at temp
-  rw [← temp]
-  simp only [Fintype.card_ofFinset, mem_coe, iff_self_iff, forall_const]
+  sorry
+  -- rw [← temp]
+  -- simp only [Fintype.card_ofFinset, mem_coe, iff_self_iff, forall_const]
+
+-- TODO: Fix `Lean.Internal.coeM` leak
 
 @[to_additive]
 lemma card_mul_card_eq_mulStab_card_mul_coe (s t : Finset α) :
@@ -321,12 +324,13 @@ lemma card_mul_card_eq_mulStab_card_mul_coe (s t : Finset α) :
   have that : ↥(stabilizer α (s * t)) = ↥(s * t).mulStab := by
     rw [← Subgroup.coeSort_coe, ← coe_mulStab (hs.mul ht), Finset.coe_sort_coe]
   have temp := this.trans (Equiv.prodCongr (Equiv.cast that) (Equiv.refl _))
-  rw [to_name_mul_also s t] at temp
-  replace temp := Fintype.card_congr temp
-  have h1 : Fintype.card ((s * t : Finset α) : Set α) = Fintype.card (s * t) := by congr
-  simp_rw [← coe_mul s t, h1, Fintype.card_coe, coe_mul, Fintype.card_prod, Fintype.card_ofFinset,
-    Fintype.card_coe, ← coe_mul s t, to_finset_coe] at temp
-  exact temp
+  sorry
+  -- rw [to_name_mul_also s t] at temp
+  -- replace temp := Fintype.card_congr temp
+  -- have h1 : Fintype.card ((s * t : Finset α) : Set α) = Fintype.card (s * t) := by congr
+  -- simp_rw [← coe_mul s t, h1, Fintype.card_coe, coe_mul, Fintype.card_prod, Fintype.card_ofFinset,
+  --   Fintype.card_coe, ← coe_mul s t, to_finset_coe] at temp
+  -- exact temp
 
 /-- A version of Lagrange's lemma. -/
 @[to_additive "A version of Lagrange's lemma."]
@@ -344,30 +348,33 @@ lemma card_mul_card_image_coe (s t : Finset α) :
   have image_coe_mul :
     (((s : Set α) * t).image (↑) : Set (α ⧸ stabilizer α (s * t))) =
       (s : Set α).image (↑) * (t : Set α).image (↑) :=
-    Set.image_mul (QuotientGroup.mk' _ : α →* α ⧸ stabilizer α (s * t))
+    sorry
+    -- Set.image_mul (QuotientGroup.mk' (stabilizer α (s * t)) : α →* α ⧸ stabilizer α (s * t))
   rw [← image_coe_mul, to_name_mul_also, image_coe_mul] at this
   have that :
     (stabilizer α (s * t) ×
-        ↥(((s : Set α).image coe : Set (α ⧸ stabilizer α (s * t))) *
-            ((t : Set α).image coe : Set (α ⧸ stabilizer α (s * t))))) =
+        ↥(((s : Set α).image (↑) : Set (α ⧸ stabilizer α (s * t))) *
+            ((t : Set α).image (↑) : Set (α ⧸ stabilizer α (s * t))))) =
       ((s * t).mulStab ×
-        ↥(((s : Set α).image coe : Set (α ⧸ stabilizer α (s * t))) *
-            ((t : Set α).image coe : Set (α ⧸ stabilizer α (s * t))))) := by rw [← Subgroup.coeSort_coe, ← coe_mulStab (hs.mul ht), Finset.coe_sort_coe]
+        ↥(((s : Set α).image (↑) : Set (α ⧸ stabilizer α (s * t))) *
+            ((t : Set α).image (↑) : Set (α ⧸ stabilizer α (s * t))))) := by rw [← Subgroup.coeSort_coe, ← coe_mulStab (hs.mul ht), Finset.coe_sort_coe]
   have temp := this.trans (Equiv.cast that)
   replace temp := Fintype.card_congr temp
   simp_rw [← Finset.coe_mul s t] at temp
   simp only [Fintype.card_prod, Fintype.card_coe] at temp
   have h1 : Fintype.card ((s * t : Finset α) : Set α) = Fintype.card (s * t) := by congr
   have h2 :
-    ((s : Set α).image coe : Set (α ⧸ stabilizer α (s * t))) * coe '' ↑t =
-      ((s.image coe : Finset (α ⧸ stabilizer α (s * t))) * t.image coe :
-        Finset (α ⧸ stabilizer α (s * t))) := by simp
-  have h3 :
-    Fintype.card (((s : Set α).image coe : Set (α ⧸ stabilizer α (s * t))) * coe '' (t : Set α)) =
-      Fintype.card ((s.image coe : Finset (α ⧸ stabilizer α (s * t))) * image coe t) := by
-    simp_rw [h2]
-    congr
-  simp only [h1, h3, Fintype.card_coe] at temp
-  rw [temp]
+    ((s : Set α).image (↑) : Set (α ⧸ stabilizer α (s * t))) *
+      ((↑) '' (t : Set α) : Set (α ⧸ stabilizer α (s * t))) =
+        ((s.image (↑) : Finset (α ⧸ stabilizer α (s * t))) * t.image (↑) :
+          Finset (α ⧸ stabilizer α (s * t))) := by simp
+  sorry
+  -- have h3 :
+  --   Fintype.card (((s : Set α).image coe : Set (α ⧸ stabilizer α (s * t))) * coe '' (t : Set α)) =
+  --     Fintype.card ((s.image coe : Finset (α ⧸ stabilizer α (s * t))) * image coe t) := by
+  --   simp_rw [h2]
+  --   congr
+  -- simp only [h1, h3, Fintype.card_coe] at temp
+  -- rw [temp]
 
 end Finset

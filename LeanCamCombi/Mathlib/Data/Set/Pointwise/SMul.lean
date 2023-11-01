@@ -1,4 +1,4 @@
-import Mathlib.Data.Set.Pointwise.Smul
+import Mathlib.Data.Set.Pointwise.SMul
 
 #align_import mathlib.data.set.pointwise.smul
 
